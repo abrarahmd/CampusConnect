@@ -69,7 +69,7 @@ h1 {
 }
 
 h2 {
-  color: #777;
+  color: black;
   font-family: "Roboto", sans-serif;
   width: 100%;
   text-transform: uppercase;
@@ -90,13 +90,97 @@ p {
   color: #070707;
 }
 
+.input{
+  border-width: 1px;
+  border-style: solid;
+  border-image: linear-gradient(to right, #62d7ec, rgba(50, 70, 248, 0.5)) 1 0%;
+  border-top: 0;
+  width: 80%;
+  font-family: "Montserrat", sans-serif;
+  font-size: 13px;
+  padding: 7px 0;
+  color: #070707;
+  outline: none;
+}
+
+.btn {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  padding: 7px;
+  text-align: center;
+  text-transform: uppercase;
+  background: #0c34b8;
+  border-radius: 20px;
+  margin: 20px 200px;
+}
+
+.btn:hover, .btn:focus, .btn:active {
+  background: #3160fa;
+}
+
+.popup {
+  position: absolute;
+  top: -150%;
+  opacity: 0;
+  left: 60%;
+  transform: translate(-50%, -50%) scale(1.25);
+  width: 380px;
+  padding: 20px 30px;
+  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  transition: top 0ms ease-in-out 0ms, 
+              opacity 200ms ease-in-out 0ms,
+              transform 20ms ease-in-out 0ms;
+}
+
+.popup.active {
+  top: 50%;
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #888;
+  color: #eee;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.popup .form h2 {
+  text-align: center;
+  color: black;
+  margin: 10px 0px 20px;
+  font-size: 15px;
+}
+
+.btn-2 {
+  font-size: 14px;
+  font-weight: bold;
+  color: #fff;
+  width: 100px;
+  padding: 7px;
+  text-align: center;
+  text-transform: uppercase;
+  background: #0c34b8;
+  border-radius: 20px;
+}
+
 footer {
   position: absolute;
   width: 20%;
   bottom: 0;
   right: -20px;
   text-align: right;
-  font-size: 12.8;
+  font-size: 12.8px;
   text-transform: uppercase;
   letter-spacing: 2px;
   font-family: "Roboto", sans-serif;
