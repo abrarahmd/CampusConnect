@@ -15,6 +15,47 @@ body {
   box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
 }
 
+.popup {
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  transform: translate(-50%, -50%) scale(1.25);
+  width: 380px;
+  padding: 20px 30px;
+  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15);
+  border-radius: 10px;
+  visibility: hidden;
+  transition: top 0ms ease-in-out 0ms, 
+              opacity 200ms ease-in-out 0ms,
+              transform 20ms ease-in-out 0ms;
+}
+
+.open-popup {
+  visibility:visible;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.popup .close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 15px;
+  height: 15px;
+  background: #888;
+  color: #eee;
+  text-align: center;
+  line-height: 15px;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.popup .form h2 {
+  text-align: center;
+  color: black;
+  margin: 10px 0px 20px;
+  font-size: 15px;
+}
+
 .leftbox {
   float: left;
   top: -5%;
@@ -120,47 +161,7 @@ p {
   background: #3160fa;
 }
 
-.popup {
-  position: absolute;
-  top: -150%;
-  opacity: 0;
-  left: 60%;
-  transform: translate(-50%, -50%) scale(1.25);
-  width: 380px;
-  padding: 20px 30px;
-  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.15);
-  border-radius: 10px;
-  transition: top 0ms ease-in-out 0ms, 
-              opacity 200ms ease-in-out 0ms,
-              transform 20ms ease-in-out 0ms;
-}
 
-.popup.active {
-  top: 50%;
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.popup .close-btn {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  width: 15px;
-  height: 15px;
-  background: #888;
-  color: #eee;
-  text-align: center;
-  line-height: 15px;
-  border-radius: 15px;
-  cursor: pointer;
-}
-
-.popup .form h2 {
-  text-align: center;
-  color: black;
-  margin: 10px 0px 20px;
-  font-size: 15px;
-}
 
 .btn-2 {
   font-size: 14px;
