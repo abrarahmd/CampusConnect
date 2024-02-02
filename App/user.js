@@ -1,8 +1,21 @@
-document.querySelector("#show-login").addEventListener("click", function(){
-    document.querySelector(".popup").classList.add("active");
-});
+//Logout-Btn
+let popup = document.querySelector(".popup");
+function openPopup() {
+    popup.classList.add("active");
+}
+function closePopup() {
+    popup.classList.remove("active");
+}
+document.getElementById("show-login").addEventListener("click", openPopup);
+document.querySelector(".popup .close-btn").addEventListener("click", closePopup);
 
-document.querySelector(".popup .close-btn").addEventListener("click", function(){
-    document.querySelector(".popup").classList.remove("active");
+//Update-Profile
+document.getElementById("updateBtn").addEventListener("click", function() {
+    if (confirm("Are you sure you want to update?")) {
+        updateProfile();
+    } else {
+    }
 });
-
+function updateProfile() {
+    // Have to write the code for updating
+}
