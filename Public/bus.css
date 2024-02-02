@@ -1,0 +1,13 @@
+body {
+    background-image: url("https://w0.peakpx.com/wallpaper/475/965/HD-wallpaper-school-bus-school-desert-road-bus.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+.booking-form-box {
+    max-width: 350px;
+    border: 1px solid #ced4da;
+    margin: 10% auto 0;
+}
