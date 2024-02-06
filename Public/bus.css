@@ -7,7 +7,152 @@ body {
 }
 
 .booking-form-box {
-    max-width: 350px;
+    max-width: 400px;
     border: 1px solid #ced4da;
     margin: 10% auto 0;
+    background-color: transparent;
+    backdrop-filter: blur(50px);
+}
+
+.radio-btn {
+    margin: 0 20px;
+    
+}
+
+.radio-btn .btn {
+    margin: 20px 0 20px 0;
+    box-shadow: none;
+}
+
+.radio-btn .btn::after {
+    content: '';
+    height: 15px;
+    width: 15px;
+    top: -2px;
+    left: -1px;
+    background-color: #fff;
+    position: relative;
+    display: inline-block;
+    border: 3px solid #fff;
+    visibility: visible;
+    border-radius: 50%;
+}
+
+.radio-btn .btn:checked::after {
+    content: '';
+    background-color: mediumseagreen;
+    transition: 0.5s;
+}
+
+.radio-btn span {
+    color: #fff;
+    margin-right: 5px;
+    margin-left: 250px;
+    font-size: 15px;
+}
+
+.Heading h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 25px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    margin-top: 15px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+  }
+  
+
+.booking-form {
+    padding: 0 20px 20px;
+}
+
+.booking-form label {
+    margin-bottom: 5px;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #fff;
+}
+
+input::placeholder {
+    color: #fff ;
+}
+
+.input-grp {
+    width: 176px;
+    display: inline-block;
+}
+
+input-grp-2 {
+    width: 310px;
+    display: inline-block;
+
+}
+
+.input-grp-time {
+    width: 200px; 
+    display: inline-block; 
+}
+
+.input-grp-time select {
+    width: 179%; 
+    height: 35px;
+    margin-bottom: 15px;
+}
+
+.input-grp-btn {
+    width: 100%;
+    display: inline-block;
+}
+
+.form-control {
+    font-size: 12px !important;
+    border-radius: 0 !important;
+    color: #fff!important;
+    background: transparent!important;
+    box-shadow: none!important;
+}
+
+.select-date::-webkit-inner-spin-button, 
+.select-date::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.select-date::-webkit-calender-picker-indicator {
+    background: transparent!important;
+}
+
+.custom-select {
+    color: #fff;
+    font-size: 12px;
+    border: 1px solid #ced4da;
+    box-shadow: none;
+    border-radius:0!important;
+    background: transparent!important;
+}
+
+.custom-select option {
+    color: #333;
+}
+
+.booking-form-box .input-grp-btn .flight {
+    width:100%;
+    padding: 9px 0;
+    font-size: 12px;
+    border: 1px solid  #ced4da;
+    background: transparent;
+    box-shadow: none;
+    border-radius:0;
+    transition: background-color 0.5s, color 0.5s;
+}
+
+
+
+.booking-form-box .input-grp-btn .flight:hover {
+    background-color: #fff; 
+    color: black !important;
+    font-weight: bold;
 }
