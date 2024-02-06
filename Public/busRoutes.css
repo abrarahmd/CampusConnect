@@ -1,9 +1,6 @@
-/* Import Google Font "Poppins" */
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap");
 
-/* Common variables */
 :root {
-  /* colors */
   --primary: #865dff;
   --light: #ffffff;
   --dark: #222222;
@@ -21,37 +18,35 @@
 }
 
 body {
-    background-color: var(--primary);
-    background-image: url("https://i.redd.it/glrntr8shsu11.jpg");
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
-
+  background-color: var(--primary);
+  background-image: url("https://i.redd.it/glrntr8shsu11.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .introduction {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 0px; 
-    color: var(--light);
-    background-color: black;
-    margin-top: 0px;
-    width: 100%;
-    height: 80px;
-    text-shadow: 4px 4px 8px rgb(48, 0, 104); 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 0px; 
+  color: var(--light);
+  background-color: black;
+  margin-top: 0px;
+  width: 100%;
+  height: 80px;
+  text-shadow: 4px 4px 8px rgb(48, 0, 104); 
 }
 
 .introduction-text {
-    margin-right: 5px;
-    color: var(--light);
-    flex-grow: 1; /* Allows the text to grow and take up available space */
-    text-align: center;
-    margin-left: 230px;
-
+  margin-right: 5px;
+  color: var(--light);
+  flex-grow: 1; 
+  text-align: center;
+  margin-left: 230px;
 }
 
 .custom-button {
@@ -64,7 +59,6 @@ body {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-
 }
 
 .custom-button:hover {
@@ -77,14 +71,12 @@ body {
   margin-top: 17px; 
   margin-right: 730px;
   color: var(--light);
-  
   text-shadow: 4px 4px 4px rgba(97, 79, 253, 0.514); 
 }
 
 .going-trip-text {
   color: white;
 }
-  
   
 .container {
   position: relative;
@@ -106,17 +98,14 @@ body {
     opacity: 1;
     transform: translateY(-25px);
   }
-
   50% {
     opacity: 1;
     transform: translateY(0);
   }
-
   100% {
     opacity: 1;
     transform: translateY(-25px);
   }
-
 }
 
 .box:nth-child(2) {
@@ -261,7 +250,6 @@ body {
   0% {
     height: 0;
   }
-
   50% {
     height: 100%;
   }
@@ -277,47 +265,36 @@ body {
   .vertical-line {
     left: 60px;
   }
-
   .box {
     width: 100%;
-    /* padding-right: 1.5rem; */
     padding-left: 109px;
   }
-
-  .box-left,
-  .box-right {
+  .box-left, .box-right {
     left: 0;
   }
-
   .box i {
     left: 35px;
   }
-
   .info::after {
     left: -16px;
   }
-
   .box-left .info::after {
     border-left: 0;
     border-right: 14px solid white;
     left: -14px;
   }
-
 }
 
 @media screen and (max-width: 500px) {
   .vertical-line {
     left: 40px;
   }
-
   .box {
     width: 100%;
     padding-right: 1.5rem;
     padding-left: 85px;
   }
-
   .box i {
     left: 15px;
   }
-
 }

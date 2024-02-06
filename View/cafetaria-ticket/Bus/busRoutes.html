@@ -1,17 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Responsive Timeline Design | upCoding</title>
-    <!-- Font Awesome Icons CDN -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-    />
-    <!-- Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
     <link rel="stylesheet" href="/busRoutes.css" />
   </head>
+
   <body>
     <div>
       <h1 class="introduction">
@@ -19,16 +16,13 @@
         <button class="custom-button" onclick="redirectToBookingPage()">Book Seats</button>
       </h1>
     </div>
-    
+
     <div>
       <h1 class="going-trip"><span class="going-trip-text">Trip Both-Ways</span></i></h1>
     </div>
-
-    <!-- Container -->
+    
     <div class="container">
-      <!-- Vertical line -->
       <div class="vertical-line"></div>
-      <!-- Box -->
       <div class="box box-left">
         <i class="fa-solid fa-shop"></i>
         <div class="info">
@@ -38,7 +32,6 @@
             <br>
             Time: 6:21 AM
           </p>
-          
         </div>
       </div>
       <div class="box box-right">
@@ -97,12 +90,11 @@
         </div>
       </div>
     </div>
+    
     <script>
       function redirectToBookingPage() {
-        // Replace 'booking.html' with the actual URL of your booking page
         window.location.href = '/bus-book';
       }
     </script>
-
   </body>
 </html>
