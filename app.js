@@ -21,7 +21,10 @@ app.get('/signup-signin', (req, res) => {
 
 /*Bus Routes */
 app.get('/bus-book', (req, res) => {
-  res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busTicketPurchase.html'));
+  res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busBooking.html'));
+});
+app.get('/bus-routes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busRoutes.html'));
 });
 
 /*User Profile Routes */

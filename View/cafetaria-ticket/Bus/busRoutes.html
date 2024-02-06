@@ -10,13 +10,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
     />
     <!-- Stylesheet -->
-    <link rel="stylesheet" href="../../../Public/busRoutes.css" />
+    <link rel="stylesheet" href="/busRoutes.css" />
   </head>
   <body>
     <div>
       <h1 class="introduction">
         <span class="introduction-text">Brac University Bus Routes <i class="fa-solid fa-route"></i></span>
-        <button class="custom-button">Book Seats</button>
+        <button class="custom-button" onclick="redirectToBookingPage()">Book Seats</button>
       </h1>
     </div>
     
@@ -97,6 +97,12 @@
         </div>
       </div>
     </div>
+    <script>
+      function redirectToBookingPage() {
+        // Replace 'booking.html' with the actual URL of your booking page
+        window.location.href = '/bus-book';
+      }
+    </script>
 
   </body>
 </html>
