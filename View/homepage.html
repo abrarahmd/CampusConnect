@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage</title>
-    <link rel="stylesheet" href="../Public/homepage.css">
+    <link rel="stylesheet" href="/homepage.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
   </head>
   <body>
@@ -26,8 +26,8 @@
           <li>
             <a href="#">Transportation</a>
             <ul class="dropdown-menu">
-                <li><a href="#">Bus Routes</a></li>
-                <li><a href="#">Book Tickets</a></li>
+                <li><a href="/bus-routes">Bus Routes</a></li>
+                <li><a href="/bus-book">Book Tickets</a></li>
             </ul>
           </li>
           <li>
@@ -52,7 +52,7 @@
         <p>
           From crafting your class routines to checking out the cafeteria menu, booking bus seats, and securing parking slots – we've got it all covered.
         </p>
-        <button>Sign-Up</button>
+        <button onclick="redirectToSignupPage()">Sign-Up</button>
       </div>
     </section>
 
@@ -60,12 +60,11 @@
       const header = document.querySelector("header");
       const hamburgerBtn = document.querySelector("#hamburger-btn");
       const closeMenuBtn = document.querySelector("#close-menu-btn");
-
-      // Toggle mobile menu on hamburger button click
       hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
-
-      // Close mobile menu on close button click
       closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
+      function redirectToSignupPage() {
+        window.location.href = '/signup-signin';
+      }
     </script>
     
   </body>

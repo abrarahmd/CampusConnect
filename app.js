@@ -17,6 +17,11 @@ app.get('/signup-signin', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'signup-signin.html'));
 });
 
+/* Homepage Route */
+app.get('/homepage', (req, res) => {
+  res.sendFile(path.join(__dirname, 'View',  'homepage.html'));
+});
+
 /*Bus Routes */
 app.get('/bus-book', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busBooking.html'));
@@ -32,6 +37,7 @@ app.get('/userProfile', (req, res) => {
 app.get('/userUpdate', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'user', 'userUpdate.html'));
 });
+
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
