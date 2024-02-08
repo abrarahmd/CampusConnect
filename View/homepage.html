@@ -1,70 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Homepage</title>
     <link rel="stylesheet" href="../Public/homepage.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar__container">
-            <a href="#" id="navbar__logo">StudentHub<i class="fa-solid fa-users" style="margin-left: 5px;"></i></a> 
-            
-            <div class="navbar__toggle" id="mobile-menu">
-                <span class="bar"></span> <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-            <ul class="navbar__menu">
-                <li class="navbar__item">
-                    <a href="#" class="navbar__links">
-                        Home
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="#" class="navbar__links">
-                        Routine 
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="#" class="navbar__links">
-                        Transportation
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="#" class="navbar__links">
-                        Cafetaria
-                    </a>
-                </li>
-                <li class="navbar__item">
-                    <a href="#" class="navbar__links">
-                        Parking Slot
-                    </a>
-                </li>
-                <li class="navbar__btn">
-                    <a href="#" class="button">
-                        Signup
-                    </a>
-                </li>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0">
+  </head>
+  <body>
+    <header>
+      <nav class="navbar">
+        <a class="logo" href="#">StudentHub<span>.</span></a>
+        <ul class="menu-links">
+          <span id="close-menu-btn" class="material-symbols-outlined">close</span>
+          <li>
+            <a href="#">Routine</i></a>
+          </li>
+          <li>
+            <a href="#">Cafetaria</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Food Menu</a></li>
+                <li><a href="#">Order Food</a></li>   
             </ul>
-        </div>
-    </nav>
+          </li>
+          <li>
+            <a href="#">Transportation</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Bus Routes</a></li>
+                <li><a href="#">Book Tickets</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Parking Slot</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Book Parking Slot</a></li>
+                <li><a href="#">Queries</a></li>
+            </ul>
+          </li>
+          <li>
+            <a href="#">Student Forum</a>
+          </li>
+        </ul>
+        
+        <span id="hamburger-btn" class="material-symbols-outlined">menu</span>
+      </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <div class="main">
-        <div class="main__container">
-            <div class="main__content">
-                <h1>ALL IN ONE</h1>
-                <h2>TECHNOLOGY</h2>
-                <p>See what makes us different.</p>
-                <button class="main__btn"><a href="#">Get Started</a></button>
-            </div>
-            <div class="main__img--container">
-                <img src="" alt="" id="main__img">
-            </div>
-        </div>
-    </div>
+    <section class="hero-section">
+      <div class="content">
+        <h2>Optimize Your Student Experience</h2>
+        <p>
+          From crafting your class routines to checking out the cafeteria menu, booking bus seats, and securing parking slots – we've got it all covered.
+        </p>
+        <button>Sign-Up</button>
+      </div>
+    </section>
 
-</body>
+    <script>
+      const header = document.querySelector("header");
+      const hamburgerBtn = document.querySelector("#hamburger-btn");
+      const closeMenuBtn = document.querySelector("#close-menu-btn");
+
+      // Toggle mobile menu on hamburger button click
+      hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
+
+      // Close mobile menu on close button click
+      closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
+    </script>
+    
+  </body>
 </html>
