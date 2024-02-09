@@ -20,19 +20,28 @@
             <a href="#">Cafetaria</a>
             <ul class="dropdown-menu">
                 <li><a href="#">Food Menu</a></li>
+                <li><a href="#">Order Food</a></li>   
             </ul>
           </li>
           <li>
             <a href="#">Transportation</a>
             <ul class="dropdown-menu">
-                <li><a href="/bus-routes">Bus Routes</a></li>
+                <li><a href="/bus-routes-in">Bus Routes</a></li>
+                <li><a href="/bus-book">Book Tickets</a></li>
             </ul>
           </li>
           <li>
             <a href="#">Parking Slot</a>
+            <ul class="dropdown-menu">
+                <li><a href="#">Book Parking Slot</a></li>
+                <li><a href="#">Queries</a></li>
+            </ul>
           </li>
           <li>
             <a href="#">Student Forum</a>
+          </li>
+          <li>
+            <a href="/userProfile">MyProfile</a>
           </li>
         </ul>
         
@@ -46,7 +55,7 @@
         <p>
           From crafting your class routines to checking out the cafeteria menu, booking bus seats, and securing parking slots – we've got it all covered.
         </p>
-        <button onclick="redirectToSignupPage()">Sign-Up</button>
+        <button>Welcome</button>
       </div>
     </section>
 
@@ -56,9 +65,6 @@
       const closeMenuBtn = document.querySelector("#close-menu-btn");
       hamburgerBtn.addEventListener("click", () => header.classList.toggle("show-mobile-menu"));
       closeMenuBtn.addEventListener("click", () => hamburgerBtn.click());
-      function redirectToSignupPage() {
-        window.location.href = '/signup-signin';
-      }
     </script>
     
   </body>

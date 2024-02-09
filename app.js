@@ -18,16 +18,22 @@ app.get('/signup-signin', (req, res) => {
 });
 
 /* Homepage Route */
-app.get('/homepage', (req, res) => {
+app.get('/CampusConnect', (req, res) => {
   res.sendFile(path.join(__dirname, 'View',  'homepage.html'));
+});
+app.get('/homepage', (req, res) => {
+  res.sendFile(path.join(__dirname, 'View',  'homepage-loggedin.html'));
 });
 
 /*Bus Routes */
 app.get('/bus-book', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busBooking.html'));
 });
-app.get('/bus-routes', (req, res) => {
+app.get('/bus-routes-in', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busRoutes.html'));
+});
+app.get('/bus-routes', (req, res) => {
+  res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busRoutes-Loggedout.html'));
 });
 
 /*User Profile Routes */
