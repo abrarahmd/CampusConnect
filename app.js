@@ -35,6 +35,9 @@ app.get('/bus-routes-in', (req, res) => {
 app.get('/bus-routes', (req, res) => {
   res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busRoutes-Loggedout.html'));
 });
+app.get('/bus-ticket', (req, res) => {
+  res.sendFile(path.join(__dirname, 'View', 'cafetaria-ticket', 'Bus', 'busTicket.html'));
+});
 
 /*User Profile Routes */
 app.get('/userProfile', (req, res) => {
