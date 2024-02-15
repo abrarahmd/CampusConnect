@@ -10,7 +10,7 @@
 }
 
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.conduent.com/wp-content/uploads/2022/11/bnr_Digital_Integrated_Payments_Hub3.jpg");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://img.freepik.com/free-photo/two-monastera-leaves-black-background_23-2147835077.jpg?w=1380&t=st=1708000149~exp=1708000749~hmac=e211654fbf23742e04fa82654e78de7c945ade233836c05e5194e6f982e4b3fb");
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -89,14 +89,14 @@ body {
   width: 100%;
   padding:12px;
   font-size: 17px;
-  background: #1d9bfc;
+  background: #8a3192;
   color:#fff;
   margin-top: 5px;
   cursor: pointer;
 }
 
 .container form .submit-btn:hover{
-  background: #2aafc7;
+  background: #37133a;
 }
 
 .payment-buttons {
@@ -105,7 +105,7 @@ body {
 }
 
 .payment-btn {
-    background-color: #1d9bfc;
+    background-color: #8a3192;
     color: white;
     padding: 10px 15px;
     border: none;
@@ -114,5 +114,5 @@ body {
 }
 
 .payment-btn:hover {
-    background-color: #2aafc7;
+    background-color: #37133a;
 }
