@@ -7,9 +7,8 @@
     <link rel="stylesheet" href="/busTicket.css">
 </head>
 <body>
-
-<div class="container">
-    <form action="">
+    <div class="container">
+        <form action="">
         <div class="row">
             <div class="col">
                 <h3 class="title">Student Information</h3>
@@ -39,23 +38,21 @@
                 <div class="inputBox">
                     <span>Select your mode of Payment method</span>
                     <div class="payment-buttons">
-                        <button type="button" class="payment-btn" id="bkashBtn">bkash</button>
-                        <button type="button" class="payment-btn" id="nagadBtn">nagad</button>
+                        <button type="button" class="payment-btn" id="bkashBtn" onclick="selectPayment('bkash')">bkash</button>
+                        <button type="button" class="payment-btn" id="nagadBtn" onclick="selectPayment('nagad')">nagad</button>
                     </div>
                 </div> 
                 <div class="inputBox">
                     <span>Transaction ID :</span>
-                    <input type="text" placeholder="Q2NwYH6nVP">
+                    <input type="text" placeholder="Select Your Payment Method" id="transactionInput">
                 </div>
             </div>
-    
         </div>
-
         <input type="submit" value="proceed to checkout" class="submit-btn">
+        </form>
+    </div> 
 
-    </form>
+    <script src="/App/busTicket.js"></script>
 
-</div>    
-    
 </body>
 </html>
