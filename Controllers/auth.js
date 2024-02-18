@@ -38,3 +38,33 @@ exports.UserSignup = async (req, res) => {
         })
     });
 }
+
+exports.UserLogin = (req, res) => {
+    const {Username, Password } = req.body;
+  
+    const sanitizedUsername = db.escape(Username);
+  
+    const query = 'SELECT * FROM user WHERE Username = Username';
+    db.query(query, async (err, results) => {
+      if (err) {
+        console.error('Database error:', err);
+        return res.status(500).send('Internal server error');
+      }
+
+      if (results.length === 0) {
+        return res.status(200).send('User not found.');
+      }
+      const user = results[0]; 
+
+      const isPasswordValid = await bcrypt.compare(Password, user.Password);
+      if (isPasswordValid) {
+
+          res.redirect("/homepage");
+
+      } else {
+        return res.status(400).send('Invalid password');
+      }
+      
+    });  
+    
+};

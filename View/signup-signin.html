@@ -12,15 +12,15 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form action="/auth/signin" class="sign-in-form" method="POST">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name="Username" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="Password" placeholder="Password" />
             </div>
             <input type="submit" value="Login" class="btn solid" />
             <p class="social-text">Or Sign in with social platforms</p>
@@ -40,7 +40,7 @@
             </div>
           </form>
 
-          <form action="/auth/signup-signin" class="sign-up-form" method="POST">
+          <form action="/auth/signup" class="sign-up-form" method="POST">
             <h2 class="title">Sign Up</h2>
             <div class="input-field">
               <i class="fa fa-id-card" aria-hidden="true"></i>
