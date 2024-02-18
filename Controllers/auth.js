@@ -4,12 +4,28 @@ const bcrypt = require('bcrypt');
 
 exports.UserSignup = async (req, res) => {
     const {StudentID, Username, StudentName, Email, Phone, Password} = req.body;
-    db.query("SELECT StudentID FROM user WHERE StudentID = ?", [StudentID], async (error, results) => {
+    db.query("SELECT StudentID, Email, Username, Phone FROM user WHERE StudentID = ? OR Email = ? OR Username = ? OR Phone = ?", [StudentID, Email, Username, Phone], async (error, results) => {
         if(error) {
             console.log(error);
         }
         if(results.length > 0) {
-            return res.status(400).send('You are already registered.');
+            let errorMessage = ''
+            if (results.some(result => result.StudentID === StudentID)) {
+                errorMessage += 'Student ID already registered. ';
+            }
+            if (results.some(result => result.Email === Email)) {
+                errorMessage += 'Email already exists. ';
+            }
+
+            if (results.some(result => result.Username === Username)) {
+                errorMessage += 'Username already taken. ';
+            }
+
+            if (results.some(result => result.Number === Phone)) {
+                errorMessage += 'Phone number already registered. ';
+            }
+
+            return res.status(400).send(errorMessage.trim());
         } 
 
         let hashedPassword = await bcrypt.hash(Password, 8);
@@ -20,7 +36,5 @@ exports.UserSignup = async (req, res) => {
                 res.redirect("/signup-signin")
             }
         })
-  
     });
-  
 }
