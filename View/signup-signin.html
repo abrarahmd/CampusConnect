@@ -40,31 +40,31 @@
             </div>
           </form>
 
-          <form action="/signup-signin" class="sign-up-form" method="POST">
+          <form action="/auth/signup-signin" class="sign-up-form" method="POST">
             <h2 class="title">Sign Up</h2>
             <div class="input-field">
               <i class="fa fa-id-card" aria-hidden="true"></i>
-              <input type="text" placeholder="Student ID" />
+              <input type="text" name="StudentID" placeholder="Student ID" />
             </div>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input type="text" name="Username" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fa fa-user-circle" aria-hidden="true"></i>
-              <input type="text" placeholder="Name" />
+              <input type="text" name="StudentName" placeholder="Name" />
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <input type="email" name="Email" placeholder="Email" />
             </div>
             <div class="input-field">
               <i class="fa fa-mobile" aria-hidden="true"></i>
-              <input type="tel" placeholder="Phone" />
+              <input type="tel" name="Phone" placeholder="Phone" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input type="password" name="Password" placeholder="Password" />
             </div>
             <input type="submit" value="Sign up" class="btn solid" />
             <p class="social-text">Or sign up with social platforms</p>
