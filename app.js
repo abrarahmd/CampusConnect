@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(session({
   secret: '112484',
-  resave: false,
+  resave: true,
   saveUninitialized: true,
 }))
 

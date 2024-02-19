@@ -6,6 +6,13 @@ function openPopup() {
 function closePopup() {
     popup.classList.remove("active");
 }
+function logout() {
+    window.location.href = "/auth/logout";
+}
+
+
+document.getElementById("logoutButton").addEventListener("click", logout);
+
 document.getElementById("show-login").addEventListener("click", openPopup);
 document.querySelector(".popup .close-btn").addEventListener("click", closePopup);
 
