@@ -2,6 +2,11 @@ const express = require("express");
 const db = require('../db');
 const bcrypt = require('bcrypt');
 
+const generateSessionToken = () => {
+    const randomString = Math.random().toString(36).substring(2, 15);
+    return randomString;
+};
+
 exports.UserSignup = async (req, res) => {
     const {StudentID, Username, StudentName, Email, Phone, Password} = req.body;
     db.query("SELECT StudentID, Email, Username, Phone FROM user WHERE StudentID = ? OR Email = ? OR Username = ? OR Phone = ?", [StudentID, Email, Username, Phone], async (error, results) => {
@@ -58,14 +63,18 @@ exports.UserLogin = (req, res) => {
 
       const isPasswordValid = await bcrypt.compare(Password, user.Password);
       if (isPasswordValid) {
-
-        req.session.user = user;
-        res.redirect("/homepage");
-
-      } else {
-        return res.status(400).send('Invalid password');
-      }
-      
-    });  
-    
+        const sessionToken = generateSessionToken();
+        db.query('UPDATE user SET Token = ? WHERE StudentID = ?', [sessionToken, user.StudentID], (updateError, updateResults) => {
+            if (updateError) {
+              console.error('Database error:', updateError);
+              return res.status(500).send('Internal server error');
+            }
+            req.session.user = { ...user, Token: sessionToken };
+            console.log(req.session.user);
+            res.redirect('/homepage');
+          });
+        } else {
+          return res.status(400).send('Invalid password');
+        }
+      });
 };
