@@ -59,7 +59,8 @@ exports.UserLogin = (req, res) => {
       const isPasswordValid = await bcrypt.compare(Password, user.Password);
       if (isPasswordValid) {
 
-          res.redirect("/homepage");
+        req.session.user = user;
+        res.redirect("/homepage");
 
       } else {
         return res.status(400).send('Invalid password');

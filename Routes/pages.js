@@ -21,7 +21,11 @@ router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '..','View', 'homepage.html'));
   });
   router.get('/homepage', (req, res) => {
+    if (req.session.user) {
     res.sendFile(path.join(__dirname, '..', 'View', 'homepage-loggedin.html'));
+    } else {
+      res.redirect('/signup-signin');
+    }
   });
   
   /*Bus Routes */
