@@ -1,5 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const {GetUserData} = require("../Controllers/auth");
+
+router.post("/api/auth", GetUserData)
 
 router.get('/', (req, res) => {
 

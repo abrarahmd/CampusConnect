@@ -77,3 +77,27 @@ exports.UserLogin = (req, res) => {
         }
       });
 };
+
+exports.GetUserData = (req, res) => {
+  console.log('Session Data:', req.session);
+
+  if (!req.session.user) {
+    return res.status(401).send('User not logged in.');
+  }
+
+  const userId = req.session.user.StudentID;
+  console.log(userId)
+
+  db.query('SELECT StudentID, Username, StudentName, Email, Phone FROM user WHERE StudentID = ?', [userId], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
+    if (results.length === 0) {
+      return res.status(404).send('User not found.');
+    }
+
+    const userData = results[0];
+    res.send(userData);
+  });
+};

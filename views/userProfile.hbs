@@ -57,6 +57,30 @@
             <a href="">Abrar Ahmed</a>.
         </p>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            try {
+                const response = await axios.get('/api/auth');
+                const userData = response.data;
+                
+                const fullName = document.getElementById('fullName');
+                const studentID = document.getElementById('studentID');
+                const username = document.getElementById('username');
+                const email = document.getElementById('email');
+                const phone = document.getElementById('phone');
+
+                fullName.innerText = userData.StudentName;
+                studentID.innerText = userData.StudentID;
+                username.innerText = userData.Username;
+                email.innerText = userData.Email;
+                phone.innerText = userData.Phone;
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        });
+    </script>
     <script src="/app/user.js"></script>
 </body>
 </html>
