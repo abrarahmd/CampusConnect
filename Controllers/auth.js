@@ -77,19 +77,3 @@ exports.UserLogin = (req, res) => {
         }
       });
 };
-
-
-exports.userProfile = (req, res) => { 
-  console.log('Session user:', req.session.user); 
-  db.query('SELECT * FROM user WHERE StudentID = ?', [userId], (err, results) => {
-      if (err) {
-          console.error('Error fetching user data:', err);
-          res.status(500).send('Internal server error');
-          return;
-      }
-      const user = results[0];
-      console.log('User data:', user);
-      // Send user data as JSON
-      res.json(user);
-  });
-};

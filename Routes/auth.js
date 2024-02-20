@@ -5,8 +5,6 @@ const router = express.Router();
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 
-router.get("/userProfile", authController.userProfile)
-
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if (err) {
