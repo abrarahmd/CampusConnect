@@ -70,11 +70,26 @@ exports.UserLogin = (req, res) => {
               return res.status(500).send('Internal server error');
             }
             req.session.user = { ...user, Token: sessionToken };
-            console.log(req.session.user);
             res.redirect('/homepage');
           });
         } else {
           return res.status(400).send('Invalid password');
         }
       });
+};
+
+
+exports.userProfile = (req, res) => { 
+  console.log('Session user:', req.session.user); 
+  db.query('SELECT * FROM user WHERE StudentID = ?', [userId], (err, results) => {
+      if (err) {
+          console.error('Error fetching user data:', err);
+          res.status(500).send('Internal server error');
+          return;
+      }
+      const user = results[0];
+      console.log('User data:', user);
+      // Send user data as JSON
+      res.json(user);
+  });
 };
