@@ -16,8 +16,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(publicDirectory));
 app.use('/app', express.static(path.join(__dirname, 'app')));
-app.use(cors({origin: '*'}))
-app.use(methodOverride("_method"))
 
 app.use(session({
   secret: '112484',

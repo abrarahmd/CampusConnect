@@ -65,6 +65,13 @@ router.get('/bus-ticket', (req, res) => {
   res.render("busTicket");
 
 });
+
+/* Cafetaria Route */
+router.get('/Cafetaria', (req, res) => {
+
+  res.render("cafetaria");
+
+});
   
 /*User Profile Routes */
 

@@ -48,9 +48,9 @@ exports.UserLogin = (req, res) => {
     const {Username, Password } = req.body;
   
     const sanitizedUsername = db.escape(Username);
-  
-    const query = 'SELECT * FROM user WHERE Username = ?';
-    db.query(query, [sanitizedUsername], async (err, results) => {
+
+    const query = `SELECT * FROM user WHERE Username = ${sanitizedUsername}`;
+    db.query(query, async (err, results) => {
       if (err) {
         console.error('Database error:', err);
         return res.status(500).send('Internal server error');
