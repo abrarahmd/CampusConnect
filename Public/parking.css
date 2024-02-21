@@ -1,0 +1,126 @@
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/parking-background.jpg");
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+::-webkit-scrollbar {
+    width: 7px;
+    background-color: yellow;
+}
+
+.navbar {
+    background-color: rgb(0, 0, 0);
+}
+
+#nav-link {
+    font-size: 25px;
+    font-weight: 550;
+    background-color: rgb(0, 0, 0);
+    color: yellow;
+}
+.lni-car{
+    font-size: 35px;
+    color: yellow;
+}
+form{
+    width: 17rem;
+}
+
+.form-label{
+    color: yellow;
+}
+.form-control:focus, .form-control {
+    padding:5px; 
+    border:2px solid yellow; 
+    -webkit-border-radius: 1px;
+    border-radius: 5px;
+    background-color: black;
+    color: yellow;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+-webkit-box-shadow: 0 0 0 30px rgb(3, 3, 3) inset !important;
+}
+
+input:-webkit-autofill {
+    -webkit-text-fill-color: yellow !important;
+    }
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+      } 
+
+/* css above for styling form input when its in diiferent states*/
+#parkingtable{
+    color: yellow;
+    border-color: yellow;
+    font-size: 13px;
+    width: 14rem;
+}
+th{
+    font-size: 15px;
+    width: 30rem;
+    font-weight: 500;
+
+}
+#receipttable{
+    color: yellow;
+    width: 30rem;
+    font-size: 13px;
+    
+}
+.table{
+    color: yellow;
+    border-color: yellow;
+    width: 30rem;
+}
+#parkingHead{
+    color: yellow;
+    font-size: 25px;
+    text-align: center;
+    border-style:solid ;
+    border-color: yellow;
+    border-radius: 10px;
+    padding: 20px;
+    width: 30rem;
+}
+#receiptHead{
+    color: black;
+    font-size: 25px;
+    text-align: center;
+    margin-top: 5rem;
+    border-style:solid ;
+    border-color: yellow;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: yellow;
+    width: 30rem;
+
+}
+#receiptDescription{
+    color: yellow;
+    font-size: 11px;
+
+}
+.modal-dialog, .modal-content{
+    width: 22rem;
+    background-color: black;
+}
+
+#closeBtn{
+    color:black;
+    background: red;
+    font-weight: 600;
+    font-size: 12px;
+}
+#footer{
+    color: yellow;
+    text-align: center;
+    font-size: 15px;
+}

@@ -64,9 +64,17 @@ router.get('/bus-ticket', (req, res) => {
 });
 
 /* Cafetaria Route */
-router.get('/Cafetaria', (req, res) => {
+router.get('/cafetaria', (req, res) => {
 
   res.render("cafetaria");
+
+});
+
+/* Parking Route */
+
+router.get('/parking', (req, res) => {
+
+  res.render("parking");
 
 });
   
