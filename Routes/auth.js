@@ -2,6 +2,8 @@ const express = require("express");
 const authController = require("../Controllers/auth");
 const router = express.Router();
 
+
+router.get("/api/auth", authController.GetUserData)
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 
