@@ -4,6 +4,7 @@ const router = express.Router();
 
 
 router.get("/api/auth", authController.GetUserData)
+router.get("/api/fetchroutes", authController.BusRoutes)
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 

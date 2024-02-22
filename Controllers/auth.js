@@ -78,15 +78,24 @@ exports.UserLogin = (req, res) => {
       });
 };
 
+exports.BusRoutes = (req, res) => {
+  const condition = req.params.condition;
+  db.query('SELECT * FROM routes', (error, results) => {
+    if (error) {
+      return res.status(500).send('Internal server error');
+    }
+    res.send(results);
+  });
+
+}
+
 exports.GetUserData = (req, res) => {
-  console.log('Session Data:', req.session);
 
   if (!req.session.user) {
     return res.status(401).send('User not logged in.');
   }
 
   const userId = req.session.user.StudentID;
-  console.log(userId)
 
   db.query('SELECT StudentID, Username, StudentName, Email, Phone FROM user WHERE StudentID = ?', [userId], (error, results) => {
     if (error) {
@@ -97,7 +106,8 @@ exports.GetUserData = (req, res) => {
       return res.status(404).send('User not found.');
     }
 
-    const userData = results[0];
+    const userData = results;
+    console.log(userData)
     res.send(userData);
   });
 };

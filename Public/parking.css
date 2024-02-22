@@ -21,10 +21,12 @@ body {
     background-color: rgb(0, 0, 0);
     color: yellow;
 }
+
 .lni-car{
     font-size: 35px;
     color: yellow;
 }
+
 form{
     width: 17rem;
 }
@@ -32,6 +34,7 @@ form{
 .form-label{
     color: yellow;
 }
+
 .form-control:focus, .form-control {
     padding:5px; 
     border:2px solid yellow; 
@@ -40,7 +43,6 @@ form{
     background-color: black;
     color: yellow;
 }
-
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
@@ -56,30 +58,31 @@ input:-webkit-autofill {
         -webkit-appearance: none;
       } 
 
-/* css above for styling form input when its in diiferent states*/
 #parkingtable{
     color: yellow;
     border-color: yellow;
     font-size: 13px;
     width: 14rem;
 }
+
 th{
     font-size: 15px;
     width: 30rem;
     font-weight: 500;
-
 }
+
 #receipttable{
     color: yellow;
     width: 30rem;
-    font-size: 13px;
-    
+    font-size: 13px; 
 }
+
 .table{
     color: yellow;
     border-color: yellow;
     width: 30rem;
 }
+
 #parkingHead{
     color: yellow;
     font-size: 25px;
@@ -90,6 +93,7 @@ th{
     padding: 20px;
     width: 30rem;
 }
+
 #receiptHead{
     color: black;
     font-size: 25px;
@@ -101,13 +105,13 @@ th{
     padding: 20px;
     background-color: yellow;
     width: 30rem;
-
 }
+
 #receiptDescription{
     color: yellow;
     font-size: 11px;
-
 }
+
 .modal-dialog, .modal-content{
     width: 22rem;
     background-color: black;
@@ -119,6 +123,7 @@ th{
     font-weight: 600;
     font-size: 12px;
 }
+
 #footer{
     color: yellow;
     text-align: center;
