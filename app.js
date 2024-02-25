@@ -4,9 +4,9 @@ const dotenv = require('dotenv');
 const session = require('express-session');
 const app = express();
 const port = process.env.PORT || 3000;
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
-dotenv.config({ path: './.env'})
+dotenv.config({ path: './.env'});
 
 const publicDirectory = path.join(__dirname, "./public");
 
@@ -17,11 +17,7 @@ app.use(express.json());
 app.use(express.static(publicDirectory));
 app.use('/app', express.static(path.join(__dirname, 'app')));
 
-app.use(session({
-  secret: '112484',
-  resave: true,
-  saveUninitialized: true,
-}))
+app.use(session({secret: '112484', resave: true, saveUninitialized: true}));
 
 //Define Routes 
 app.use("/", require("./Routes/pages"));

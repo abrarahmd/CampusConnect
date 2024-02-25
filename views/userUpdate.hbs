@@ -39,19 +39,21 @@
         </div>
         <div class="rightbox">
             <div class="profile">
-                <h1>Personal Info</h1>
-                <h2>Full Name</h2>
-                <input type = "text" id = "fullName" class = "input" value = "">
-                <h2>Student ID</h2>
-                <input type = "text" id = "studentID" class = "input" value = "">
-                <h2>username</h2>
-                <input type = "text" id = "username" class = "input" value = "">
-                <h2>Email</h2>
-                <input type = "text" id = "email" class = "input" value = "">
-                <h2>Phone</h2>
-                <input type = "text" id = "phone" class = "input" value = "">
-                <br>
-                <button class="btn" id="updateBtn">Update</button>
+                <form action="/auth/updateUser" method="POST"></form>
+                    <h1>Personal Info</h1>
+                    <h2>Full Name</h2>
+                    <input type = "text" id = "fullName" class = "input" value = "">
+                    <h2>Student ID</h2>
+                    <input type = "number" id = "studentID" class = "input" value = "" readonly>
+                    <h2>username</h2>
+                    <input type = "text" id = "username" class = "input" value = "" readonly>
+                    <h2>Email</h2>
+                    <input type = "email" id = "email" class = "input" value = "">
+                    <h2>Phone</h2>
+                    <input type = "text" id = "phone" class = "input" value = "">
+                    <br>
+                    <button class="btn" id="updateBtn">Update</button>
+                </form>
             </div>
         </div>
     </div>
@@ -74,7 +76,6 @@
                 const username = document.getElementById('username');
                 const email = document.getElementById('email');
                 const phone = document.getElementById('phone');
-
 
                 fullName.value = userData.StudentName;
                 studentID.value = userData.StudentID;

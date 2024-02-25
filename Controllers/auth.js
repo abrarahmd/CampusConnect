@@ -107,7 +107,41 @@ exports.GetUserData = (req, res) => {
     }
 
     const userData = results;
-    console.log(userData)
     res.send(userData);
   });
 };
+
+exports.UserUpdate = (req, res) => {
+  const { fullName, studentID, username, email, phone } = req.body;
+  const userId = req.session.user.StudentID;
+  if (!req.session.user) {
+    return res.status(401).send('User not logged in.');
+  }
+  if (studentID == userId) {
+      db.query('UPDATE user SET StudentName = ?, Email = ?, Phone = ? WHERE StudentID = ?', [fullName, email, phone, userId], (error, results) => {
+          if (error) {
+            console.error('Database error:', error);
+            return res.status(500).send({
+              success: false,
+              message: 'Internal server error',
+            });
+          }
+
+          if (results.affectedRows === 0) {
+            return res.status(404).send({
+              success: false,
+              message: 'User not found.',
+            });
+          }
+
+          res.status(200).send({
+            success: true,
+            message: 'User information updated successfully',
+          });
+        
+        }
+      );
+  } else {
+    console.error('User Match Error:', error);
+  }
+}
