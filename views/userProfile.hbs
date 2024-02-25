@@ -64,13 +64,15 @@
         async function fetchData () {
             try {
                 const response = await axios.get('/auth/api/auth');
-                const userData = response.data;
                 
+                const userData = response.data[0];
+                      
                 const fullName = document.getElementById('fullName');
                 const studentID = document.getElementById('studentID');
                 const username = document.getElementById('username');
                 const email = document.getElementById('email');
                 const phone = document.getElementById('phone');
+
 
                 fullName.innerText = userData.StudentName;
                 studentID.innerText = userData.StudentID;

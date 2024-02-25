@@ -77,6 +77,12 @@ router.get('/parking', (req, res) => {
   res.render("parking");
 
 });
+
+router.get('/parkingContact', (req, res) => {
+
+  res.render("parkingContact");
+
+});
   
 /*User Profile Routes */
 
