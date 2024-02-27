@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 16, 2024 at 07:16 PM
+-- Generation Time: Feb 27, 2024 at 03:22 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `integrated student service platform`
+-- Database: `integrated_student_service_platform`
 --
 
 -- --------------------------------------------------------
@@ -76,16 +76,86 @@ CREATE TABLE `parkingmanagement` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `routes`
+--
+
+CREATE TABLE `routes` (
+  `Name` varchar(64) NOT NULL,
+  `Place` text NOT NULL,
+  `Time` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `routes`
+--
+
+INSERT INTO `routes` (`Name`, `Place`, `Time`) VALUES
+('BRAC University', 'Moddho Badda', '7:30 AM'),
+('Dhanmondi', 'Road No 7 (ARA Center Shopping Mall)', '6:35 AM'),
+('Kalabagan', 'Krira Chokro (Near Foot Over-Bridge)', '6:40 AM'),
+('Manik Mia Avenue', 'West End of Manik Mia Avenue (Opposite Aarong)', '6:50 AM'),
+('New Market', 'Gate no 2, Janata Bank', '6:30 AM'),
+('Sobhanbag', 'Sobhanbag (Near Foot Over-Bridge)', '6:45 AM');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `transportation`
 --
 
 CREATE TABLE `transportation` (
   `BusType` varchar(50) NOT NULL,
   `Time` time NOT NULL,
-  `SeatID` int(64) NOT NULL,
-  `SeatPaid` text NOT NULL,
+  `SeatID` varchar(64) NOT NULL,
+  `SeatPaid` varchar(64) DEFAULT NULL,
   `SeatAvailibility` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transportation`
+--
+
+INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatPaid`, `SeatAvailibility`) VALUES
+('Going', '07:30:00', '1', '', 1),
+('Going', '07:30:00', '10', '', 1),
+('Going', '07:30:00', '11', '', 1),
+('Going', '07:30:00', '12', '', 1),
+('Going', '07:30:00', '13', '', 1),
+('Going', '07:30:00', '14', '', 1),
+('Going', '07:30:00', '15', '', 1),
+('Going', '07:30:00', '16', '', 1),
+('Going', '07:30:00', '17', '', 1),
+('Going', '07:30:00', '18', '', 1),
+('Going', '07:30:00', '19', '', 1),
+('Going', '07:30:00', '2', '', 1),
+('Going', '07:30:00', '20', '', 1),
+('Going', '07:30:00', '3', '', 1),
+('Going', '07:30:00', '4', '', 1),
+('Going', '07:30:00', '5', '', 1),
+('Going', '07:30:00', '6', '', 1),
+('Going', '07:30:00', '7', '', 1),
+('Going', '07:30:00', '8', '', 1),
+('Going', '07:30:00', '9', '', 1),
+('Returning', '07:30:00', '1', '', 1),
+('Returning', '07:30:00', '10', '', 1),
+('Returning', '07:30:00', '11', '', 1),
+('Returning', '07:30:00', '12', '', 1),
+('Returning', '07:30:00', '13', '', 1),
+('Returning', '07:30:00', '14', '', 1),
+('Returning', '07:30:00', '15', '', 1),
+('Returning', '07:30:00', '16', '', 1),
+('Returning', '07:30:00', '17', '', 1),
+('Returning', '07:30:00', '18', '', 1),
+('Returning', '07:30:00', '19', '', 1),
+('Returning', '07:30:00', '2', '', 1),
+('Returning', '07:30:00', '20', '', 1),
+('Returning', '07:30:00', '3', '', 1),
+('Returning', '07:30:00', '4', '', 1),
+('Returning', '07:30:00', '5', '', 1),
+('Returning', '07:30:00', '6', '', 1),
+('Returning', '07:30:00', '7', '', 1),
+('Returning', '07:30:00', '8', '', 1),
+('Returning', '07:30:00', '9', '', 1);
 
 -- --------------------------------------------------------
 
@@ -99,9 +169,17 @@ CREATE TABLE `user` (
   `StudentName` varchar(100) NOT NULL,
   `Email` varchar(62) NOT NULL,
   `Grade` float NOT NULL,
-  `Phone` int(11) NOT NULL,
-  `Password` text NOT NULL
+  `Phone` int(20) NOT NULL,
+  `Password` text NOT NULL,
+  `Token` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'c259thikbe6');
 
 --
 -- Indexes for dumped tables
@@ -126,11 +204,18 @@ ALTER TABLE `parkingmanagement`
   ADD PRIMARY KEY (`SpaceID`);
 
 --
+-- Indexes for table `routes`
+--
+ALTER TABLE `routes`
+  ADD PRIMARY KEY (`Name`),
+  ADD UNIQUE KEY `Place` (`Place`) USING HASH,
+  ADD UNIQUE KEY `Time` (`Time`) USING HASH;
+
+--
 -- Indexes for table `transportation`
 --
 ALTER TABLE `transportation`
-  ADD PRIMARY KEY (`BusType`),
-  ADD UNIQUE KEY `SeatID` (`SeatID`);
+  ADD PRIMARY KEY (`BusType`,`SeatID`);
 
 --
 -- Indexes for table `user`
@@ -139,7 +224,8 @@ ALTER TABLE `user`
   ADD PRIMARY KEY (`StudentID`),
   ADD UNIQUE KEY `Email` (`Email`),
   ADD UNIQUE KEY `Username` (`Username`),
-  ADD UNIQUE KEY `Phone` (`Phone`);
+  ADD UNIQUE KEY `Phone` (`Phone`),
+  ADD UNIQUE KEY `Token` (`Token`) USING HASH;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
