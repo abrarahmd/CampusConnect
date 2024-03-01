@@ -138,7 +138,7 @@ exports.bookTicket = (req, res) => {
               console.error('Error updating seat:', error);
               return res.status(500).send('Internal Server Error');
             }
-            res.status(200).send('Seat Booked Successfully.');
+            res.redirect('/successful')
           });
         }
       });
