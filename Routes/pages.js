@@ -109,4 +109,10 @@ router.get('/successful', (req, res) => {
 
 });
 
+router.get('/successfulPurchase', (req, res) => {
+
+  res.render("successBuy");
+
+});
+
 module.exports = router;

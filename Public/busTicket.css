@@ -10,7 +10,7 @@
 }
 
 body {
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://img.freepik.com/free-photo/two-monastera-leaves-black-background_23-2147835077.jpg?w=1380&t=st=1708000149~exp=1708000749~hmac=e211654fbf23742e04fa82654e78de7c945ade233836c05e5194e6f982e4b3fb");
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://images.unsplash.com/photo-1476842634003-7dcca8f832de?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTB8fGRhcmslMjBsZWFmfGVufDB8fDB8fHww");
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;

@@ -159,7 +159,7 @@ exports.busTicket = (req, res) => {
       return res.status(500).send('Internal Server Error');
     }
     if (result.affectedRows > 0) {
-      res.status(200).send('Paid');
+      res.render('successBuy')
     } else {
       res.status(400).send('No matching seat found')
     }
