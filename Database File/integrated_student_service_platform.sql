@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 27, 2024 at 03:22 PM
+-- Generation Time: Mar 01, 2024 at 12:58 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -104,58 +104,59 @@ INSERT INTO `routes` (`Name`, `Place`, `Time`) VALUES
 --
 
 CREATE TABLE `transportation` (
-  `BusType` varchar(50) NOT NULL,
-  `Time` time NOT NULL,
-  `SeatID` varchar(64) NOT NULL,
-  `SeatPaid` varchar(64) DEFAULT NULL,
-  `SeatAvailibility` int(50) NOT NULL
+  `BusType` varchar(64) NOT NULL,
+  `Time` text NOT NULL,
+  `SeatID` int(11) NOT NULL,
+  `SeatAvailibility` int(11) NOT NULL,
+  `SeatPaid` int(11) NOT NULL,
+  `SeatBooked` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transportation`
 --
 
-INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatPaid`, `SeatAvailibility`) VALUES
-('Going', '07:30:00', '1', '', 1),
-('Going', '07:30:00', '10', '', 1),
-('Going', '07:30:00', '11', '', 1),
-('Going', '07:30:00', '12', '', 1),
-('Going', '07:30:00', '13', '', 1),
-('Going', '07:30:00', '14', '', 1),
-('Going', '07:30:00', '15', '', 1),
-('Going', '07:30:00', '16', '', 1),
-('Going', '07:30:00', '17', '', 1),
-('Going', '07:30:00', '18', '', 1),
-('Going', '07:30:00', '19', '', 1),
-('Going', '07:30:00', '2', '', 1),
-('Going', '07:30:00', '20', '', 1),
-('Going', '07:30:00', '3', '', 1),
-('Going', '07:30:00', '4', '', 1),
-('Going', '07:30:00', '5', '', 1),
-('Going', '07:30:00', '6', '', 1),
-('Going', '07:30:00', '7', '', 1),
-('Going', '07:30:00', '8', '', 1),
-('Going', '07:30:00', '9', '', 1),
-('Returning', '07:30:00', '1', '', 1),
-('Returning', '07:30:00', '10', '', 1),
-('Returning', '07:30:00', '11', '', 1),
-('Returning', '07:30:00', '12', '', 1),
-('Returning', '07:30:00', '13', '', 1),
-('Returning', '07:30:00', '14', '', 1),
-('Returning', '07:30:00', '15', '', 1),
-('Returning', '07:30:00', '16', '', 1),
-('Returning', '07:30:00', '17', '', 1),
-('Returning', '07:30:00', '18', '', 1),
-('Returning', '07:30:00', '19', '', 1),
-('Returning', '07:30:00', '2', '', 1),
-('Returning', '07:30:00', '20', '', 1),
-('Returning', '07:30:00', '3', '', 1),
-('Returning', '07:30:00', '4', '', 1),
-('Returning', '07:30:00', '5', '', 1),
-('Returning', '07:30:00', '6', '', 1),
-('Returning', '07:30:00', '7', '', 1),
-('Returning', '07:30:00', '8', '', 1),
-('Returning', '07:30:00', '9', '', 1);
+INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `SeatPaid`, `SeatBooked`) VALUES
+('Going', '6:30', 1, 1, 0, NULL),
+('Going', '6:30', 2, 1, 0, NULL),
+('Going', '6:30', 3, 1, 0, NULL),
+('Going', '6:30', 4, 1, 0, NULL),
+('Going', '6:30', 5, 1, 0, NULL),
+('Going', '6:30', 6, 1, 0, NULL),
+('Going', '6:30', 7, 1, 0, NULL),
+('Going', '6:30', 8, 1, 0, NULL),
+('Going', '6:30', 9, 1, 0, NULL),
+('Going', '6:30', 10, 1, 0, NULL),
+('Going', '6:30', 11, 1, 0, NULL),
+('Going', '6:30', 12, 1, 0, NULL),
+('Going', '6:30', 13, 1, 0, NULL),
+('Going', '6:30', 14, 1, 0, NULL),
+('Going', '6:30', 15, 1, 0, NULL),
+('Going', '6:30', 16, 1, 0, NULL),
+('Going', '6:30', 17, 1, 0, NULL),
+('Going', '6:30', 18, 1, 0, NULL),
+('Going', '6:30', 19, 1, 0, NULL),
+('Going', '6:30', 20, 1, 0, NULL),
+('Returning', '5:00', 1, 1, 0, NULL),
+('Returning', '5:00', 2, 1, 0, NULL),
+('Returning', '5:00', 3, 1, 0, NULL),
+('Returning', '5:00', 4, 1, 0, NULL),
+('Returning', '5:00', 5, 1, 0, NULL),
+('Returning', '5:00', 6, 1, 0, NULL),
+('Returning', '5:00', 7, 1, 0, NULL),
+('Returning', '5:00', 8, 1, 0, NULL),
+('Returning', '5:00', 9, 1, 0, NULL),
+('Returning', '5:00', 10, 1, 0, NULL),
+('Returning', '5:00', 11, 1, 0, NULL),
+('Returning', '5:00', 12, 1, 0, NULL),
+('Returning', '5:00', 13, 1, 0, NULL),
+('Returning', '5:00', 14, 1, 0, NULL),
+('Returning', '5:00', 15, 1, 0, NULL),
+('Returning', '5:00', 16, 1, 0, NULL),
+('Returning', '5:00', 17, 1, 0, NULL),
+('Returning', '5:00', 18, 1, 0, NULL),
+('Returning', '5:00', 19, 1, 0, NULL),
+('Returning', '5:00', 20, 1, 0, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,7 +180,10 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'c259thikbe6');
+(112, 'test', 'test', 'test@test', 0, 211212121, '$2b$08$Kw6AfWUHUmSbUN7h.EjvjuPr5JfNBn6177raIOb1CfTHT9AISxwVe', 'ibmre37skcb'),
+(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'cyrj0529gps'),
+(21301233, 'PORTE BOSH', 'Mezbha Ul Haque Fahim', 'mezbha.fahim@gmail.com', 0, 1749750955, '$2b$08$OGm3uHRr/khYYPeoPSNWWOHv4kUK4N5fJLbKDpOLygzD1RmmN.8Mu', 'dxagwvfbcs8'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '6pa6jwpqf3v');
 
 --
 -- Indexes for dumped tables

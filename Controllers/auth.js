@@ -146,6 +146,28 @@ exports.bookTicket = (req, res) => {
   });
 };
 
+exports.busTicket = (req, res) => {
+  const { fullName, studentID, email, phone, time, transaction } = req.body;
+  const loggedInUser = req.session.user;
+  console.log("fullName, studentID, email, phone, time, transaction")
+
+  const BusType = time === '06:30' ? 'Going' : 'Returning';
+  console.log(BusType)
+
+  db.query('UPDATE transportation SET SeatPaid = 1 WHERE BusType = ? AND SeatBooked = ?', [BusType, loggedInUser.Username], (error, result) => {
+    if (error) {
+      return res.status(500).send('Internal Server Error');
+    }
+    if (result.affectedRows > 0) {
+      res.status(200).send('Paid');
+    } else {
+      res.status(400).send('No matching seat found')
+    }
+  })
+}
+
+// User Stuff
+
 exports.GetUserData = (req, res) => {
 
   if (!req.session.user) {
@@ -195,10 +217,7 @@ exports.UserUpdate = (req, res) => {
             });
           }
 
-          res.status(200).send({
-            success: true,
-            message: 'User information updated successfully',
-          });
+          return res.render('userUpdate')
         
         }
       );

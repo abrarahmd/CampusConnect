@@ -9,6 +9,7 @@ router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 router.post("/updateUser", authController.UserUpdate)
 router.post("/bookTickets", authController.bookTicket)
+router.post("/buyBusTickets", authController.busTicket)
 
 
 
