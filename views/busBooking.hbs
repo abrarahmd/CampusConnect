@@ -16,39 +16,63 @@
       </div>
 
       <div class="booking-form">
-        <div class="input-grp">
-          <label>Student ID</label>
-          <input type="number" class = "form-control">
-        </div>
+        <form action = "/auth/bookTickets" method="POST">
+          <div class="input-grp">
+            <label for = "studentID">Student ID</label>
+            <input type="number" id = "studentID" name = "studentID" class = "form-control" readonly>
+          </div>
 
-        <div class="input-grp">
-          <label>Email</label>
-          <input type="email" class = "form-control">
-        </div>
+          <div class="input-grp">
+            <label for = "email">Email</label>
+            <input type="email" id = "email" name = "email" class = "form-control" readonly>
+          </div>
 
-        <label>Going From</label>
-        <input type="text" class = "form-control">
-        <label>Going To</label>
-        <input type="text" class = "form-control">
+          <label for = "goingFrom">Going From</label>
+          <input type="text" id = "goingFrom" name = "goingFrom" class = "form-control" required>
+          <label for = "goingTo">Going To</label>
+          <input type="text" id = "goingTo" name = "goingTo" class = "form-control" required>
 
-        <div class="input-grp-2">
-          <label>Phone Number</label>
-          <input type="number" class = "form-control">
-        </div>
+          <div class="input-grp-2">
+            <label for = "number">Phone Number</label>
+            <input type="number" id = "number" name = "number" class = "form-control" readonly>
+          </div>
 
-        <div class="input-grp-time">
-          <label>Time</label>
-          <select class = custom-select>
-            <option value="1">6:15 AM</option>
-            <option value="4">5:00 PM</option>
-          </select>
-        </div> <br> 
+          <div class="input-grp-time">
+            <label for = "time">Time</label>
+            <select id = "time" name = "time" class = custom-select>
+              <option value="1">6:30 AM</option>
+              <option value="4">5:00 PM</option>
+            </select>
+          </div> <br> 
 
-        <div class="input-grp-btn">
-          <button type = "button" class = "btn btn-primary flight">Book</button>
-        </div>
+          <div class="input-grp-btn">
+            <button type = "submit" class = "btn btn-primary flight">Book</button>
+          </div>
+        </form>
         
       </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchData () {
+            try {
+                const response = await axios.get('/auth/api/auth');
+                
+                const userData = response.data[0];
+                      
+                const studentID = document.getElementById('studentID');
+                const email = document.getElementById('email');
+                const number = document.getElementById('number');
+
+                studentID.value = userData.StudentID;
+                email.value = userData.Email;
+                number.value = userData.Phone;
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        }
+    fetchData()
+    </script>
   </body>
 </html>
