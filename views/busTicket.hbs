@@ -14,19 +14,19 @@
                 <h3 class="title">Student Information</h3>
                 <div class="inputBox">
                     <span>Full Name :</span>
-                    <input type="text" placeholder="Zarin Tasnim Raisa">
+                    <input type="text" id = "fullName" placeholder="" readonly>
                 </div>
                 <div class="inputBox">
                     <span>Student ID :</span>
-                    <input type="number" placeholder="21381452">
+                    <input type="number" id = "studentID" placeholder="" readonly>
                 </div>
                 <div class="inputBox">
                     <span>Email :</span>
-                    <input type="email" placeholder="example@g.bracu.ac.bd">
+                    <input type="email" id = "email" placeholder="" readonly>
                 </div>
                 <div class="inputBox">
                     <span>Phone number  :</span>
-                    <input type="number" placeholder="01749750321">
+                    <input type="number" id = "phone" placeholder="" readonly>
                 </div>
                 <div class="inputBox">
                     <span>Bus time :</span>
@@ -53,6 +53,30 @@
     </div> 
 
     <script src="/App/busTicket.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchData () {
+            try {
+                const response = await axios.get('/auth/api/auth');
+                
+                const userData = response.data[0];
+                      
+                const fullName = document.getElementById('fullName');
+                const studentID = document.getElementById('studentID');
+                const email = document.getElementById('email');
+                const phone = document.getElementById('phone');
+
+                fullName.value = userData.StudentName;
+                studentID.value = userData.StudentID;
+                email.value = userData.Email;
+                phone.value = userData.Phone;
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        }
+    fetchData()
+    </script>
 
 </body>
 </html>

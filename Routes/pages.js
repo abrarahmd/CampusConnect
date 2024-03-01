@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-
-  res.send('Welcome to the main page!');
+  
+  if (req.session.user) {
+    res.render("homepage-loggedin");
+  } else {
+    res.render("homepage");
+  }
 
 });
 
@@ -32,7 +36,7 @@ router.get('/homepage', (req, res) => {
   }
   else {
 
-    res.render("/signup-signin");
+    res.render("signup-signin");
 
   }
 });
@@ -94,6 +98,14 @@ router.get('/userProfile', (req, res) => {
 router.get('/userUpdate', (req, res) => {
 
   res.render("userUpdate");
+
+});
+
+/* Submit Success Route */
+
+router.get('/successful', (req, res) => {
+
+  res.render("successSubmit");
 
 });
 
