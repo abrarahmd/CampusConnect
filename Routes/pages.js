@@ -101,7 +101,7 @@ router.get('/userUpdate', (req, res) => {
 
 });
 
-/* Submit Success Route */
+/* Successful Message Route */
 
 router.get('/successful', (req, res) => {
 
@@ -112,6 +112,14 @@ router.get('/successful', (req, res) => {
 router.get('/successfulPurchase', (req, res) => {
 
   res.render("successBuy");
+
+});
+
+// Routine Routes
+
+router.get('/routine', (req, res) => {
+
+  res.render("routine");
 
 });
 

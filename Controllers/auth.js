@@ -8,6 +8,8 @@ const generateSessionToken = () => {
     return randomString;
 };
 
+//Login Signup Stuff
+
 exports.UserSignup = async (req, res) => {
 
     const {StudentID, Username, StudentName, Email, Phone, Password} = req.body;
@@ -94,6 +96,8 @@ exports.UserLogin = (req, res) => {
       });
 };
 
+//Bus Stuff
+
 exports.BusRoutes = (req, res) => {
 
   const condition = req.params.condition;
@@ -149,10 +153,8 @@ exports.bookTicket = (req, res) => {
 exports.busTicket = (req, res) => {
   const { fullName, studentID, email, phone, time, transaction } = req.body;
   const loggedInUser = req.session.user;
-  console.log("fullName, studentID, email, phone, time, transaction")
 
   const BusType = time === '06:30' ? 'Going' : 'Returning';
-  console.log(BusType)
 
   db.query('UPDATE transportation SET SeatPaid = 1 WHERE BusType = ? AND SeatBooked = ?', [BusType, loggedInUser.Username], (error, result) => {
     if (error) {
