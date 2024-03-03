@@ -227,3 +227,8 @@ exports.UserUpdate = (req, res) => {
     console.error('User Match Error:', error);
   }
 }
+
+//food 
+exports.FoodInfo = (req, res) => {
+  console.log('Hello');
+}
