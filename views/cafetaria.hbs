@@ -20,7 +20,7 @@
                 <li><a href="/homepage">Home</a></li>
                 <li><a href="#About">About</a></li>
                 <li><a href="#Menu">Menu</a></li>
-                <li><a href="#Order">Order</a></li>
+                
                 <li><a href="#Contact Us">Contact Us</a></li>
             </ul>
         </nav>
@@ -68,14 +68,14 @@
         <div class="menu_box">
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="/buger.jpg">
+                    <img src="/buger.jpg" id = "BurgerImg">
                 </div>
                 <div class="small_card">
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div class="menu_info">
-                    <h2>Burger</h2> 
-                    <h3>TK.120</h3>
+                    <h2 id = "Burger">Burger</h2> 
+                    <h3 id = "BurgerCost">TK.120</h3>
                     <div class="menu_icon">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -88,14 +88,14 @@
             </div> 
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="/pasta.jpg">
+                    <img src="/pasta.jpg" id = 'pastaImg'>
                 </div>
                 <div class="small_card">
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div class="menu_info">
-                    <h2>Pasta</h2>
-                    <h3>TK.100</h3>
+                    <h2 id = 'Pasta'>Pasta</h2>
+                    <h3 id = 'PastaCost'>TK.100</h3>
                     <div class="menu_icon">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -109,14 +109,14 @@
 
             <div class="menu_card">
                 <div class="menu_image">
-                    <img src="/gallary_3.jpg">
+                    <img src="/gallary_3.jpg" id = 'CupCakeImg'>
                 </div>
                 <div class="small_card">
                     <i class="fa-solid fa-heart"></i>
                 </div>
                 <div class="menu_info">
-                    <h2>Chocolate Cup Cake</h2>
-                    <h3>TK.50</h3>
+                    <h2 id = 'CupCake'>Chocolate Cup Cake</h2>
+                    <h3 id = 'CupCakeCost'>TK.50</h3>
                     <div class="menu_icon">
                         <i class="fa-solid fa-star"></i>
                         <i class="fa-solid fa-star"></i>
@@ -325,41 +325,7 @@
         </div>
     </div>
 
-    <div class="order" id="Order">
-        <h1><span>Order</span>Now</h1>
-        <div class="order_main">
-            <div class="order_image">
-                <img src="/order_image.png">
-            </div>
-            <form action="#">
-                <div class="input">
-                    <p>Name</p>
-                    <input type="text" placeholder="you name">
-                </div>
-                <div class="input">
-                    <p>Email</p>
-                    <input type="email" placeholder="you email">
-                </div>
-                <div class="input">
-                    <p>Student ID</p>
-                    <input placeholder="24******">
-                </div>
-                <div class="input">
-                    <p>Quantity</p>
-                    <input type="number" placeholder="how many order">
-                </div>
-                <div class="input">
-                    <p>You Order</p>
-                    <input placeholder="food name">
-                </div>
-                <div class="input">
-                    <p>Details about food</p>
-                    <input placeholder="Flavour-Spicy">
-                </div>
-                <a href="#" class="order_btn">Order Now</a>
-            </form>
-        </div>
-    </div>
+    
 
     <footer>
         <div class="Contact Us" id="Contact Us">
@@ -386,6 +352,22 @@
             </div>
         </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        async function FoodInfo() {
+            try {
+                const response = await axios.get('/auth/api/FoodInfo');
+                const routesData = response.data;
+                
+            } catch (error) {
+                console.error('Error fetching food:', error);
+            }
+        }
+
+        FoodInfo();
+    </script>
     
 </body>
 </html>
