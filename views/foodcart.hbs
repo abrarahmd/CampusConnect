@@ -1,0 +1,118 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>shopping cart</title>
+
+   <!-- font awesome cdn link  -->
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+   <!-- custom css file link  -->
+   <link rel="stylesheet" href="/foodcart.css">
+
+</head>
+<body>
+
+
+
+<div class="container">
+
+<section class="shopping-cart">
+
+   <h1 class="heading">shopping cart</h1>
+
+   <table>
+
+      <thead>
+         <th>image</th>
+         <th>name</th>
+         <th>price</th>
+         <th>quantity</th>
+         <th>total price</th>
+         <th>action</th>
+      </thead>
+
+      <tbody>
+
+        
+
+         <tr>
+            <td><img src="" height="100" alt=""></td>
+            <td></td>
+            <td></td>
+            <td>
+               <form action="" method="post">
+                  <input type="hidden" name="update_quantity_id"  value="<?php echo $fetch_cart['id']; ?>" >
+                  <input type="number" name="update_quantity" min="1"  value="<?php echo $fetch_cart['quantity']; ?>" >
+                  <input type="submit" value="update" name="update_update_btn">
+               </form>   
+            </td>
+            <td></td>
+            <td><a href="#" onclick="return confirm('remove item from cart?')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
+         </tr>
+         
+         <tr class="table-bottom">
+            <td><a href="#" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
+            <td colspan="3">grand total</td>
+            <td></td>
+            <td><a href="#" onclick="return confirm('are you sure you want to delete all?');" class="delete-btn"> <i class="fas fa-trash"></i> delete all </a></td>
+         </tr>
+
+      </tbody>
+
+   </table>
+
+   <div class="checkout-btn">
+      <a href="#" class="btn <?= ($grand_total > 1)?'':'disabled'; ?>">procced to checkout</a>
+   </div>
+
+</section>
+
+</div>
+
+
+<div class="container">
+
+<section class="checkout-form">
+
+   <h1 class="heading">complete your order</h1>
+
+   <form action="" method="post">
+
+   <div class="display-order">
+      <span></span>
+      <span class="grand-total">  </span>
+   </div>
+
+      <div class="flex">
+         <div class="inputBox">
+            <span>your name</span>
+            <input type="text" placeholder="" name="name" required>
+         </div>
+         <div class="inputBox">
+            <span>Student ID</span>
+            <input type="number" placeholder="" name="studentID" required>
+         </div>
+         <div class="inputBox">
+            <span>your number</span>
+            <input type="number" placeholder="" name="number" required>
+         </div>
+         
+         
+      </div>
+      <input type="submit" value="Confirm Order" name="order_btn" class="btn">
+   </form>
+
+</section>
+
+</div>
+
+
+</body>
+</html>
+
+
