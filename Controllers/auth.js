@@ -230,5 +230,13 @@ exports.UserUpdate = (req, res) => {
 
 //food 
 exports.FoodInfo = (req, res) => {
-  console.log('Hello');
-}
+  
+  // Execute the query
+  db.query('SELECT * FROM food', (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+
+    }
+    res.send(results);
+  });
+};
