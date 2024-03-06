@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 01, 2024 at 12:58 PM
+-- Generation Time: Mar 06, 2024 at 05:15 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -43,10 +43,50 @@ CREATE TABLE `courses` (
 --
 
 CREATE TABLE `food` (
-  `FoodID` int(100) NOT NULL,
   `FoodName` varchar(200) NOT NULL,
-  `FoodRating` float NOT NULL
+  `FoodRating` float DEFAULT NULL,
+  `FoodCost` int(11) NOT NULL,
+  `FoodPicture` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food`
+--
+
+INSERT INTO `food` (`FoodName`, `FoodRating`, `FoodCost`, `FoodPicture`) VALUES
+('Biryani', 5, 160, '/biryani.webp'),
+('Burger', 5, 120, '/buger.jpg'),
+('Chocolate', 5, 20, '/chocolate.jpg'),
+('Chocolate Cup Cake', 5, 50, '/gallary_3.jpg'),
+('Chocolate Milkshake', 5, 80, '/chocolate_Drink.jpg'),
+('Drinks', 5, 60, '/juse.jpg'),
+('Hot Dog', 5, 80, '/Hot_dog.jpg'),
+('Ice Cream', 5, 100, '/ice_cream.jpg'),
+('Muffin Cake', 5, 40, '/Spanchi.jpg'),
+('Pasta', 5, 100, '/pasta.jpg'),
+('Pizza', 5, 250, '/pizza.jpg'),
+('Sandwich', 5, 70, '/sandwich.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `foodcart`
+--
+
+CREATE TABLE `foodcart` (
+  `FoodPicture` text NOT NULL,
+  `StudentID` int(11) NOT NULL,
+  `FoodName` varchar(200) NOT NULL,
+  `Quantity` int(11) NOT NULL,
+  `Bill` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `foodcart`
+--
+
+INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bill`) VALUES
+('/Hot_dog.jpg', 21301309, 'Hot Dog', 1, 80);
 
 -- --------------------------------------------------------
 
@@ -183,7 +223,7 @@ INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `P
 (112, 'test', 'test', 'test@test', 0, 211212121, '$2b$08$Kw6AfWUHUmSbUN7h.EjvjuPr5JfNBn6177raIOb1CfTHT9AISxwVe', 'ibmre37skcb'),
 (21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'cyrj0529gps'),
 (21301233, 'PORTE BOSH', 'Mezbha Ul Haque Fahim', 'mezbha.fahim@gmail.com', 0, 1749750955, '$2b$08$OGm3uHRr/khYYPeoPSNWWOHv4kUK4N5fJLbKDpOLygzD1RmmN.8Mu', 'dxagwvfbcs8'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '6pa6jwpqf3v');
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'h0fkw97g3f4');
 
 --
 -- Indexes for dumped tables
@@ -194,6 +234,19 @@ INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `P
 --
 ALTER TABLE `courses`
   ADD PRIMARY KEY (`CourseID`);
+
+--
+-- Indexes for table `food`
+--
+ALTER TABLE `food`
+  ADD PRIMARY KEY (`FoodName`);
+
+--
+-- Indexes for table `foodcart`
+--
+ALTER TABLE `foodcart`
+  ADD PRIMARY KEY (`StudentID`,`FoodName`),
+  ADD KEY `FoodName` (`FoodName`);
 
 --
 -- Indexes for table `forum`
@@ -230,6 +283,17 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `Username` (`Username`),
   ADD UNIQUE KEY `Phone` (`Phone`),
   ADD UNIQUE KEY `Token` (`Token`) USING HASH;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `foodcart`
+--
+ALTER TABLE `foodcart`
+  ADD CONSTRAINT `foodcart_ibfk_1` FOREIGN KEY (`StudentID`) REFERENCES `user` (`StudentID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `foodcart_ibfk_2` FOREIGN KEY (`FoodName`) REFERENCES `food` (`FoodName`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

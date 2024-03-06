@@ -134,7 +134,9 @@
                             <div class="menu_icon">
                                 ${generateStarIcons(food.FoodRating)}
                             </div>
-                            <a href="/foodcart" class="menu_btn">Add To Cart</a>
+                            <a href="#" class="menu_btn" onclick="addToCart('${food.FoodPicture}', '${food.FoodName}', ${food.FoodCost})">Add To Cart</a>
+
+            
                             
                         </div>
                     `;
@@ -161,6 +163,27 @@
             }
 
             return starIcons;
+        }
+
+        function addToCart(foodPicture, foodName, foodCost ) {
+            
+            const data = {
+                foodPicture : foodPicture,
+                foodName: foodName,
+                foodCost: foodCost,
+                
+                
+            };
+
+            
+            axios.post('/auth/api/addToCart', data)
+                .then(response => {
+                    
+                    console.log(response.data);
+                })
+                .catch(error => {
+                    console.error('Error adding to cart:', error);
+                });
         }
 
         FoodInfo();
