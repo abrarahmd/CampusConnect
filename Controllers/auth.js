@@ -258,7 +258,7 @@ exports.AddToCart = (req, res) => {
   
 //Routine
 exports.CourseFetch = async (req, res) => {
-  db.query('SELECT CourseName, Time, Section FROM courses', (error, results) => {
+  db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
     if (error) {
       console.error('Database error:', error);
       return res.status(500).send('Internal server error');

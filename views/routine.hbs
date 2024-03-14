@@ -89,7 +89,7 @@
         const response = await axios.get('/auth/api/courses');
         const courses = response.data;
         const searchInput = document.getElementById("course-search");
-        const searchQuery = searchInput.value.trim().toLowerCase();
+        const searchQuery = searchInput.value.toLowerCase();
         
 
         const matchingCourses = courses.filter(course => course.CourseName.toLowerCase().includes(searchQuery));
@@ -97,8 +97,11 @@
         const searchResultsContainer = document.getElementById("search-results");
         searchResultsContainer.innerHTML = "";
 
-        if (matchingCourses.length === 0) {
+        if (searchQuery === "") {
+          searchResultsContainer.style.display = "none";
+        } else if (matchingCourses.length === 0) {
           searchResultsContainer.textContent = "No matching courses found.";
+          searchResultsContainer.style.display = "block";
         } else {
           matchingCourses.forEach(course => {
             const courseButton = document.createElement("div");
@@ -106,8 +109,8 @@
             courseButton.classList.add("search-result-item");
             searchResultsContainer.appendChild(courseButton);
           });
+          searchResultsContainer.style.display = "block";
         }
-        searchResultsContainer.style.display = "block";
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
