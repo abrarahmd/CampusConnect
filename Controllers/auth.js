@@ -249,12 +249,26 @@ exports.AddToCart = (req, res) => {
   const loggedInUser = req.session.user;
   console.log(foodPicture, foodName, foodCost)
 
-        db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {
-            
-            if(error){
-                console.log(error);
-            } 
-        })
-    };
+  db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {    
+      if(error){
+        console.log(error);
+        } 
+    })
+  };
   
+//Routine
+exports.CourseFetch = async (req, res) => {
+  db.query('SELECT CourseName, Time, Section FROM courses', (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
 
+    if (results.length === 0) {
+      return res.status(404).send('No Courses Found!.');
+    }
+
+    const userData = results;
+    res.send(userData);
+  });
+};

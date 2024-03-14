@@ -75,3 +75,43 @@ button:hover {
   background-color: #3b92f0;
   color: white;
 }
+
+#search-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px; 
+}
+
+#course-search {
+  flex-grow: 1;
+  padding: 10px; 
+  margin-right: 10px;
+  border: 1px solid #ccc;
+  border-radius: 25px; 
+  text-align: center; 
+  transition: border-color 0.3s ease; 
+}
+
+#search-results {
+  position: absolute;
+  top: calc(100% + 10px);
+  width: calc(100% - 20px);
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: #f3f9ff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  display: none;
+}
+
+.search-result-item {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.search-result-item:hover {
+  background-color: #bad5fc;
+}

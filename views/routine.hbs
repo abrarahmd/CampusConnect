@@ -4,14 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weekly Routine</title>
-  <link rel = "stylesheet" href = "/routine.css">
+  <link rel="stylesheet" href="/routine.css">
 </head>
 <body>
 
-  <h2>Individual Schedule</h2>
+  <h2>Thyn Schedule</h2>
 
   <div id="search-container">
     <input type="text" id="course-search" placeholder="Search for a course...">
+    <div id="search-results"></div>
   </div>
 
   <table>
@@ -79,6 +80,40 @@
       <td></td>
     </tr>
   </table>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    async function showSearchResults() {
+      try {
+        const response = await axios.get('/auth/api/courses');
+        const courses = response.data;
+        const searchInput = document.getElementById("course-search");
+        const searchQuery = searchInput.value.trim().toLowerCase();
+        
+
+        const matchingCourses = courses.filter(course => course.CourseName.toLowerCase().includes(searchQuery));
+
+        const searchResultsContainer = document.getElementById("search-results");
+        searchResultsContainer.innerHTML = "";
+
+        if (matchingCourses.length === 0) {
+          searchResultsContainer.textContent = "No matching courses found.";
+        } else {
+          matchingCourses.forEach(course => {
+            const courseButton = document.createElement("div");
+            courseButton.textContent = `${course.CourseName} Section ${course.Section}`;
+            courseButton.classList.add("search-result-item");
+            searchResultsContainer.appendChild(courseButton);
+          });
+        }
+        searchResultsContainer.style.display = "block";
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+    document.getElementById("course-search").addEventListener("input", showSearchResults);
+  </script>
 
 </body>
 </html>
