@@ -227,3 +227,34 @@ exports.UserUpdate = (req, res) => {
     console.error('User Match Error:', error);
   }
 }
+
+//food 
+exports.FoodInfo = (req, res) => {
+  
+  // Execute the query
+  db.query('SELECT * FROM food', (error, results) => {
+    if (error) {
+      return res.status(500).json({ error: 'Internal Server Error' });
+
+    }
+    res.send(results);
+  });
+};
+
+
+//cart
+
+exports.AddToCart = (req, res) => {
+  const { foodPicture, foodName, foodCost } = req.body;
+  const loggedInUser = req.session.user;
+  console.log(foodPicture, foodName, foodCost)
+
+        db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {
+            
+            if(error){
+                console.log(error);
+            } 
+        })
+    };
+  
+

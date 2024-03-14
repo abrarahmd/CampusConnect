@@ -5,11 +5,14 @@ const router = express.Router();
 
 router.get("/api/auth", authController.GetUserData)
 router.get("/api/fetchroutes", authController.BusRoutes)
+router.get('/api/FoodInfo' , authController.FoodInfo)
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 router.post("/updateUser", authController.UserUpdate)
 router.post("/bookTickets", authController.bookTicket)
 router.post("/buyBusTickets", authController.busTicket)
+router.post('/api/addToCart' , authController.AddToCart)
+
 
 
 

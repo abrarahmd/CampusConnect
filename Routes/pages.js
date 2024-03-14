@@ -74,6 +74,12 @@ router.get('/cafetaria', (req, res) => {
 
 });
 
+router.get('/foodcart', (req, res) => {
+
+  res.render("foodcart");
+
+});
+
 /* Parking Route */
 
 router.get('/parking', (req, res) => {
