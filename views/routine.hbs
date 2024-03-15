@@ -108,6 +108,15 @@
             courseButton.textContent = `${course.CourseName} Section ${course.Section}`;
             courseButton.classList.add("search-result-item");
             searchResultsContainer.appendChild(courseButton);
+
+            courseButton.addEventListener('click', function() {
+              const selectedCourse = {
+                courseName: course.CourseName,
+                section: course.Section
+              }
+              sendCourseData(selectedCourse)
+              
+            })
           });
           searchResultsContainer.style.display = "block";
         }
@@ -115,6 +124,27 @@
         console.error('Error fetching user data:', error);
       }
     }
+
+    async function sendCourseData(course) {
+      try {
+        const response = await axios({
+            method: 'post',
+            url: '/auth/api/courseSelected',
+            data: {
+                courseDetails: course
+            }
+        });
+      } catch (error) {
+        if (error.response.status === 401) {
+          alert('You are not logged in. Please log in to continue.');
+        } else if (error.response.status === 404) {
+          alert('You have already taken this course');
+        } else {
+          console.error('Error Sending Data', error);
+        }
+      }
+    }
+
     document.getElementById("course-search").addEventListener("input", showSearchResults);
   </script>
 

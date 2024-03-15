@@ -228,10 +228,9 @@ exports.UserUpdate = (req, res) => {
   }
 }
 
-//food 
+//Food 
 exports.FoodInfo = (req, res) => {
   
-  // Execute the query
   db.query('SELECT * FROM food', (error, results) => {
     if (error) {
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -241,9 +240,7 @@ exports.FoodInfo = (req, res) => {
   });
 };
 
-
-//cart
-
+//Cart
 exports.AddToCart = (req, res) => {
   const { foodPicture, foodName, foodCost } = req.body;
   const loggedInUser = req.session.user;
@@ -256,7 +253,7 @@ exports.AddToCart = (req, res) => {
     })
   };
   
-//Routine
+//Routine Stuff
 exports.CourseFetch = async (req, res) => {
   db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
     if (error) {
@@ -271,4 +268,38 @@ exports.CourseFetch = async (req, res) => {
     const userData = results;
     res.send(userData);
   });
+};
+
+exports.CourseSelected = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const { courseDetails } = req.body;
+    const username = req.session.user.Username;
+
+    db.query("SELECT * FROM usercoursetable WHERE Username = ? AND CourseName = ?", [username, courseDetails.courseName], (error, results) => {
+        if (error) {
+          console.error("Database error:", error);
+          return res.status(500).send("Internal server error");
+        }
+        if (results.length > 0) {
+          return res.status(404).send("You have taken this course");
+        } else {
+          db.query(
+            "INSERT INTO usercoursetable SET ?", {Username: username, CourseName: courseDetails.courseName, CourseSection: courseDetails.section}, (insertError, insertResults) => {
+              if (insertError) {
+                console.error("Database insert error:", insertError);
+                return res.status(500).send("Internal server error");
+              }
+              return res.status(200).send("Course selection successful");
+            }
+          );
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Error in CourseSelected:", error);
+    return res.status(500).send("Internal server error");
+  }
 };

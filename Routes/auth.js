@@ -13,6 +13,7 @@ router.post("/updateUser", authController.UserUpdate)
 router.post("/bookTickets", authController.bookTicket)
 router.post("/buyBusTickets", authController.busTicket)
 router.post('/api/addToCart' , authController.AddToCart)
+router.post('/api/courseSelected' , authController.CourseSelected)
 
 
 
