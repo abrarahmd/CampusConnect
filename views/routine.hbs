@@ -24,60 +24,67 @@
       <th>Wednesday</th>
       <th>Thursday</th>
       <th>Friday</th>
+      <th>Saturday</th>
     </tr>
     <tr>
-      <td>8:00 - 9:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="8:00 - 9:20">8:00 - 9:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>9:30 - 10:50</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="9:30 - 10:50">9:30 - 10:50</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>11:00 - 12:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="11:00 - 12:20">11:00 - 12:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>12:30 - 1:50</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="12:30 - 1:50">12:30 - 1:50</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>2:00 - 3:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="2:00 - 3:20">2:00 - 3:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>3:30 - 5:00</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="3:30 - 5:00">3:30 - 5:00</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
   </table>
 
@@ -145,16 +152,123 @@
       }
     }
 
+    document.addEventListener("DOMContentLoaded", function() {
+      console.log("DOM is fully loaded");
+      courseShow();
+    });
+
     async function courseShow() {
       try {
         const response = await axios.get('/auth/api/courseShow');
         const courseTaken = response.data;
-        console.log(courseTaken)
+        renderCoursesInRoutineTable(courseTaken);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching course data:', error);
       }
     }
-    courseShow()
+
+    function renderCoursesInRoutineTable(courses) {
+
+      courses.forEach(courseArray => {
+        courseArray.forEach(course => {
+
+          const { CourseName, Time, Day1, Day2 } = course;
+          console.log(`Course: ${CourseName}, Time: ${Time}, Day1: ${Day1}, Day2: ${Day2}`);
+          let tableCell1;
+
+          if (Day1 === "Sunday"){
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day1}"]`);
+          }
+
+          if (Day1 === "Monday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Tuesday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Wednesday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Thursday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Friday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Saturday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (tableCell1) {
+            tableCell1.textContent = `${CourseName} Section ${course.Section}`;
+          }
+
+          let tableCell2;
+
+          if (Day2 === "Sunday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day2}"]`);
+          }
+
+          if (Day2 === "Monday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Tuesday"){
+            console.log("h")
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Wednesday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Thursday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Friday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Saturday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (tableCell2) {
+            tableCell2.textContent = `${CourseName} Section ${course.Section}`;
+          }
+        });
+      });
+    }
 
     document.getElementById("course-search").addEventListener("input", showSearchResults);
   </script>
