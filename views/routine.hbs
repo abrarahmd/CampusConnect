@@ -145,6 +145,17 @@
       }
     }
 
+    async function courseShow() {
+      try {
+        const response = await axios.get('/auth/api/courseShow');
+        const courseTaken = response.data;
+        console.log(courseTaken)
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+    courseShow()
+
     document.getElementById("course-search").addEventListener("input", showSearchResults);
   </script>
 

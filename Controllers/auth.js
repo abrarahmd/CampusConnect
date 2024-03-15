@@ -251,7 +251,7 @@ exports.AddToCart = (req, res) => {
         console.log(error);
         } 
     })
-  };
+};
   
 //Routine Stuff
 exports.CourseFetch = async (req, res) => {
@@ -300,6 +300,49 @@ exports.CourseSelected = async (req, res) => {
     );
   } catch (error) {
     console.error("Error in CourseSelected:", error);
+    return res.status(500).send("Internal server error");
+  }
+};
+
+exports.CourseShowRoutine = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const username = req.session.user.Username;
+    const results = await new Promise((resolve, reject) => {
+      db.query('SELECT * FROM usercoursetable WHERE Username = ?', [username], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    const courseNamesList = results.map(row => ({ courseName: row.CourseName, courseSection: row.CourseSection }));
+    const courseDetails = [];
+
+    for (let i = 0; i < courseNamesList.length; i++) {
+      const courseName = courseNamesList[i]['courseName'];
+      const courseSection = courseNamesList[i]['courseSection'];
+
+      const courseResults = await new Promise((resolve, reject) => {
+        db.query('SELECT * FROM courses WHERE CourseName = ? AND Section = ?', [courseName, courseSection], (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+
+      courseDetails.push(courseResults);
+    }
+    res.send(courseDetails);
+
+  } catch (error) {
+    console.error("Error in CourseShowRoutine:", error);
     return res.status(500).send("Internal server error");
   }
 };
