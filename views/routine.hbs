@@ -8,7 +8,14 @@
 </head>
 <body>
 
-  <h2>Thyn Schedule</h2>
+  <h2>Customize Routine</h2>
+
+  
+
+  <div id="added-courses">
+    <h3>Added Courses:</h3>
+    <ul id="added-courses-list"></ul>
+  </div>
 
   <div id="search-container">
     <input type="text" id="course-search" placeholder="Search for a course...">
@@ -141,7 +148,9 @@
                 courseDetails: course
             }
         });
+        
         courseShow();
+        
       } catch (error) {
         if (error.response.status === 401) {
           alert('You are not logged in. Please log in to continue.');
@@ -154,7 +163,6 @@
     }
 
     document.addEventListener("DOMContentLoaded", function() {
-      console.log("DOM is fully loaded");
       courseShow();
     });
 
@@ -163,6 +171,16 @@
         const response = await axios.get('/auth/api/courseShow');
         const courseTaken = response.data;
         renderCoursesInRoutineTable(courseTaken);
+
+        const addedCoursesList = document.getElementById('added-courses-list');
+        addedCoursesList.innerHTML = ""; // Clear previous content
+        courseTaken.forEach(courseList => {
+          courseList.forEach(course => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${course.CourseName} Section ${course.Section}`;
+            addedCoursesList.appendChild(listItem);
+          });
+        });
       } catch (error) {
         console.error('Error fetching course data:', error);
       }
@@ -174,7 +192,6 @@
         courseArray.forEach(course => {
 
           const { CourseName, Time, Day1, Day2 } = course;
-          console.log(`Course: ${CourseName}, Time: ${Time}, Day1: ${Day1}, Day2: ${Day2}`);
           let tableCell1;
 
           if (Day1 === "Sunday"){
@@ -235,7 +252,6 @@
           }
 
           if (Day2 === "Tuesday"){
-            console.log("h")
             tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day2}"]`);
             
           }
