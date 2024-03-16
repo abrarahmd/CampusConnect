@@ -5,9 +5,11 @@ const router = express.Router();
 
 router.get("/api/auth", authController.GetUserData)
 router.get("/api/fetchroutes", authController.BusRoutes)
+router.get('/api/busSeatAvailability' , authController.BusSeatAvailability)
 router.get('/api/FoodInfo' , authController.FoodInfo)
 router.get('/api/courses' , authController.CourseFetch)
 router.get('/api/courseShow' , authController.CourseShowRoutine)
+
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
 router.post("/updateUser", authController.UserUpdate)

@@ -151,6 +151,28 @@ exports.bookTicket = (req, res) => {
   });
 };
 
+exports.BusSeatAvailability = (req, res) => {
+  db.query('SELECT COUNT(*) AS goingSeats FROM transportation WHERE SeatAvailibility = 1 AND BusType = ?', ['Going'], (error, goingResult) => {
+    if (error) {
+      return res.status(500).send('Internal server error');
+    }
+
+    const goingSeats = goingResult[0].goingSeats;
+
+    db.query('SELECT COUNT(*) AS returningSeats FROM transportation WHERE SeatAvailibility = 1 AND BusType = ?', ['Returning'], (error, returningResult) => {
+      if (error) {
+        return res.status(500).send('Internal server error');
+      }
+
+      const returningSeats = returningResult[0].returningSeats;
+
+      const seatAvailability = {going: goingSeats, returning: returningSeats};
+      res.send(seatAvailability);
+
+    });
+  });
+};
+
 exports.busTicket = (req, res) => {
   const { fullName, studentID, email, phone, time, transaction } = req.body;
   const loggedInUser = req.session.user;

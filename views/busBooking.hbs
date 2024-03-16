@@ -13,8 +13,8 @@
 
     <div class="available-seats">
       <h3>Available Seats</h3>
-      <p>Going Trip Seat Available: 25</p>
-      <p>Returning Trip Seat Available: 25</p>
+      <p id="goingSeats">Going Trip Seat Available:</p>
+      <p id="returningSeats">Returning Trip Seat Available:</p>
     </div>
 
     <div class="booking-form-box">
@@ -89,7 +89,20 @@
                 console.error('Error fetching user data:', error);
             }
         }
-    fetchData()
+        async function busSeatAvailability () {
+          try {
+            const response = await axios.get('/auth/api/busSeatAvailability');
+            const busSeatData = response.data;
+            
+            document.getElementById('goingSeats').textContent += ` ${busSeatData.going}`;
+            document.getElementById('returningSeats').textContent += ` ${busSeatData.returning}`;
+          } catch (error) {
+            console.error('Error fetching bus seat availability:', error);
+          }
+        }
+        fetchData()
+        busSeatAvailability()
+        
     </script>
   </body>
 </html>
