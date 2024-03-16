@@ -10,6 +10,13 @@
   </head>
 
   <body>
+
+    <div class="available-seats">
+      <h3>Available Seats</h3>
+      <p>Going Trip Seat Available: 25</p>
+      <p>Returning Trip Seat Available: 25</p>
+    </div>
+
     <div class="booking-form-box">
       <div class="Heading">
         <h2>Book Your Seats!</h2>
@@ -26,11 +33,21 @@
             <label for = "email">Email</label>
             <input type="email" id = "email" name = "email" class = "form-control" readonly>
           </div>
-
+          <div class="input-grp-time">
           <label for = "goingFrom">Going From</label>
-          <input type="text" id = "goingFrom" name = "goingFrom" class = "form-control" required>
+          <select id = "goingFrom" type = "text" name = "goingFrom" class = custom-select required>
+              <option value="1">Newmarket</option>
+              <option value="2">Brac University</option>
+            </select>
+          </div>
+          <div class="input-grp-time">
           <label for = "goingTo">Going To</label>
-          <input type="text" id = "goingTo" name = "goingTo" class = "form-control" required>
+          <select id = "goingTo" type = "text" name = "goingTo" class = custom-select required>
+              <option value="1">Brac University</option>
+              <option value="2">Newmarket</option>
+              
+            </select>
+          </div>
 
           <div class="input-grp-2">
             <label for = "number">Phone Number</label>
@@ -41,7 +58,7 @@
             <label for = "time">Time</label>
             <select id = "time" name = "time" class = custom-select>
               <option value="1">6:30 AM</option>
-              <option value="4">5:00 PM</option>
+              <option value="2">5:00 PM</option>
             </select>
           </div> <br> 
 

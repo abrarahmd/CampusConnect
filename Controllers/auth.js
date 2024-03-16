@@ -116,7 +116,8 @@ exports.bookTicket = (req, res) => {
 
   const { studentID, email, goingFrom, goingTo, number, time } = req.body;
   const loggedInUser = req.session.user;
-  const busType = goingFrom === 'Newmarket' ? 'Going' : 'Returning';
+
+  const busType = goingFrom === '1' ? 'Going' : 'Returning';
 
   db.query('SELECT * FROM transportation WHERE FIND_IN_SET(?, SeatBooked) > 0 AND BusType = ?', [loggedInUser.Username.toString(), busType], (error, result) => {
 
@@ -154,7 +155,7 @@ exports.busTicket = (req, res) => {
   const { fullName, studentID, email, phone, time, transaction } = req.body;
   const loggedInUser = req.session.user;
 
-  const BusType = time === '06:30' ? 'Going' : 'Returning';
+  const BusType = time === '1' ? 'Going' : 'Returning';
 
   db.query('UPDATE transportation SET SeatPaid = 1 WHERE BusType = ? AND SeatBooked = ?', [BusType, loggedInUser.Username], (error, result) => {
     if (error) {
