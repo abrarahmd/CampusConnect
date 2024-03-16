@@ -8,8 +8,10 @@
 </head>
 <body>
 
-  <h2>Customize Routine</h2>
-
+  <div class="header">
+    <h2>Customize Routine</h2>
+    <button id="customize-button">Home</button>
+  </div>
   
 
   <div id="added-courses">
@@ -288,6 +290,7 @@
     }
 
     document.getElementById("course-search").addEventListener("input", showSearchResults);
+    document.getElementById("customize-button").addEventListener("click", function() {window.location.href = "/";});
   </script>
 
 </body>

@@ -30,11 +30,33 @@ td {
   background-color: #e0edfa;
 }
 
-h2 {
-  color: #000000;
-  text-shadow: 2px 2px 4px #96bef6; 
-  font-size: 2.2em; 
-  margin-bottom: 20px; 
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.header h2 {
+  font-size: 25px;
+  text-align: center;
+  margin-right: auto; 
+  color: #007bff;
+}
+
+#customize-button {
+  padding: 12px 16px;
+  background-color: #94c0fd;
+  color: black;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+#customize-button:hover {
+  background-color: #3b92f0;
+  color: white;
 }
 
 .container {
@@ -44,8 +66,11 @@ h2 {
 }
 
 #search-container {
+  position: relative;
   display: flex;
   align-items: center;
+  margin-bottom: 20px; 
+  width: 20%; 
 }
 
 #course-search {
@@ -114,4 +139,24 @@ button:hover {
 
 .search-result-item:hover {
   background-color: #bad5fc;
+}
+
+#added-courses {
+  margin-top: -15px;
+}
+
+#added-courses h3 {
+  font-size: 20px;
+  text-align: center;
+  color: rgb(191, 0, 0);
+}
+
+#added-courses-list {
+  margin-left: 20px;
+  padding: 0;
+}
+
+#added-courses-list li {
+  font-size: 16px;
+  margin-bottom: 5px;
 }
