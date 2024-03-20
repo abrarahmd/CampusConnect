@@ -129,4 +129,12 @@ router.get('/routine', (req, res) => {
 
 });
 
+//Forum
+
+router.get('/StudentForum', (req, res) => {
+
+  res.render("forum");
+
+});
+
 module.exports = router;

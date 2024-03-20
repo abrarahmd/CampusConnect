@@ -121,14 +121,15 @@ nav li {
 
 nav a {
   text-decoration: none;
-  color: #707070;
+  color: #096394;
   font-weight: 700;
   margin: .25em 0;
+  transition: color 0.3s ease;
 }
 
 nav a:hover,
 nav a:focus {
-  color: #1792d2;
+  color: rgb(11, 157, 236);
 }
 
 .current-page {
@@ -160,7 +161,7 @@ nav a:focus {
 }
 
 .sidebar-widget {
-  border: 10px solid #efefef;
+  border: 10px solid #096394;
   margin-bottom: 2em;
   padding: 1em;
 }
@@ -192,6 +193,62 @@ nav a:focus {
   margin-bottom: .5em;
 }
 
+.article-post {
+  border-bottom: #707070 1px solid;
+  padding-bottom: 2em;
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  text-align: center; 
+}
+
+.article-post form {
+  background-color: #f8f8f8;
+  padding: 2em;
+  border-radius: 10px;
+  width: 80%; /* Adjust width as needed */
+  max-width: 600px;
+}
+
+.article-post .form-group {
+  margin-bottom: 2em;
+}
+
+.article-post label {
+  display: block;
+  margin-bottom: 0.5em;
+  font-weight: bold;
+}
+
+.article-post textarea,
+.article-post input[type="file"] {
+  width: 100%;
+  padding: 0.5em;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  resize: vertical; 
+}
+
+.article-post button {
+  padding: 1em 2em;
+  background-color: #096394;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.article-post button:hover {
+  background-color: #1792d2;
+}
+
+h2 {
+  font-size: 1.5rem; 
+  color: #096394;
+  margin-top: 2em;
+  margin-bottom: 1em; 
+}
 
 @media (min-width: 675px) {
   .container-nav,
@@ -221,7 +278,6 @@ nav a:focus {
      margin-left: 2em;
   }
   
-  
   .article-recent {
      flex-direction: row;
      justify-content: space-between;
@@ -244,7 +300,6 @@ nav a:focus {
      min-height: 200px;
      object-fit: cover;
   }
-  
   
   .article-featured {
      display: flex;
