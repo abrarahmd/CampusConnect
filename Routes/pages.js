@@ -137,4 +137,11 @@ router.get('/StudentForum', (req, res) => {
 
 });
 
+router.get('/ForumPost', (req, res) => {
+
+  res.render("forumPost");
+
+});
+
+
 module.exports = router;
