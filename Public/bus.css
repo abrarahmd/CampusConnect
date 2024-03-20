@@ -6,12 +6,30 @@ body {
     background-attachment: fixed;
 }
 
+.available-seats {
+    background-color: rgba(161, 161, 161, 0.5); 
+    padding: 20px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+  
+.available-seats h3 {
+    color: #000000;
+    margin-bottom: 10px;
+}
+  
+.available-seats p {
+    margin: 5px 0;
+    color: rgb(54, 0, 0);
+}
+
 .booking-form-box {
     max-width: 400px;
     border: 1px solid #ced4da;
     margin: 10% auto 0;
     background-color: transparent;
     backdrop-filter: blur(50px);
+    margin-top: 125px;
 }
 
 .radio-btn {
@@ -148,8 +166,6 @@ input-grp-2 {
     border-radius:0;
     transition: background-color 0.5s, color 0.5s;
 }
-
-
 
 .booking-form-box .input-grp-btn .flight:hover {
     background-color: #fff; 
