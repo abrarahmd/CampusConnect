@@ -37,13 +37,17 @@
             <article class="article-post">
                 <h2 class="article-title">What Is In Your Mind?</h2>
                 <form action="#" method="POST" enctype="multipart/form-data">
+                     <div class = "form-group">
+                        <label for="post-text">Title:</label>
+                        <textarea id="post-text" name="post-text" rows="1" cols="50" required></textarea>
+                     </div>
                     <div class="form-group">
                         <label for="post-text">Write Something:</label>
-                        <textarea id="post-text" name="post-text" rows="4" cols="50"></textarea>
+                        <textarea id="post-text" name="post-text" rows="4" cols="50" required></textarea>
                     </div>
                     <div class="form-group">
                         <label for="post-image">Upload An Image:</label>
-                        <input type="file" id="post-image" name="post-image" accept="image/*">
+                        <input type="file" id="post-image" name="post-image" accept="image/*" required>
                     </div>
                     <button type="submit" class="btn btn-primary">Post</button>
                 </form>
