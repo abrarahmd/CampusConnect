@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 06, 2024 at 05:15 PM
+-- Generation Time: Mar 15, 2024 at 10:19 PM
 -- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,13 +28,33 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `courses` (
-  `CourseID` int(100) NOT NULL,
   `CourseName` varchar(200) NOT NULL,
-  `Time` time NOT NULL,
+  `Time` text NOT NULL,
   `Section` int(100) NOT NULL,
-  `SeatBooked` int(11) NOT NULL,
-  `TotalSeat` int(11) NOT NULL
+  `Day1` text NOT NULL,
+  `Day2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`CourseName`, `Time`, `Section`, `Day1`, `Day2`) VALUES
+('CSE110', '8:00 - 9:20', 1, 'Sunday', 'Tuesday'),
+('CSE110', '9:30 - 10:50', 2, 'Monday', 'Wednesday'),
+('CSE110', '9:30 - 10:50', 3, 'Sunday', 'Tuesday'),
+('CSE111', '8:00 - 9:20', 1, 'Sunday', 'Tuesday'),
+('CSE111', '2:00 - 3:20', 2, 'Thursday', 'Saturday'),
+('CSE111', '3:30 - 5:00', 3, 'Monday', 'Wednesday'),
+('CSE220', '11:00 - 12:20', 1, 'Monday', 'Wednesday'),
+('CSE220', '12:30 - 1:50', 2, 'Monday', 'Wednesday'),
+('CSE220', '9:30 - 10:50', 3, 'Sunday', 'Tuesday'),
+('CSE221', '8:00 - 9:20', 1, 'Thursday', 'Saturday'),
+('CSE221', '9:30 - 10:50', 2, 'Monday', 'Wednesday'),
+('CSE221', '3:30 - 5:00', 3, 'Sunday', 'Tuesday'),
+('CSE470', '11:00 - 12:20', 1, 'Sunday', 'Tuesday'),
+('CSE470', '2:00 - 3:20', 2, 'Monday', 'Wednesday'),
+('CSE470', '12:30 - 1:50', 3, 'Sunday', 'Tuesday');
 
 -- --------------------------------------------------------
 
@@ -86,7 +106,8 @@ CREATE TABLE `foodcart` (
 --
 
 INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bill`) VALUES
-('/Hot_dog.jpg', 21301309, 'Hot Dog', 1, 80);
+('/Hot_dog.jpg', 21301309, 'Hot Dog', 1, 80),
+('/sandwich.jpg', 21301309, 'Sandwich', 1, 70);
 
 -- --------------------------------------------------------
 
@@ -220,10 +241,28 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
-(112, 'test', 'test', 'test@test', 0, 211212121, '$2b$08$Kw6AfWUHUmSbUN7h.EjvjuPr5JfNBn6177raIOb1CfTHT9AISxwVe', 'ibmre37skcb'),
 (21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'cyrj0529gps'),
-(21301233, 'PORTE BOSH', 'Mezbha Ul Haque Fahim', 'mezbha.fahim@gmail.com', 0, 1749750955, '$2b$08$OGm3uHRr/khYYPeoPSNWWOHv4kUK4N5fJLbKDpOLygzD1RmmN.8Mu', 'dxagwvfbcs8'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'h0fkw97g3f4');
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '826i94eokwa');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `usercoursetable`
+--
+
+CREATE TABLE `usercoursetable` (
+  `Username` varchar(64) NOT NULL,
+  `CourseName` varchar(64) NOT NULL,
+  `CourseSection` int(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usercoursetable`
+--
+
+INSERT INTO `usercoursetable` (`Username`, `CourseName`, `CourseSection`) VALUES
+('PhantomN3rd', 'CSE111', 1),
+('PhantomN3rd', 'CSE470', 1);
 
 --
 -- Indexes for dumped tables
@@ -233,7 +272,7 @@ INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `P
 -- Indexes for table `courses`
 --
 ALTER TABLE `courses`
-  ADD PRIMARY KEY (`CourseID`);
+  ADD PRIMARY KEY (`CourseName`,`Section`);
 
 --
 -- Indexes for table `food`
@@ -283,6 +322,12 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `Username` (`Username`),
   ADD UNIQUE KEY `Phone` (`Phone`),
   ADD UNIQUE KEY `Token` (`Token`) USING HASH;
+
+--
+-- Indexes for table `usercoursetable`
+--
+ALTER TABLE `usercoursetable`
+  ADD PRIMARY KEY (`Username`,`CourseName`);
 
 --
 -- Constraints for dumped tables

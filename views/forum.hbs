@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+      <meta http-equiv="X-UA-Compatible" content="ie=edge">
+      <title>Student Forum</title>
+      <link rel="stylesheet" href="/forum.css" />
+   </head>
+
+   <body>
+
+      <header>
+         <div class="container container-nav">
+            <div class="site-title">
+               <h1>Student Forum</h1>
+               <p class="subtitle">Share your experiences or problems with other students.</p>
+            </div>
+            <nav>
+               <ul>
+                  <li><a href="/" class="current-page">Home</a></li>
+                  <li><a href="#Start">Recent Posts</a></li>
+               </ul>
+            </nav>
+         </div>
+      </header>
+      
+      <div class="container container-flex">
+         <main role="main">
+            <article class="article-featured">
+                <h2 class="article-title">Welcome to BRACU Student Forum!</h2>
+                <img src="https://img.freepik.com/free-vector/hand-drawn-people-asking-questions-illustration_23-2148911451.jpg" class="article-image">
+
+                <p class="article-body">Life can get complicated really quickly, but it doesn't have to be! 
+                    There are many ways to simplify your life, one approach can be, share your problems and experiences with your university mates.</p>
+            </article>
+            <article class="article-post">
+                <h2 class="article-title">What Is In Your Mind?</h2>
+                <form action="#" method="POST" enctype="multipart/form-data">
+                     <div class = "form-group">
+                        <label for="post-text">Title:</label>
+                        <textarea id="post-text" name="post-text" rows="1" cols="50" required></textarea>
+                     </div>
+                    <div class="form-group">
+                        <label for="post-text">Write Something:</label>
+                        <textarea id="post-text" name="post-text" rows="4" cols="50" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-image">Upload An Image:</label>
+                        <input type="file" id="post-image" name="post-image" accept="image/*" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </form>
+            </article>
+            <h2>Discussion Topics:</h2>
+            <article class="article-recent" id="Start">
+                <div class="article-recent-main">
+                    <h2 class="article-title">Keeping cooking simple</h2>
+                    <p class="article-body">Food is a very important part of everyone's life. If you want to be healthy, you have to eat healthy. One of the easiest way to do that is to keep your cooking nice and simple.</p>
+                    <a href="#" class="article-read-more">CONTINUE READING</a>
+                </div>
+                <div class="article-recent-secondary">
+                    <img src="img/food.jpg" alt="" class="article-image">
+                    <p class="article-info">July 19, 2019 | 3 comments</p>
+                </div>
+            </article> 
+        </main>
+        
+         <aside class="sidebar">
+            <div class="sidebar-widget">
+               <h2 class="widget-title">ABOUT THIS FORUM</h2>
+               <img src="img/about-me.jpg" alt="" class="widget-image">
+               <p class="widget-body">Welcome to our community forum, where students come together to share experiences, seek advice, and connect with peers from their university.
+                  Join us to discuss academic challenges, campus events, and more, and be a part of our vibrant community!</p>
+            </div>  
+         </aside>
+
+      </div>
+      
+      <footer>
+         <p><strong>Communication is a Necessity.</strong></p>
+         <p>Contact Email: <i class="fas fa-heart"></i>Bracu@ac.bd</p>
+      </footer>
+
+   </body>
+
+</html>

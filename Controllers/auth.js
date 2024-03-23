@@ -116,7 +116,8 @@ exports.bookTicket = (req, res) => {
 
   const { studentID, email, goingFrom, goingTo, number, time } = req.body;
   const loggedInUser = req.session.user;
-  const busType = goingFrom === 'Newmarket' ? 'Going' : 'Returning';
+
+  const busType = goingFrom === '1' ? 'Going' : 'Returning';
 
   db.query('SELECT * FROM transportation WHERE FIND_IN_SET(?, SeatBooked) > 0 AND BusType = ?', [loggedInUser.Username.toString(), busType], (error, result) => {
 
@@ -150,11 +151,33 @@ exports.bookTicket = (req, res) => {
   });
 };
 
+exports.BusSeatAvailability = (req, res) => {
+  db.query('SELECT COUNT(*) AS goingSeats FROM transportation WHERE SeatAvailibility = 1 AND BusType = ?', ['Going'], (error, goingResult) => {
+    if (error) {
+      return res.status(500).send('Internal server error');
+    }
+
+    const goingSeats = goingResult[0].goingSeats;
+
+    db.query('SELECT COUNT(*) AS returningSeats FROM transportation WHERE SeatAvailibility = 1 AND BusType = ?', ['Returning'], (error, returningResult) => {
+      if (error) {
+        return res.status(500).send('Internal server error');
+      }
+
+      const returningSeats = returningResult[0].returningSeats;
+
+      const seatAvailability = {going: goingSeats, returning: returningSeats};
+      res.send(seatAvailability);
+
+    });
+  });
+};
+
 exports.busTicket = (req, res) => {
   const { fullName, studentID, email, phone, time, transaction } = req.body;
   const loggedInUser = req.session.user;
 
-  const BusType = time === '06:30' ? 'Going' : 'Returning';
+  const BusType = time === '1' ? 'Going' : 'Returning';
 
   db.query('UPDATE transportation SET SeatPaid = 1 WHERE BusType = ? AND SeatBooked = ?', [BusType, loggedInUser.Username], (error, result) => {
     if (error) {
@@ -228,10 +251,9 @@ exports.UserUpdate = (req, res) => {
   }
 }
 
-//food 
+//Food 
 exports.FoodInfo = (req, res) => {
   
-  // Execute the query
   db.query('SELECT * FROM food', (error, results) => {
     if (error) {
       return res.status(500).json({ error: 'Internal Server Error' });
@@ -241,20 +263,109 @@ exports.FoodInfo = (req, res) => {
   });
 };
 
-
-//cart
-
+//Cart
 exports.AddToCart = (req, res) => {
   const { foodPicture, foodName, foodCost } = req.body;
   const loggedInUser = req.session.user;
   console.log(foodPicture, foodName, foodCost)
 
-        db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {
-            
-            if(error){
-                console.log(error);
-            } 
-        })
-    };
+  db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {    
+      if(error){
+        console.log(error);
+        } 
+    })
+};
   
+//Routine Stuff
+exports.CourseFetch = async (req, res) => {
+  db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
 
+    if (results.length === 0) {
+      return res.status(404).send('No Courses Found!.');
+    }
+
+    const userData = results;
+    res.send(userData);
+  });
+};
+
+exports.CourseSelected = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const { courseDetails } = req.body;
+    const username = req.session.user.Username;
+
+    db.query("SELECT * FROM usercoursetable WHERE Username = ? AND CourseName = ?", [username, courseDetails.courseName], (error, results) => {
+        if (error) {
+          console.error("Database error:", error);
+          return res.status(500).send("Internal server error");
+        }
+        if (results.length > 0) {
+          return res.status(404).send("You have taken this course");
+        } else {
+          db.query(
+            "INSERT INTO usercoursetable SET ?", {Username: username, CourseName: courseDetails.courseName, CourseSection: courseDetails.section}, (insertError, insertResults) => {
+              if (insertError) {
+                console.error("Database insert error:", insertError);
+                return res.status(500).send("Internal server error");
+              }
+              return res.status(200).send("Course selection successful");
+            }
+          );
+        }
+      }
+    );
+  } catch (error) {
+    console.error("Error in CourseSelected:", error);
+    return res.status(500).send("Internal server error");
+  }
+};
+
+exports.CourseShowRoutine = async (req, res) => {
+  try {
+    if (!req.session.user || !req.session.user.Username) {
+      return res.status(401).send("User is not logged in");
+    }
+    const username = req.session.user.Username;
+    const results = await new Promise((resolve, reject) => {
+      db.query('SELECT * FROM usercoursetable WHERE Username = ?', [username], (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(results);
+        }
+      });
+    });
+
+    const courseNamesList = results.map(row => ({ courseName: row.CourseName, courseSection: row.CourseSection }));
+    const courseDetails = [];
+
+    for (let i = 0; i < courseNamesList.length; i++) {
+      const courseName = courseNamesList[i]['courseName'];
+      const courseSection = courseNamesList[i]['courseSection'];
+
+      const courseResults = await new Promise((resolve, reject) => {
+        db.query('SELECT * FROM courses WHERE CourseName = ? AND Section = ?', [courseName, courseSection], (error, results) => {
+          if (error) {
+            reject(error);
+          } else {
+            resolve(results);
+          }
+        });
+      });
+
+      courseDetails.push(courseResults);
+    }
+    res.send(courseDetails);
+
+  } catch (error) {
+    console.error("Error in CourseShowRoutine:", error);
+    return res.status(500).send("Internal server error");
+  }
+};

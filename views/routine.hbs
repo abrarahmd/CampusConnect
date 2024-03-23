@@ -4,14 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Weekly Routine</title>
-  <link rel = "stylesheet" href = "/routine.css">
+  <link rel="stylesheet" href="/routine.css">
 </head>
 <body>
 
-  <h2>Individual Schedule</h2>
+  <div class="header">
+    <h2>Customize Routine</h2>
+    <button id="customize-button">Home</button>
+  </div>
+  
+
+  <div id="added-courses">
+    <h3>Added Courses:</h3>
+    <ul id="added-courses-list"></ul>
+  </div>
 
   <div id="search-container">
     <input type="text" id="course-search" placeholder="Search for a course...">
+    <div id="search-results"></div>
   </div>
 
   <table>
@@ -23,62 +33,265 @@
       <th>Wednesday</th>
       <th>Thursday</th>
       <th>Friday</th>
+      <th>Saturday</th>
     </tr>
     <tr>
-      <td>8:00 - 9:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="8:00 - 9:20">8:00 - 9:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>9:30 - 10:50</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="9:30 - 10:50">9:30 - 10:50</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>11:00 - 12:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="11:00 - 12:20">11:00 - 12:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>12:30 - 1:50</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="12:30 - 1:50">12:30 - 1:50</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>2:00 - 3:20</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="2:00 - 3:20">2:00 - 3:20</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
     <tr>
-      <td>3:30 - 5:00</td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
-      <td></td>
+      <td data-time="3:30 - 5:00">3:30 - 5:00</td>
+      <td data-day="Sunday"></td>
+      <td data-day="Monday"></td>
+      <td data-day="Tuesday"></td>
+      <td data-day="Wednesday"></td>
+      <td data-day="Thursday"></td>
+      <td data-day="Friday"></td>
+      <td data-day="Saturday"></td>
     </tr>
   </table>
+
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    async function showSearchResults() {
+      try {
+        const response = await axios.get('/auth/api/courses');
+        const courses = response.data;
+        const searchInput = document.getElementById("course-search");
+        const searchQuery = searchInput.value.toLowerCase();
+        
+
+        const matchingCourses = courses.filter(course => course.CourseName.toLowerCase().includes(searchQuery));
+
+        const searchResultsContainer = document.getElementById("search-results");
+        searchResultsContainer.innerHTML = "";
+
+        if (searchQuery === "") {
+          searchResultsContainer.style.display = "none";
+        } else if (matchingCourses.length === 0) {
+          searchResultsContainer.textContent = "No matching courses found.";
+          searchResultsContainer.style.display = "block";
+        } else {
+          matchingCourses.forEach(course => {
+            const courseButton = document.createElement("div");
+            courseButton.textContent = `${course.CourseName} Section ${course.Section}`;
+            courseButton.classList.add("search-result-item");
+            searchResultsContainer.appendChild(courseButton);
+
+            courseButton.addEventListener('click', function() {
+              const selectedCourse = {
+                courseName: course.CourseName,
+                section: course.Section
+              }
+              sendCourseData(selectedCourse)
+              
+            })
+          });
+          searchResultsContainer.style.display = "block";
+        }
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    }
+
+    async function sendCourseData(course) {
+      try {
+        const response = await axios({
+            method: 'post',
+            url: '/auth/api/courseSelected',
+            data: {
+                courseDetails: course
+            }
+        });
+        
+        courseShow();
+        
+      } catch (error) {
+        if (error.response.status === 401) {
+          alert('You are not logged in. Please log in to continue.');
+        } else if (error.response.status === 404) {
+          alert('You have already taken this course');
+        } else {
+          console.error('Error Sending Data', error);
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+      courseShow();
+    });
+
+    async function courseShow() {
+      try {
+        const response = await axios.get('/auth/api/courseShow');
+        const courseTaken = response.data;
+        renderCoursesInRoutineTable(courseTaken);
+
+        const addedCoursesList = document.getElementById('added-courses-list');
+        addedCoursesList.innerHTML = ""; // Clear previous content
+        courseTaken.forEach(courseList => {
+          courseList.forEach(course => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${course.CourseName} Section ${course.Section}`;
+            addedCoursesList.appendChild(listItem);
+          });
+        });
+      } catch (error) {
+        console.error('Error fetching course data:', error);
+      }
+    }
+
+    function renderCoursesInRoutineTable(courses) {
+
+      courses.forEach(courseArray => {
+        courseArray.forEach(course => {
+
+          const { CourseName, Time, Day1, Day2 } = course;
+          let tableCell1;
+
+          if (Day1 === "Sunday"){
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day1}"]`);
+          }
+
+          if (Day1 === "Monday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Tuesday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Wednesday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Thursday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Friday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (Day1 === "Saturday"){
+
+            tableCell1 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day1}"]`);
+            
+          }
+
+          if (tableCell1) {
+            tableCell1.textContent = `${CourseName} Section ${course.Section}`;
+          }
+
+          let tableCell2;
+
+          if (Day2 === "Sunday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day2}"]`);
+          }
+
+          if (Day2 === "Monday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Tuesday"){
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Wednesday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Thursday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Friday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (Day2 === "Saturday"){
+
+            tableCell2 = document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day2}"]`);
+            
+          }
+
+          if (tableCell2) {
+            tableCell2.textContent = `${CourseName} Section ${course.Section}`;
+          }
+        });
+      });
+    }
+
+    document.getElementById("course-search").addEventListener("input", showSearchResults);
+    document.getElementById("customize-button").addEventListener("click", function() {window.location.href = "/";});
+  </script>
 
 </body>
 </html>
