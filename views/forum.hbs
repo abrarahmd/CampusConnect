@@ -148,10 +148,7 @@
                   console.error('Error fetching posts:', error);
             }
          }
-
          fetchPosts();
-
-         // Function to truncate text to a specific number of words
          function truncateText(text, numWords) {
             const words = text.split(' ');
             if (words.length > numWords) {
