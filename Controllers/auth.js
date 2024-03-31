@@ -401,3 +401,16 @@ exports.PostFetch = async (req, res) => {
     res.send(Posts);
   });
 }
+
+exports.PostFetchBasedOnID = async (req, res) => {
+  const postID = req.query.id;
+  db.query('SELECT * FROM forum WHERE PostID = ?', [postID], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    } else {
+      const Post = results;
+      res.send(Post);
+    }
+  });
+}

@@ -88,62 +88,61 @@
       <script>
          async function fetchPosts() {
             try {
-                  const response = await axios.get('/auth/api/PostFetch');
-                  const posts = response.data;
+               const response = await axios.get('/auth/api/PostFetch');
+               const posts = response.data;
+               const articleContainer = document.getElementById('Start');
 
-                  const articleContainer = document.getElementById('Start');
+               posts.forEach(post => {
+                  const article = document.createElement('article');
+                  article.className = 'article-recent';
 
-                  posts.forEach(post => {
-                     const article = document.createElement('article');
-                     article.className = 'article-recent';
+                  const mainDiv = document.createElement('div');
+                  mainDiv.className = 'article-recent-main';
 
-                     const mainDiv = document.createElement('div');
-                     mainDiv.className = 'article-recent-main';
+                  const title = document.createElement('h2');
+                  title.className = 'article-title';
+                  title.textContent = post.Title;
 
-                     const title = document.createElement('h2');
-                     title.className = 'article-title';
-                     title.textContent = post.Title;
+                  const truncatedText = truncateText(post.Text, 17);
 
-                     const truncatedText = truncateText(post.Text, 17);
+                  const body = document.createElement('p');
+                  body.className = 'article-body';
+                  body.textContent = truncatedText;
 
-                     const body = document.createElement('p');
-                     body.className = 'article-body';
-                     body.textContent = truncatedText;
+                  const readMoreLink = document.createElement('a');
+                  readMoreLink.className = 'article-read-more';
+                  readMoreLink.textContent = 'CONTINUE READING';
+                  readMoreLink.href = 'forumPost?id=' + post.PostID;
 
-                     const readMoreLink = document.createElement('a');
-                     readMoreLink.className = 'article-read-more';
-                     readMoreLink.textContent = 'CONTINUE READING';
-                     readMoreLink.href = '#';
+                  mainDiv.appendChild(title);
+                  mainDiv.appendChild(body);
+                  mainDiv.appendChild(readMoreLink);
 
-                     mainDiv.appendChild(title);
-                     mainDiv.appendChild(body);
-                     mainDiv.appendChild(readMoreLink);
+                  const secondaryDiv = document.createElement('div');
+                  secondaryDiv.className = 'article-recent-secondary';
 
-                     const secondaryDiv = document.createElement('div');
-                     secondaryDiv.className = 'article-recent-secondary';
+                  const image = document.createElement('img');
+                  image.className = 'article-image';
+                  image.src = post.Picture; 
+                  image.alt = ''; 
 
-                     const image = document.createElement('img');
-                     image.className = 'article-image';
-                     image.src = post.Picture; 
-                     image.alt = ''; 
+                  const info = document.createElement('p');
+                  info.className = 'article-info';
+                  info.textContent = "Posted by: ";
+                  const username = document.createElement('span');
+                  username.textContent = post.Username;
+                  username.style.color = "#1792d2";
+                  username.style.fontWeight = "bold"; 
+                  info.appendChild(username);
 
-                     const info = document.createElement('p');
-                     info.className = 'article-info';
-                     info.textContent = "Posted by: ";
-                     const username = document.createElement('span');
-                     username.textContent = post.Username;
-                     username.style.color = "#1792d2";
-                     username.style.fontWeight = "bold"; 
-                     info.appendChild(username);
+                  secondaryDiv.appendChild(image);
+                  secondaryDiv.appendChild(info);
 
-                     secondaryDiv.appendChild(image);
-                     secondaryDiv.appendChild(info);
+                  article.appendChild(mainDiv);
+                  article.appendChild(secondaryDiv);
 
-                     article.appendChild(mainDiv);
-                     article.appendChild(secondaryDiv);
-
-                     articleContainer.appendChild(article);
-                  });
+                  articleContainer.appendChild(article);
+               });
             } catch (error) {
                   console.error('Error fetching posts:', error);
             }

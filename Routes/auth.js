@@ -12,6 +12,7 @@ router.get('/api/FoodInfo' , authController.FoodInfo)
 router.get('/api/courses' , authController.CourseFetch)
 router.get('/api/courseShow' , authController.CourseShowRoutine)
 router.get('/api/PostFetch' , authController.PostFetch)
+router.get('/api/PostFetchBasedOnID' , authController.PostFetchBasedOnID)
 
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)

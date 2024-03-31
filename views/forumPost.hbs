@@ -9,13 +9,11 @@
 <body>
 
     <main>
-        <article class="post">
-            <h2 class="post-title">Keeping cooking simple</h2>
+        <article class="post" id = 'postContainer'>
+            <h2 class="post-title" id = 'Title'></h2>
             <div class="post-content">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/800px-Good_Food_Display_-_NCI_Visuals_Online.jpg" alt="Food" class="post-image">
-                <p class="post-text">
-                    Food is a very important part of everyone's life. If you want to be healthy, you have to eat healthy. One of the easiest way to do that is to keep your cooking nice and simple.
-                </p>
+                <img src="" alt="" id = 'Image' class="post-image">
+                <p class="post-text" id = 'Text'></p>
             </div>
             <hr>
             <div class="comments">
@@ -28,6 +26,30 @@
             </form>
         </article>
     </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchPostBasedonID() {
+            try {
+                const postID = location.search.split('=')[1]
+                const response = await axios.get(`/auth/api/PostFetchBasedOnID?id=${postID}`);
+                const post = response.data[0];
+                const titleElement = document.getElementById('Title');
+                const imageElement = document.getElementById('Image');
+                const textElement = document.getElementById('Text');
+
+                titleElement.textContent = post.Title;
+                imageElement.src = post.Picture;
+                textElement.textContent = post.Text;
+                  
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
+         }
+         fetchPostBasedonID();
+
+      </script>
 
 </body>
 </html>
