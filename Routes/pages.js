@@ -93,6 +93,12 @@ router.get('/parkingContact', (req, res) => {
   res.render("parkingContact");
 
 });
+
+router.get('/parkingconfirm', (req, res) => {
+
+  res.render("parkingconfirm");
+
+});
   
 /*User Profile Routes */
 
