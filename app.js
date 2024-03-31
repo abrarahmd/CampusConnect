@@ -18,6 +18,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static(publicDirectory));
 app.use('/app', express.static(path.join(__dirname, 'app')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use(session({secret: '112484', resave: true, saveUninitialized: true}));
 
