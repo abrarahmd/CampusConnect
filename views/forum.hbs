@@ -82,6 +82,22 @@
          <p>Contact Email: <i class="fas fa-heart"></i>Bracu@ac.bd</p>
       </footer>
 
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+         async function fetchPost () {
+            try {
+                const response = await axios.get('/auth/api/PostFetching');
+                
+                const postData = response.data;
+                console.log(postData)
+            } catch (error) {
+                console.error('Error fetching post:', error);
+            }
+        }
+        fetchPost()
+      </script>
+
    </body>
 
 </html>

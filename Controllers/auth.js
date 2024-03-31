@@ -376,8 +376,6 @@ exports.ForumPost = async (req, res) => {
   const { 'post-title': title, 'post-text': text } = req.body;
   const image = req.file
   const imagePath = image['path']
-
-  console.log(title, text, image, username);
   db.query('INSERT INTO forum (Title, Text, Picture, Username) VALUES (?, ?, ?, ?)', [title, text, imagePath, username], (error, result) => {
     if (error) {
       console.error('Error executing SQL query:', err);
@@ -386,4 +384,20 @@ exports.ForumPost = async (req, res) => {
       res.redirect('/StudentForum')
     }
   })
+}
+
+exports.PostFetch = async (req, res) => {
+  db.query('SELECT PostID, Title, Text, Picture, Username FROM forum', (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send('No Post Found!.');
+    }
+
+    const Posts = results;
+    res.send(Posts);
+  });
 }
