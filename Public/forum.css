@@ -227,7 +227,7 @@ nav a:focus {
   padding: 0.5em;
   border-radius: 5px;
   border: 1px solid #ccc;
-  resize: vertical; 
+  resize: vertical;
 }
 
 .article-post button {

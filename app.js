@@ -6,9 +6,11 @@ const app = express();
 const port = process.env.PORT || 3000;
 const bodyParser = require('body-parser');
 
+
 dotenv.config({ path: './.env'});
 
 const publicDirectory = path.join(__dirname, "./public");
+
 
 app.set('view engine', 'hbs'); //hbs access method
 

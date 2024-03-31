@@ -369,3 +369,21 @@ exports.CourseShowRoutine = async (req, res) => {
     return res.status(500).send("Internal server error");
   }
 };
+
+//Forum
+exports.ForumPost = async (req, res) => {
+  const username = req.session.user.Username;
+  const { 'post-title': title, 'post-text': text } = req.body;
+  const image = req.file
+  const imagePath = image['path']
+
+  console.log(title, text, image, username);
+  db.query('INSERT INTO forum (Title, Text, Picture, Username) VALUES (?, ?, ?, ?)', [title, text, imagePath, username], (error, result) => {
+    if (error) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).send('Internal Server Error');
+    } else {
+      res.redirect('/StudentForum')
+    }
+  })
+}
