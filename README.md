@@ -55,14 +55,6 @@ For any inquiries or support related to the Integrated Student Service Platform,
 
 The design and implementation of this project prioritize user-friendliness and efficiency. The platform is designed to be intuitive, allowing users to navigate through various services seamlessly.
 
-## Getting Started
-
-To get started with the Integrated Student Service Platform, refer to the documentation provided in the repository. Detailed guidelines are available to help you utilize the platform effectively.
-
-## Contributions
-
-Contributions from the community are welcome to enhance and improve the Integrated Student Service Platform. Refer to the contribution guidelines outlined in the repository.
-
 ## License
 
 This project is licensed under the [MIT License](LICENSE). Feel free to use, modify, and distribute it as per the terms of the license.
