@@ -33,10 +33,19 @@ Welcome to the Integrated Student Service Platform, a comprehensive solution des
 - **Commenting:** Engage with posts by commenting.
 - **Post Deleting:** Manage your posts effectively.
 
-
 ## User
 - **See Student Information:** Access comprehensive student information.
 - **Update Information:** Update your profile information seamlessly.
+
+## Contributors
+
+This project was developed collaboratively by:
+- [Abrar Ahmed](https://github.com/abrarahmd)
+- [Zarin Tasnim Raisa](https://github.com/ZarinTasnimRaisa)
+- [Mezbha Ul Haq Fahim](https://github.com/MezbhaFahim)
+
+This project was supervised by:
+- [Zahin Wahab](https://github.com/zahinwahab)
 
 ## About & Contact
 
