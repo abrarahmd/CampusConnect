@@ -57,4 +57,4 @@ The design and implementation of this project prioritize user-friendliness and e
 
 ## License
 
-This project is licensed under the [MIT License](LICENSE), which means it is free for everyone to use, modify, and distribute, subject to the terms and conditions of the license.
+This project is licensed under the MIT License, which means it is free for everyone to use, modify, and distribute, subject to the terms and conditions of the license.
