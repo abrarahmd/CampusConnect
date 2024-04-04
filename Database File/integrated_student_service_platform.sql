@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2024 at 10:19 PM
+-- Generation Time: Mar 31, 2024 at 02:17 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -117,10 +117,20 @@ INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bil
 
 CREATE TABLE `forum` (
   `PostID` int(11) NOT NULL,
-  `Text` text NOT NULL,
-  `Picture` blob NOT NULL,
-  `Comment` text NOT NULL
+  `Title` varchar(260) DEFAULT NULL,
+  `Text` text DEFAULT NULL,
+  `Picture` text DEFAULT NULL,
+  `Comment` text DEFAULT NULL,
+  `Username` varchar(260) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`PostID`, `Title`, `Text`, `Picture`, `Comment`, `Username`) VALUES
+(1, 'BRACU Duburi', 'The BRACU Duburi team is committed to establishing a vibrant and inclusive community of AUV and ROV hobbyists and enthusiasts who will collaborate to develop cutting-edge, industrial-grade underwater vehicle. The team envisions fostering an environment where individuals can share their ideas, knowledge, and expertise to create innovative technologies that can revolutionize the underwater industry. Additionally, the team aspires to establish a state-of-the-art test facility that will enable the next generation of ROV enthusiasts to hone their skills and advance their knowledge in the field. Through these initiatives, the BRACU Duburi team aims to create a sustainable and innovative ecosystem that will drive the growth and development of the underwater industry in Bangladesh and beyond.', 'uploads\\f0c32d17ff0fed3c1fad00364c6810a5', NULL, 'PhantomN3rd'),
+(2, 'BRACU Mongol Tori', 'BRAC University Mongol Tori, a next-generation Mars rover, has ranked 3rd in University Rover Challenge (URC). The rover, which tends to walk alongside human explorers on the red planet someday, has the ability to retrieve objects, complete autonomous traversal missions, collect visual data, perform planetary analysis, detect the presence of life by conducting biosignature tests and help astronauts with equipment servicing.', 'uploads\\157af074f3fc7aca4f8c80ad9be14b77', NULL, 'Penguin');
 
 -- --------------------------------------------------------
 
@@ -178,7 +188,7 @@ CREATE TABLE `transportation` (
 --
 
 INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `SeatPaid`, `SeatBooked`) VALUES
-('Going', '6:30', 1, 1, 0, NULL),
+('Going', '6:30', 1, 0, 0, 'PhantomN3rd'),
 ('Going', '6:30', 2, 1, 0, NULL),
 ('Going', '6:30', 3, 1, 0, NULL),
 ('Going', '6:30', 4, 1, 0, NULL),
@@ -198,7 +208,7 @@ INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `
 ('Going', '6:30', 18, 1, 0, NULL),
 ('Going', '6:30', 19, 1, 0, NULL),
 ('Going', '6:30', 20, 1, 0, NULL),
-('Returning', '5:00', 1, 1, 0, NULL),
+('Returning', '5:00', 1, 0, 0, 'PhantomN3rd'),
 ('Returning', '5:00', 2, 1, 0, NULL),
 ('Returning', '5:00', 3, 1, 0, NULL),
 ('Returning', '5:00', 4, 1, 0, NULL),
@@ -241,8 +251,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
-(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'cyrj0529gps'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '826i94eokwa');
+(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'esijezote5'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '4tuwqgya9m4');
 
 -- --------------------------------------------------------
 
@@ -261,8 +271,9 @@ CREATE TABLE `usercoursetable` (
 --
 
 INSERT INTO `usercoursetable` (`Username`, `CourseName`, `CourseSection`) VALUES
+('PhantomN3rd', 'CSE110', 1),
 ('PhantomN3rd', 'CSE111', 1),
-('PhantomN3rd', 'CSE470', 1);
+('PhantomN3rd', 'CSE220', 3);
 
 --
 -- Indexes for dumped tables
@@ -328,6 +339,16 @@ ALTER TABLE `user`
 --
 ALTER TABLE `usercoursetable`
   ADD PRIMARY KEY (`Username`,`CourseName`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `forum`
+--
+ALTER TABLE `forum`
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

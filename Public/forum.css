@@ -147,8 +147,6 @@ nav a:focus {
 }
 
 .article-recent {
-  display: flex;
-  flex-direction: column;
   margin-bottom: 2em;
 }
 
@@ -227,7 +225,7 @@ nav a:focus {
   padding: 0.5em;
   border-radius: 5px;
   border: 1px solid #ccc;
-  resize: vertical; 
+  resize: vertical;
 }
 
 .article-post button {
@@ -248,6 +246,20 @@ h2 {
   color: #096394;
   margin-top: 2em;
   margin-bottom: 1em; 
+}
+
+h2.discuss {
+  font-size: 1.5rem; 
+  color: #096394;
+  margin-top: 1em; 
+  margin-bottom: -10em; 
+}
+
+hr {
+  border: none;
+  border-top: 1px solid black;
+  margin-top: 280px;
+  margin-bottom: -13em;
 }
 
 @media (min-width: 675px) {

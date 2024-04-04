@@ -369,3 +369,48 @@ exports.CourseShowRoutine = async (req, res) => {
     return res.status(500).send("Internal server error");
   }
 };
+
+//Forum
+exports.ForumPost = async (req, res) => {
+  const username = req.session.user.Username;
+  const { 'post-title': title, 'post-text': text } = req.body;
+  const image = req.file
+  const imagePath = image['path']
+  db.query('INSERT INTO forum (Title, Text, Picture, Username) VALUES (?, ?, ?, ?)', [title, text, imagePath, username], (error, result) => {
+    if (error) {
+      console.error('Error executing SQL query:', err);
+      return res.status(500).send('Internal Server Error');
+    } else {
+      res.redirect('/StudentForum')
+    }
+  })
+}
+
+exports.PostFetch = async (req, res) => {
+  db.query('SELECT PostID, Title, Text, Picture, Username FROM forum', (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send('No Post Found!.');
+    }
+
+    const Posts = results;
+    res.send(Posts);
+  });
+}
+
+exports.PostFetchBasedOnID = async (req, res) => {
+  const postID = req.query.id;
+  db.query('SELECT * FROM forum WHERE PostID = ?', [postID], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    } else {
+      const Post = results;
+      res.send(Post);
+    }
+  });
+}

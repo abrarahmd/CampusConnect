@@ -36,10 +36,10 @@
             </article>
             <article class="article-post">
                 <h2 class="article-title">What Is In Your Mind?</h2>
-                <form action="#" method="POST" enctype="multipart/form-data">
+                <form action="auth/forum-post" method="POST" enctype="multipart/form-data">
                      <div class = "form-group">
                         <label for="post-text">Title:</label>
-                        <textarea id="post-text" name="post-text" rows="1" cols="50" required></textarea>
+                        <textarea id="post-title" name="post-title" rows="1" cols="50" required></textarea>
                      </div>
                     <div class="form-group">
                         <label for="post-text">Write Something:</label>
@@ -52,18 +52,19 @@
                     <button type="submit" class="btn btn-primary">Post</button>
                 </form>
             </article>
-            <h2>Discussion Topics:</h2>
+            <h2 class = 'discuss'>Discussion Topics:</h2>
+            <hr>
             <article class="article-recent" id="Start">
-                <div class="article-recent-main">
-                    <h2 class="article-title">Keeping cooking simple</h2>
-                    <p class="article-body">Food is a very important part of everyone's life. If you want to be healthy, you have to eat healthy. One of the easiest way to do that is to keep your cooking nice and simple.</p>
-                    <a href="#" class="article-read-more">CONTINUE READING</a>
-                </div>
-                <div class="article-recent-secondary">
-                    <img src="img/food.jpg" alt="" class="article-image">
-                    <p class="article-info">July 19, 2019 | 3 comments</p>
-                </div>
-            </article> 
+               <div class="article-recent-main">
+                  <h2 class="article-title"></h2>
+                  <img src="" alt="" class="article-image">
+                  <p class="article-body"></p>
+                  <a href="#" class="article-read-more"></a>
+               </div>
+               <div class="article-recent-secondary">
+                  <p class="article-info"></p>
+               </div>
+            </article>
         </main>
         
          <aside class="sidebar">
@@ -81,6 +82,80 @@
          <p><strong>Communication is a Necessity.</strong></p>
          <p>Contact Email: <i class="fas fa-heart"></i>Bracu@ac.bd</p>
       </footer>
+
+      <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+      <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+      <script>
+         async function fetchPosts() {
+            try {
+               const response = await axios.get('/auth/api/PostFetch');
+               const posts = response.data;
+               const articleContainer = document.getElementById('Start');
+
+               posts.forEach(post => {
+                  const article = document.createElement('article');
+                  article.className = 'article-recent';
+
+                  const mainDiv = document.createElement('div');
+                  mainDiv.className = 'article-recent-main';
+
+                  const title = document.createElement('h2');
+                  title.className = 'article-title';
+                  title.textContent = post.Title;
+
+                  const truncatedText = truncateText(post.Text, 17);
+
+                  const body = document.createElement('p');
+                  body.className = 'article-body';
+                  body.textContent = truncatedText;
+
+                  const readMoreLink = document.createElement('a');
+                  readMoreLink.className = 'article-read-more';
+                  readMoreLink.textContent = 'CONTINUE READING';
+                  readMoreLink.href = 'forumPost?id=' + post.PostID;
+
+                  mainDiv.appendChild(title);
+                  mainDiv.appendChild(body);
+                  mainDiv.appendChild(readMoreLink);
+
+                  const secondaryDiv = document.createElement('div');
+                  secondaryDiv.className = 'article-recent-secondary';
+
+                  const image = document.createElement('img');
+                  image.className = 'article-image';
+                  image.src = post.Picture; 
+                  image.alt = ''; 
+
+                  const info = document.createElement('p');
+                  info.className = 'article-info';
+                  info.textContent = "Posted by: ";
+                  const username = document.createElement('span');
+                  username.textContent = post.Username;
+                  username.style.color = "#1792d2";
+                  username.style.fontWeight = "bold"; 
+                  info.appendChild(username);
+
+                  secondaryDiv.appendChild(image);
+                  secondaryDiv.appendChild(info);
+
+                  article.appendChild(mainDiv);
+                  article.appendChild(secondaryDiv);
+
+                  articleContainer.appendChild(article);
+               });
+            } catch (error) {
+                  console.error('Error fetching posts:', error);
+            }
+         }
+         fetchPosts();
+         function truncateText(text, numWords) {
+            const words = text.split(' ');
+            if (words.length > numWords) {
+                  return words.slice(0, numWords).join(' ') + '...';
+            }
+            return text;
+         }
+      </script>
 
    </body>
 
