@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 31, 2024 at 02:17 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.2.12
+-- Generation Time: Apr 05, 2024 at 07:30 AM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -147,6 +147,28 @@ CREATE TABLE `parkingmanagement` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `parking_ver1`
+--
+
+CREATE TABLE `parking_ver1` (
+  `name` varchar(50) NOT NULL,
+  `phoneNo` int(14) NOT NULL,
+  `lic_plate` varchar(50) NOT NULL,
+  `student_id` int(20) NOT NULL,
+  `type` text NOT NULL,
+  `status` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `parking_ver1`
+--
+
+INSERT INTO `parking_ver1` (`name`, `phoneNo`, `lic_plate`, `student_id`, `type`, `status`) VALUES
+('Abrar Ahmed', 1749750959, '1234', 21301309, 'car', 'unpaid');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `routes`
 --
 
@@ -167,6 +189,71 @@ INSERT INTO `routes` (`Name`, `Place`, `Time`) VALUES
 ('Manik Mia Avenue', 'West End of Manik Mia Avenue (Opposite Aarong)', '6:50 AM'),
 ('New Market', 'Gate no 2, Janata Bank', '6:30 AM'),
 ('Sobhanbag', 'Sobhanbag (Near Foot Over-Bridge)', '6:45 AM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `transactions_table`
+--
+
+CREATE TABLE `transactions_table` (
+  `transactions` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `transactions_table`
+--
+
+INSERT INTO `transactions_table` (`transactions`) VALUES
+('69742885958'),
+('84444835832'),
+('22995524055'),
+('31643115544'),
+('79229008321'),
+('21215697742'),
+('38391466511'),
+('28310242098'),
+('16376813721'),
+('76953345077'),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL),
+(NULL);
 
 -- --------------------------------------------------------
 
@@ -251,8 +338,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
-(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'esijezote5'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '4tuwqgya9m4');
+(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'ds9ae1y9o9'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '2jw43mtsnh3');
 
 -- --------------------------------------------------------
 
@@ -309,6 +396,13 @@ ALTER TABLE `forum`
 --
 ALTER TABLE `parkingmanagement`
   ADD PRIMARY KEY (`SpaceID`);
+
+--
+-- Indexes for table `parking_ver1`
+--
+ALTER TABLE `parking_ver1`
+  ADD UNIQUE KEY `lic_plate` (`lic_plate`),
+  ADD UNIQUE KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `routes`

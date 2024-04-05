@@ -414,3 +414,34 @@ exports.PostFetchBasedOnID = async (req, res) => {
     }
   });
 }
+
+//Parking
+exports.parking = (req, res) => {
+  const { name, phoneNo, lic_plate, type } = req.body; 
+  const loggedInUser = req.session.user;
+
+  // Checking if the student has already booked
+  db.query('SELECT * FROM parking_ver1 WHERE student_id = ? LIMIT 1', [loggedInUser.StudentID], (error, results) => {
+      if (error) {
+          console.error('Error checking previous bookings:', error);
+          return res.status(500).send('Internal Server Error');
+      }
+
+      if (results.length > 0) {
+          return res.status(400).send('No more bookings available');
+      }
+
+      const status = 'unpaid';
+
+      db.query('INSERT INTO parking_ver1 (name, phoneNo, lic_plate, student_id, type, status) VALUES (?, ?, ?, ?, ?, ?)',
+          [name, phoneNo, lic_plate, loggedInUser.StudentID, type, status],
+          (insertError, insertResults) => {
+              if (insertError) {
+                  console.error('Error booking parking:', insertError);
+                  return res.status(500).send('Internal Server Error');
+              }
+              res.redirect('back');
+          }
+      );
+  });
+};

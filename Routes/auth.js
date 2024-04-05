@@ -22,6 +22,7 @@ router.post("/buyBusTickets", authController.busTicket)
 router.post('/api/addToCart' , authController.AddToCart)
 router.post('/api/courseSelected' , authController.CourseSelected)
 router.post('/forum-post', upload.single('post-image'), authController.ForumPost)
+router.post("/parking",authController.parking)
 
 
 
