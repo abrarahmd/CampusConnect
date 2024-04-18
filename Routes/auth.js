@@ -13,6 +13,9 @@ router.get('/api/courses' , authController.CourseFetch)
 router.get('/api/courseShow' , authController.CourseShowRoutine)
 router.get('/api/PostFetch' , authController.PostFetch)
 router.get('/api/PostFetchBasedOnID' , authController.PostFetchBasedOnID)
+router.get("/api/FoodData", authController.GetFoodData)
+router.get('/api/deletepost' , authController.GetUserData)
+
 
 router.post("/signup", authController.UserSignup)
 router.post("/signin", authController.UserLogin)
@@ -23,8 +26,8 @@ router.post('/api/addToCart' , authController.AddToCart)
 router.post('/api/courseSelected' , authController.CourseSelected)
 router.post('/forum-post', upload.single('post-image'), authController.ForumPost)
 router.post("/parking",authController.parking)
-
-
+router.post('/api/removeFromCart' , authController.removefromcart)
+router.post("/api/deletepostforum" , authController.deletepostforum)
 
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
