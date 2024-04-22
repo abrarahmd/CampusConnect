@@ -8,6 +8,10 @@ body {
   align-items: center;
 }
 
+.red-text {
+  color: red;
+}
+
 table {
   width: 80%;
   border-collapse: collapse;

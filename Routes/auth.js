@@ -28,6 +28,7 @@ router.post('/forum-post', upload.single('post-image'), authController.ForumPost
 router.post("/parking",authController.parking)
 router.post('/api/removeFromCart' , authController.removefromcart)
 router.post("/api/deletepostforum" , authController.deletepostforum)
+router.post("/api/removeCourse" , authController.removeCoursefromdatabase)
 
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {

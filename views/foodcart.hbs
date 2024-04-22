@@ -178,7 +178,6 @@ fetchpersonalinfo();
 
 async function removeItemFromCart(foodName) {
     try {
-        // Send an HTTP request to your backend to remove the specified food item from the cart
         const response = await axios.post('/auth/api/removeFromCart', { foodName: foodName });
         
        
