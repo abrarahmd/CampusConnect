@@ -403,6 +403,21 @@ exports.CourseSelected = async (req, res) => {
   }
 };
 
+exports.removeCoursefromdatabase = async(req, res) => {
+  const courseDescription = req.body
+  const courseName = courseDescription.courseName
+  const courseSection = courseDescription.section
+  const username = req.session.user.Username;
+  db.query( `DELETE FROM usercoursetable WHERE Username = ? AND CourseName = ? AND CourseSection = ?` , [username, courseName, courseSection], (error, results) => {
+    if (error) {
+        return res.status(500).send('Internal server error');
+    } else {
+      return res.render('routine')
+    }
+  
+});
+}
+
 exports.CourseShowRoutine = async (req, res) => {
   try {
     if (!req.session.user || !req.session.user.Username) {
