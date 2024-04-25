@@ -186,7 +186,7 @@
                 listItem.appendChild(removeButton); 
                 addedCoursesList.appendChild(listItem);
                 removeButton.addEventListener('click', function() {
-                    removeCourse(course.CourseName, course.Section);
+                removeCourse(course.CourseName, course.Section);
                 });
             });
         });
@@ -206,7 +206,8 @@ async function removeCourse(courseName, section) {
 
 
     function renderCoursesInRoutineTable(courses) {
-
+      
+      
       courses.forEach(courseArray => {
         courseArray.forEach(course => {
 
@@ -215,7 +216,8 @@ async function removeCourse(courseName, section) {
 
       if (tableCell1) {
         if (tableCell1.textContent.trim() !== "") {
-          tableCell1.textContent += `, ${CourseName} Section ${course.Section}`;
+          tableCell1.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
+
         } else {
           
           tableCell1.textContent = `${CourseName} Section ${course.Section}`;
@@ -225,7 +227,8 @@ async function removeCourse(courseName, section) {
 
       if (tableCell2) {
         if (tableCell2.textContent.trim() !== "") {
-          tableCell2.textContent += `, ${CourseName} Section ${course.Section}`;
+          tableCell2.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
+
         } else {
           tableCell2.textContent = `${CourseName} Section ${course.Section}`;
         }

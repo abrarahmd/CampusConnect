@@ -95,7 +95,11 @@
          
          
       </div>
-      <input type="submit" value="Confirm Order" name="order_btn" class="btn">
+      <form action="" method="post">
+   <input type="submit" value="Confirm Order" name="order_btn" class="btn" id="confirmOrderBtn">
+</form>
+
+
    </form>
 
 </section>
@@ -132,6 +136,7 @@
             tableBody.appendChild(row);
 
             grandtotal += (food.Quantity * food.Bill);
+            
         });
 
         
@@ -188,6 +193,47 @@ async function removeItemFromCart(foodName) {
 }
 
 
+async function placeorder() {
+    try {
+        // Fetch food data to get the list of items in the cart
+        const response = await axios.get('/auth/api/FoodData');
+        const foodData = response.data;
+
+        // Fetch personal information
+        const personalInfoResponse = await axios.get('/auth/api/auth');
+        const personalInfo = personalInfoResponse.data;
+
+        // Prepare order object
+        const order = {
+            studentID: personalInfo[0]['StudentID'],
+            grandtotal: 0,
+            foodItems: []
+        };
+
+        // Calculate grand total and gather food items
+        foodData.forEach(food => {
+            order.grandtotal += (food.Quantity * food.Bill);
+            order.foodItems.push({ name: food.FoodName, quantity: food.Quantity });
+        });
+
+        // Send order to the server
+        const orderResponse = await axios.post('/auth/api/placeOrder', order);
+
+        // Handle success or display confirmation message
+        console.log('Order placed successfully:', orderResponse.data);
+        // Optionally, display a success message to the user
+    } catch (error) {
+        console.error('Error placing order:', error);
+        // Optionally, display an error message to the user
+    }
+}
+
+
+
+document.getElementById("confirmOrderBtn").addEventListener("click", function(event) {
+   event.preventDefault(); // Prevent form submission
+   placeorder(); // Call placeorder function
+});
         
     </script>
   

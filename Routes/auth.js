@@ -29,6 +29,8 @@ router.post("/parking",authController.parking)
 router.post('/api/removeFromCart' , authController.removefromcart)
 router.post("/api/deletepostforum" , authController.deletepostforum)
 router.post("/api/removeCourse" , authController.removeCoursefromdatabase)
+router.post("/api/placeOrder" , authController.placeOrder)
+
 
 router.get('/logout', (req, res) => {
     req.session.destroy(err => {
