@@ -24,6 +24,9 @@
                 <textarea name="comment" id="comment" rows="3" placeholder="Write a comment..."></textarea>
                 <button type="submit">Post Comment</button>
             </form>
+
+            <div id="deleteButtonContainer"></div>
+
         </article>
     </main>
 
@@ -35,6 +38,8 @@
                 const postID = location.search.split('=')[1]
                 const response = await axios.get(`/auth/api/PostFetchBasedOnID?id=${postID}`);
                 const post = response.data[0];
+                
+                
                 const titleElement = document.getElementById('Title');
                 const imageElement = document.getElementById('Image');
                 const textElement = document.getElementById('Text');
@@ -42,6 +47,13 @@
                 titleElement.textContent = post.Title;
                 imageElement.src = post.Picture;
                 textElement.textContent = post.Text;
+
+                
+
+                const deleteButton = await deletepost(post.Username , postID);
+                if (deleteButton) {
+                    document.getElementById('deleteButtonContainer').appendChild(deleteButton);
+                }
                   
             } catch (error) {
                 console.error('Error fetching posts:', error);
@@ -49,6 +61,50 @@
          }
          fetchPostBasedonID();
 
+         async function deletepost(Username,postID)  {
+            try {
+                const response = await axios.get('/auth/api/deletepost');
+                const userinfo = response.data[0];
+                
+                const checkusername = userinfo.Username
+            
+                 if (Username === checkusername) {
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Delete Post';
+                    // Use onclick to attach a function to the button click event
+                    deleteButton.onclick = async function() {
+                        try {
+                            // Send request to delete post from the database
+                            await deletepostfromdatabase(postID);
+                            console.log('Post deleted successfully');
+                            // Optionally, you can update the UI or perform additional actions after successful deletion
+                        } catch (error) {
+                            console.error('Error deleting post:', error);
+                        }
+                    };
+                    return deleteButton;
+                } else {
+                    return null;
+                }
+
+                }  catch (error) {
+                console.error('Error deleting posts:', error);
+            }
+         }
+
+        async function deletepostfromdatabase(postID) {
+    try {
+        // Send post ID to backend for deletion
+        const response = await axios.post('/auth/api/deletepostforum', { postId: postID });
+        console.log('Post deleted successfully');
+        // Optionally, you can handle the response or update the UI after successful deletion
+    } catch(error) {
+        console.error('Error deleting post:', error);
+    }
+}
+
+
+         
       </script>
 
 </body>

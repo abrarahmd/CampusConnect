@@ -267,15 +267,129 @@ exports.FoodInfo = (req, res) => {
 exports.AddToCart = (req, res) => {
   const { foodPicture, foodName, foodCost } = req.body;
   const loggedInUser = req.session.user;
-  console.log(foodPicture, foodName, foodCost)
+  console.log(foodPicture, foodName, foodCost);
 
-  db.query("INSERT INTO FoodCart SET ?", {FoodPicture : foodPicture,  StudentID: loggedInUser.StudentID, FoodName : foodName, Quantity : 1, Bill: foodCost }, (error, results) => {    
-      if(error){
+  db.query("SELECT * FROM FoodCart WHERE FoodName = ? AND StudentID = ?", [foodName, loggedInUser.StudentID],(error, results) => {
+      if (error) {
         console.log(error);
-        } 
-    })
+        return res.status(500).json({ success: false, message: "Internal server error" });
+      }
+
+      if (results.length > 0) {
+        const updatedQuantity = results[0].Quantity + 1;
+        const updatedBill = parseFloat(results[0].Bill) + parseFloat(foodCost);
+        db.query("UPDATE FoodCart SET Quantity = ?, Bill = ? WHERE FoodName = ? AND StudentID = ?", [updatedQuantity, updatedBill, foodName, loggedInUser.StudentID],(updateError, updateResults) => {
+            if (updateError) {
+              console.log(updateError);
+              return res.status(500).send('Error in updating');
+            }
+            return res.render('cafetaria')
+          }
+        );
+      } else {
+        
+        db.query("INSERT INTO FoodCart (FoodPicture, StudentID, FoodName, Quantity, Bill) VALUES (?, ?, ?, ?, ?)",[foodPicture, loggedInUser.StudentID, foodName, 1, foodCost],(insertError, insertResults) => {
+            if (insertError) {
+              console.log(insertError);
+              return res.status(500).send('Error in updating');  
+            }
+            return res.render('cafetaria')
+          }
+        );
+      }
+    }
+  );
 };
+
+//shopping cart
+
+exports.GetFoodData = async (req, res) => { 
+  const loggedInUser = req.session.user;
+  db.query('SELECT * from FoodCart where StudentID = ?', [loggedInUser.StudentID], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    }
+
+    if (results.length === 0) {
+      return res.status(404).send('No Food Found!.');
+    }
+
+    const FoodData = results;
+    res.send(FoodData);
+  });
+};
+
+//removefood
+
+exports.removefromcart = async(req, res) => {
+  const getfoodname  = req.body;
+  const loggedInUser = req.session.user;
+  const foodname = getfoodname.foodName
+  db.query( 'DELETE FROM foodcart WHERE FoodName = ? AND StudentID = ? ', [foodname , loggedInUser.StudentID] , (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+  } else {
+      return res.status(200).send('Item removed from cart successfully');
+  }
+});
+}
+
+//placeorder
+
+exports.placeOrder = async (req, res) => {
+  try {
+    const getinfo = req.body;
+
+
+    const studentID = getinfo.studentID;
+    const grandtotal = getinfo.grandtotal;
+    const foodItems = getinfo.foodItems;
+
+    // Assuming foodItems is an array of objects with 'name' and 'quantity' properties
+    let food = "";
+    for (let i = 0; i < foodItems.length; i++) {
+      food += `${foodItems[i].name}: ${foodItems[i].quantity}, `;
+    }
+
+    // Example console output
+    console.log(`Student ID: ${studentID}`);
+    console.log(`Grand Total: ${grandtotal}`);
+    console.log(`Food Items: ${food}`);
+
+    const query = `INSERT INTO food_place_order (StudentID, grandTotal, orderItems) VALUES (?, ?, ?)`;
+    db.query(query, [studentID, grandtotal, food], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    } else {
+      return res.render('cafetaria')
+    }
+  });
+
+  } catch (error) {
+    console.error("Error placing order:", error);
+
+  }
+};
+
   
+//delete post
+exports.deletepostforum = async (req, res) => {
+  const postID = req.body.postId; 
+  
+  db.query( `DELETE FROM Forum WHERE PostID = ?` , [postID], (error, results) => {
+      if (error) {
+          return res.status(500).send('Internal server error');
+      } else {
+        return res.render('forum')
+      }
+    
+  });
+};
+
+
 //Routine Stuff
 exports.CourseFetch = async (req, res) => {
   db.query('SELECT CourseName, Time, Section, Day1, Day2 FROM courses', (error, results) => {
@@ -326,6 +440,21 @@ exports.CourseSelected = async (req, res) => {
     return res.status(500).send("Internal server error");
   }
 };
+
+exports.removeCoursefromdatabase = async(req, res) => {
+  const courseDescription = req.body
+  const courseName = courseDescription.courseName
+  const courseSection = courseDescription.section
+  const username = req.session.user.Username;
+  db.query( `DELETE FROM usercoursetable WHERE Username = ? AND CourseName = ? AND CourseSection = ?` , [username, courseName, courseSection], (error, results) => {
+    if (error) {
+        return res.status(500).send('Internal server error');
+    } else {
+      return res.render('routine')
+    }
+  
+});
+}
 
 exports.CourseShowRoutine = async (req, res) => {
   try {
