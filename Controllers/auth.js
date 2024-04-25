@@ -334,8 +334,46 @@ exports.removefromcart = async(req, res) => {
       return res.status(200).send('Item removed from cart successfully');
   }
 });
-  
 }
+
+//placeorder
+
+exports.placeOrder = async (req, res) => {
+  try {
+    const getinfo = req.body;
+
+
+    const studentID = getinfo.studentID;
+    const grandtotal = getinfo.grandtotal;
+    const foodItems = getinfo.foodItems;
+
+    // Assuming foodItems is an array of objects with 'name' and 'quantity' properties
+    let food = "";
+    for (let i = 0; i < foodItems.length; i++) {
+      food += `${foodItems[i].name}: ${foodItems[i].quantity}, `;
+    }
+
+    // Example console output
+    console.log(`Student ID: ${studentID}`);
+    console.log(`Grand Total: ${grandtotal}`);
+    console.log(`Food Items: ${food}`);
+
+    const query = `INSERT INTO food_place_order (StudentID, grandTotal, orderItems) VALUES (?, ?, ?)`;
+    db.query(query, [studentID, grandtotal, food], (error, results) => {
+    if (error) {
+      console.error('Database error:', error);
+      return res.status(500).send('Internal server error');
+    } else {
+      return res.render('cafetaria')
+    }
+  });
+
+  } catch (error) {
+    console.error("Error placing order:", error);
+
+  }
+};
+
   
 //delete post
 exports.deletepostforum = async (req, res) => {
