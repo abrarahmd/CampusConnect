@@ -12,8 +12,6 @@
 </head>
 <body>
 
-
-
 <div class="container">
 
 <section class="shopping-cart">
@@ -32,52 +30,38 @@
       </thead>
 
       <tbody>
-
-        
-
          <tr>
             <td><img src="" height="100" alt=""></td>
             <td></td>
             <td></td>
             <td>
                <form action="" method="post">
-                  <input type="hidden" name="update_quantity_id" value="">
-                  <input type="number" name="update_quantity" min="1" value="">
-                  <input type="submit" value="update" name="update_update_btn">
+                  
                </form>   
             </td>
             <td></td>
             <td><a href="#" onclick="removeItemFromCart('${food.FoodName}')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
-
-</tr>
+        </tr>
 
          
          <tr class="table-bottom">
             <td><a href="/cafetaria" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
             <td colspan="3">grand total</td>
             <td></td>
-            
          </tr>
-
       </tbody>
 
    </table>
 
-   
 </section>
 
 </div>
-
 
 <div class="container">
 
 <section class="checkout-form">
 
-   
-
    <form action="" method="post">
-
-   
 
       <div class="flex">
          <div class="inputBox">
@@ -92,152 +76,114 @@
             <span>your number</span>
             <input type="number" placeholder="" name="number" required>
          </div>
-         
-         
       </div>
-      <form action="" method="post">
-   <input type="submit" value="Confirm Order" name="order_btn" class="btn" id="confirmOrderBtn">
-</form>
-
+      <input type="submit" value="Confirm Order" name="order_btn" class="btn" id="confirmOrderBtn">
 
    </form>
 
 </section>
 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-       async function fetchFoodData() {
-    try {
-        const response = await axios.get('/auth/api/FoodData');
-        const foodData = response.data;
-        let grandtotal = 0; 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    async function fetchFoodData() {
+        try {
+            const response = await axios.get('/auth/api/FoodData');
+            const foodData = response.data;
+            let grandtotal = 0; 
 
-        const tableBody = document.querySelector('.shopping-cart tbody');
-        tableBody.innerHTML = '';
+            const tableBody = document.querySelector('.shopping-cart tbody');
+            tableBody.innerHTML = '';
 
-        foodData.forEach(food => {
-            const row = document.createElement('tr');
-            row.innerHTML = `
-                <td><img src="${food.FoodPicture}" height="100" alt="${food.FoodName}"></td>
-                <td>${food.FoodName}</td>
-                <td>${food.Bill}</td>
-                <td>
-                    <form action="" method="post">
-                        <input type="hidden" name="update_quantity_id" value="${food.StudentID}">
-                        <input type="number" name="update_quantity" min="1" value="${food.Quantity}">
-                    </form>
-                </td>
-                <td>${food.Quantity * food.Bill}</td>
-                <td><a href="#" onclick="removeItemFromCart('${food.FoodName}')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>
+            foodData.forEach(food => {
+                const row = document.createElement('tr');
+                row.innerHTML = 
+                    `<td><img src="${food.FoodPicture}" height="100" alt="${food.FoodName}"></td>
+                    <td>${food.FoodName}</td>
+                    <td>${food.Bill}</td>
+                    <td>
+                        <form action="" method="post">
+                            <input type="hidden" name="update_quantity_id" value="${food.StudentID}">
+                            <input type="number" name="update_quantity" min="1" value="${food.Quantity}">
+                        </form>
+                    </td>
+                    <td>${food.Quantity * food.Bill}</td>
+                    <td><a href="#" onclick="removeItemFromCart('${food.FoodName}')" class="delete-btn"> <i class="fas fa-trash"></i> remove</a></td>`;
+                tableBody.appendChild(row);
 
-   `;
-            tableBody.appendChild(row);
+                grandtotal += (food.Quantity * food.Bill);
+                
+            });
 
-            grandtotal += (food.Quantity * food.Bill);
+            const continueShoppingRow = document.createElement('tr');
+            continueShoppingRow.classList.add('table-bottom');
+            continueShoppingRow.innerHTML =
+                `<td><a href="/cafetaria" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
+                <td colspan="3">Grand Total</td>
+                <td>${grandtotal}</td> <!-- Update grand total here -->`;
+            tableBody.appendChild(continueShoppingRow);
+        } catch (error) {
+            console.error('Error fetching food data:', error);
+        }
+    }
+
+    fetchFoodData();
+
+    async function fetchpersonalinfo() {
+        try {
+            const response = await axios.get('/auth/api/auth');
+            const personalinfo = response.data;
+
+            const nameInput = document.querySelector('input[name="name"]');
+            nameInput.value = personalinfo[0]['StudentName']; 
             
-        });
+            const studentIDInput = document.querySelector('input[name="studentID"]');
+            studentIDInput.value = personalinfo[0]['StudentID']; 
 
-        
-        const continueShoppingRow = document.createElement('tr');
-        continueShoppingRow.classList.add('table-bottom');
-        continueShoppingRow.innerHTML = `
-            <td><a href="/cafetaria" class="option-btn" style="margin-top: 0;">continue shopping</a></td>
-            <td colspan="3">Grand Total</td>
-            <td>${grandtotal}</td> <!-- Update grand total here -->
-            
-        `;
-        tableBody.appendChild(continueShoppingRow);
-    } catch (error) {
-        console.error('Error fetching food data:', error);
+            const numberInput = document.querySelector('input[name="number"]');
+            numberInput.value = personalinfo[0]['Phone'];                                              
+        } catch (error) {
+            console.error('Error fetching user data:', error);
+        }
     }
-}
 
-fetchFoodData();
+    fetchpersonalinfo();
 
-async function fetchpersonalinfo() {
-    try {
-        const response = await axios.get('/auth/api/auth');
-        const personalinfo = response.data;
-        console.log(personalinfo);
-
-        // Update name field
-        const nameInput = document.querySelector('input[name="name"]');
-        nameInput.value = personalinfo[0]['StudentName']; 
-        
-        // Update student ID field
-        const studentIDInput = document.querySelector('input[name="studentID"]');
-        studentIDInput.value = personalinfo[0]['StudentID']; 
-        
-        // Update number field
-        const numberInput = document.querySelector('input[name="number"]');
-        numberInput.value = personalinfo[0]['Phone'];                                              
-    } catch (error) {
-        console.error('Error fetching user data:', error);
+    async function removeItemFromCart(foodName) {
+        try {
+            const response = await axios.post('/auth/api/removeFromCart', { foodName: foodName });
+            fetchFoodData();
+        } catch (error) {
+            console.error('Error removing item from cart:', error);
+        }
     }
-}
 
-fetchpersonalinfo();
+    async function placeorder() {
+        try {
+            const response = await axios.get('/auth/api/FoodData');
+            const foodData = response.data;
+            const personalInfoResponse = await axios.get('/auth/api/auth');
+            const personalInfo = personalInfoResponse.data;
+            const order = {studentID: personalInfo[0]['StudentID'], grandtotal: 0, foodItems: []};
 
+            foodData.forEach(food => {
+                order.grandtotal += (food.Quantity * food.Bill);
+                order.foodItems.push({ name: food.FoodName, quantity: food.Quantity });
+            });
 
-async function removeItemFromCart(foodName) {
-    try {
-        const response = await axios.post('/auth/api/removeFromCart', { foodName: foodName });
-        
-       
-        fetchFoodData();
-    } catch (error) {
-        console.error('Error removing item from cart:', error);
+            const orderResponse = await axios.post('/auth/api/placeOrder', order);
+
+        } catch (error) {
+            console.error('Error placing order:', error);
+        }
     }
-}
 
-
-async function placeorder() {
-    try {
-        // Fetch food data to get the list of items in the cart
-        const response = await axios.get('/auth/api/FoodData');
-        const foodData = response.data;
-
-        // Fetch personal information
-        const personalInfoResponse = await axios.get('/auth/api/auth');
-        const personalInfo = personalInfoResponse.data;
-
-        // Prepare order object
-        const order = {
-            studentID: personalInfo[0]['StudentID'],
-            grandtotal: 0,
-            foodItems: []
-        };
-
-        // Calculate grand total and gather food items
-        foodData.forEach(food => {
-            order.grandtotal += (food.Quantity * food.Bill);
-            order.foodItems.push({ name: food.FoodName, quantity: food.Quantity });
-        });
-
-        // Send order to the server
-        const orderResponse = await axios.post('/auth/api/placeOrder', order);
-
-        // Handle success or display confirmation message
-        console.log('Order placed successfully:', orderResponse.data);
-        // Optionally, display a success message to the user
-    } catch (error) {
-        console.error('Error placing order:', error);
-        // Optionally, display an error message to the user
-    }
-}
-
-
-
-document.getElementById("confirmOrderBtn").addEventListener("click", function(event) {
-   event.preventDefault(); // Prevent form submission
-   placeorder(); // Call placeorder function
-});
+    document.getElementById("confirmOrderBtn").addEventListener("click", function(event) {event.preventDefault(); placeorder(); });
         
-    </script>
+</script>
   
-
 </body>
 </html>
 

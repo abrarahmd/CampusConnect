@@ -15,6 +15,9 @@ router.get('/api/PostFetch' , authController.PostFetch)
 router.get('/api/PostFetchBasedOnID' , authController.PostFetchBasedOnID)
 router.get("/api/FoodData", authController.GetFoodData)
 router.get('/api/deletepost' , authController.GetUserData)
+router.get('/api/getLicensePlate', authController.getLicensePlate)
+router.get('/parkingStatus', authController.getParkingStatus)
+router.get('/parkingInfo', authController.getParkingInfo)
 
 
 router.post("/signup", authController.UserSignup)
@@ -30,6 +33,9 @@ router.post('/api/removeFromCart' , authController.removefromcart)
 router.post("/api/deletepostforum" , authController.deletepostforum)
 router.post("/api/removeCourse" , authController.removeCoursefromdatabase)
 router.post("/api/placeOrder" , authController.placeOrder)
+router.post('/proceedToCheckout', authController.proceedToCheckout)
+router.post('/auth/postComment', authController.postComment)
+router.post("/showComment",authController.showComment)
 
 
 router.get('/logout', (req, res) => {

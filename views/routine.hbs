@@ -100,179 +100,177 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
   <script>
-    async function showSearchResults() {
-      try {
-        const response = await axios.get('/auth/api/courses');
-        const courses = response.data;
-        const searchInput = document.getElementById("course-search");
-        const searchQuery = searchInput.value.toLowerCase();
-        
+      async function showSearchResults() {
+        try {
+          const response = await axios.get('/auth/api/courses');
+          const courses = response.data;
+          const searchInput = document.getElementById("course-search");
+          const searchQuery = searchInput.value.toLowerCase();
+          
 
-        const matchingCourses = courses.filter(course => course.CourseName.toLowerCase().includes(searchQuery));
+          const matchingCourses = courses.filter(course => course.CourseName.toLowerCase().includes(searchQuery));
 
-        const searchResultsContainer = document.getElementById("search-results");
-        searchResultsContainer.innerHTML = "";
+          const searchResultsContainer = document.getElementById("search-results");
+          searchResultsContainer.innerHTML = "";
 
-        if (searchQuery === "") {
-          searchResultsContainer.style.display = "none";
-        } else if (matchingCourses.length === 0) {
-          searchResultsContainer.textContent = "No matching courses found.";
-          searchResultsContainer.style.display = "block";
-        } else {
-          matchingCourses.forEach(course => {
-            const courseButton = document.createElement("div");
-            courseButton.textContent = `${course.CourseName} Section ${course.Section}`;
-            courseButton.classList.add("search-result-item");
-            searchResultsContainer.appendChild(courseButton);
+          if (searchQuery === "") {
+            searchResultsContainer.style.display = "none";
+          } else if (matchingCourses.length === 0) {
+            searchResultsContainer.textContent = "No matching courses found.";
+            searchResultsContainer.style.display = "block";
+          } else {
+            matchingCourses.forEach(course => {
+              const courseButton = document.createElement("div");
+              courseButton.textContent = `${course.CourseName} Section ${course.Section}`;
+              courseButton.classList.add("search-result-item");
+              searchResultsContainer.appendChild(courseButton);
 
-            courseButton.addEventListener('click', function() {
-              const selectedCourse = {
-                courseName: course.CourseName,
-                section: course.Section
+              courseButton.addEventListener('click', function() {
+                const selectedCourse = {
+                  courseName: course.CourseName,
+                  section: course.Section
+                }
+                sendCourseData(selectedCourse)
+                
+              })
+            });
+            searchResultsContainer.style.display = "block";
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+
+      async function sendCourseData(course) {
+        try {
+          const response = await axios({
+              method: 'post',
+              url: '/auth/api/courseSelected',
+              data: {
+                  courseDetails: course
               }
-              sendCourseData(selectedCourse)
-              
-            })
           });
-          searchResultsContainer.style.display = "block";
+          courseShow();
+        } catch (error) {
+          if (error.response.status === 401) {
+            alert('You are not logged in. Please log in to continue.');
+          } else if (error.response.status === 404) {
+            alert('You have already taken this course');
+          } else {
+            console.error('Error Sending Data', error);
+          }
         }
-      } catch (error) {
-        console.error('Error fetching user data:', error);
       }
-    }
 
-    async function sendCourseData(course) {
-      try {
-        const response = await axios({
-            method: 'post',
-            url: '/auth/api/courseSelected',
-            data: {
-                courseDetails: course
-            }
-        });
+      document.addEventListener("DOMContentLoaded", function() {
         courseShow();
-      } catch (error) {
-        if (error.response.status === 401) {
-          alert('You are not logged in. Please log in to continue.');
-        } else if (error.response.status === 404) {
-          alert('You have already taken this course');
-        } else {
-          console.error('Error Sending Data', error);
-        }
-      }
-    }
-
-    document.addEventListener("DOMContentLoaded", function() {
-      courseShow();
-    });
+      });
 
    
-  async function courseShow() {
-    try {
-        const response = await axios.get('/auth/api/courseShow');
-        const courseTaken = response.data;
-        renderCoursesInRoutineTable(courseTaken);
-        const addedCoursesList = document.getElementById('added-courses-list');
-        addedCoursesList.innerHTML = ""; 
-        courseTaken.forEach(courseList => {
-            courseList.forEach(course => {
-                const listItem = document.createElement('li');
-                const removeButton = document.createElement('button');
-                removeButton.textContent = 'Remove';
-                removeButton.classList.add('remove-button');
-                const courseText = document.createTextNode(`${course.CourseName} Section ${course.Section}`);
-                listItem.appendChild(courseText); 
-                listItem.appendChild(document.createTextNode('       '));
-                listItem.appendChild(removeButton); 
-                addedCoursesList.appendChild(listItem);
-                removeButton.addEventListener('click', function() {
-                removeCourse(course.CourseName, course.Section);
+      async function courseShow() {
+        try {
+            const response = await axios.get('/auth/api/courseShow');
+            const courseTaken = response.data;
+            renderCoursesInRoutineTable(courseTaken);
+            const addedCoursesList = document.getElementById('added-courses-list');
+            addedCoursesList.innerHTML = ""; 
+            courseTaken.forEach(courseList => {
+                courseList.forEach(course => {
+                    const listItem = document.createElement('li');
+                    const removeButton = document.createElement('button');
+                    removeButton.textContent = 'Remove';
+                    removeButton.classList.add('remove-button');
+                    const courseText = document.createTextNode(`${course.CourseName} Section ${course.Section}`);
+                    listItem.appendChild(courseText); 
+                    listItem.appendChild(document.createTextNode('       '));
+                    listItem.appendChild(removeButton); 
+                    addedCoursesList.appendChild(listItem);
+                    removeButton.addEventListener('click', function() {
+                    removeCourse(course.CourseName, course.Section);
+                    });
                 });
             });
-        });
-    } catch (error) {
-        console.error('Error fetching course data:', error);
-    } 
-}
+        } catch (error) {
+            console.error('Error fetching course data:', error);
+        } 
+      }
 
-async function removeCourse(courseName, section) {
-    try {
-        const response = await axios.post('/auth/api/removeCourse', { courseName: courseName, section: section });
-        courseShow();
-    } catch (error) {
-        console.error('Error removing course:', error);
-    }
-}
+      async function removeCourse(courseName, section) {
+          try {
+              const response = await axios.post('/auth/api/removeCourse', { courseName: courseName, section: section });
+              courseShow();
+          } catch (error) {
+              console.error('Error removing course:', error);
+          }
+      }
 
-
-    function renderCoursesInRoutineTable(courses) {
-      
-      
-      courses.forEach(courseArray => {
-        courseArray.forEach(course => {
-
-        const { CourseName, Time, Day1, Day2 } = course;
-        let tableCell1 = getTableCell(Time, Day1);
-
-      if (tableCell1) {
-        if (tableCell1.textContent.trim() !== "") {
-          tableCell1.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
-
-        } else {
+      function renderCoursesInRoutineTable(courses) {
           
-          tableCell1.textContent = `${CourseName} Section ${course.Section}`;
+          courses.forEach(courseArray => {
+            courseArray.forEach(course => {
+
+            const { CourseName, Time, Day1, Day2 } = course;
+            let tableCell1 = getTableCell(Time, Day1);
+
+          if (tableCell1) {
+            if (tableCell1.textContent.trim() !== "") {
+              tableCell1.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
+
+            } else {
+              
+              tableCell1.textContent = `${CourseName} Section ${course.Section}`;
+            }
+          }
+              let tableCell2 = getTableCell(Time, Day2);
+
+          if (tableCell2) {
+            if (tableCell2.textContent.trim() !== "") {
+              tableCell2.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
+
+            } else {
+              tableCell2.textContent = `${CourseName} Section ${course.Section}`;
+            }
+          }
+            });
+          });
         }
+
+
+      function getTableCell(Time, Day) {
+          if (Day === "Sunday") {
+            return document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Monday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Tuesday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Wednesday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Thursday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Friday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day}"]`);
+          }
+
+          if (Day === "Saturday") {
+            return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day}"]`);
+          }
       }
-          let tableCell2 = getTableCell(Time, Day2);
 
-      if (tableCell2) {
-        if (tableCell2.textContent.trim() !== "") {
-          tableCell2.innerHTML += `, <span class="red-text">${CourseName} Section ${course.Section}</span>`;
-
-        } else {
-          tableCell2.textContent = `${CourseName} Section ${course.Section}`;
-        }
-      }
-        });
-      });
-    }
-
-
-  function getTableCell(Time, Day) {
-  if (Day === "Sunday") {
-    return document.querySelector(`td[data-time="${Time}"] + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Monday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Tuesday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Wednesday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td + td + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Thursday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Friday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td[data-day="${Day}"]`);
-  }
-
-  if (Day === "Saturday") {
-    return document.querySelector(`td[data-time="${Time}"] + td + td + td + td + td + td + td[data-day="${Day}"]`);
-  }
-}
-
-
-
-    document.getElementById("course-search").addEventListener("input", showSearchResults);
-    document.getElementById("customize-button").addEventListener("click", function() {window.location.href = "/";});
+      document.getElementById("course-search").addEventListener("input", showSearchResults);
+      document.getElementById("customize-button").addEventListener("click", function() {window.location.href = "/";});
+    
   </script>
+
 
 </body>
 </html>

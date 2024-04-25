@@ -76,9 +76,6 @@
         </div>
     </div>
 
-
-    
-
     <footer>
         <div class="Contact Us" id="Contact Us">
             <h1><span>Contact</span>Us</h1>
@@ -118,11 +115,10 @@
                 foodData.forEach(food => {
 
                     const menuCard = document.createElement('div');
+
                     menuCard.className = 'menu_card';
-
-
-                    menuCard.innerHTML = `
-                        <div class="menu_image">
+                    menuCard.innerHTML = 
+                        `<div class="menu_image">
                             <img src="${food.FoodPicture}" alt="${food.FoodName}">
                         </div>
                         <div class="small_card">
@@ -134,12 +130,8 @@
                             <div class="menu_icon">
                                 ${generateStarIcons(food.FoodRating)}
                             </div>
-                            <a href="#" class="menu_btn" onclick="addToCart('${food.FoodPicture}', '${food.FoodName}', ${food.FoodCost})">Add To Cart</a>
-
-            
-                            
-                        </div>
-                    `;
+                            <a href="" class="menu_btn" onclick="addToCart('${food.FoodPicture}', '${food.FoodName}', ${food.FoodCost})">Add To Cart</a>
+                        </div>`;
 
                     menuBox.appendChild(menuCard);
                 });
@@ -167,18 +159,11 @@
 
         function addToCart(foodPicture, foodName, foodCost ) {
             
-            const data = {
-                foodPicture : foodPicture,
-                foodName: foodName,
-                foodCost: foodCost,
-                
-                
-            };
+            const data = {foodPicture : foodPicture,foodName: foodName,foodCost: foodCost};
 
             
             axios.post('/auth/api/addToCart', data)
                 .then(response => {
-                    
                     console.log(response.data);
                 })
                 .catch(error => {
@@ -187,6 +172,7 @@
         }
 
         FoodInfo();
+        
     </script>
 
 </body>

@@ -21,21 +21,18 @@
 
         body {
             background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("/parking-background.jpg");
-            background-size:cover;
+            background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             background-attachment: fixed;
         }
-
-
-
 
         .header-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.5); /* Updated background color */
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .header-row h2 {
@@ -50,9 +47,9 @@
 
         .booking-form {
             padding: 20px;
-            width: 60%; /* Adjusted width to make it a little smaller */
+            width: 60%;
             margin: 0 auto;
-            background: rgba(255, 255, 255, 0.8); /* Updated background to white with transparency */
+            background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
         }
 
@@ -68,7 +65,7 @@
             padding: 10px 15px;
             font-size: 15px;
             text-transform: none;
-            background: rgba(255, 255, 255, 0.5); /* Updated input background to white with transparency */
+            background: rgba(255, 255, 255, 0.5);
         }
 
         .booking-form input:focus {
@@ -79,22 +76,21 @@
             width: 100%;
             padding: 12px;
             font-size: 17px;
-            background: #007BFF; /* Changed button color to blue */
+            background: #007BFF;
             color: #fff;
             margin-top: 15px;
             cursor: pointer;
         }
 
         .booking-form button:hover {
-            background: #0056b3; /* Darker blue on hover */
+            background: #0056b3;
         }
 
         .payment-method-section {
-            display: none;
             padding: 20px;
-            width: 60%; /* Adjusted width to make it a little smaller */
+            width: 60%;
             margin: 20px auto;
-            background: rgba(255, 255, 255, 0.8); /* Updated background to white with transparency */
+            background: rgba(255, 255, 255, 0.8);
             box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
         }
 
@@ -109,7 +105,7 @@
         }
 
         .payment-btn {
-            background-color: #007BFF; /* Changed button color to blue */
+            background-color: #007BFF;
             color: white;
             padding: 10px 15px;
             border: none;
@@ -118,12 +114,12 @@
         }
 
         .payment-btn:hover {
-             background-color: #0056b3; /* Darker blue on hover */
+            background-color: #0056b3;
         }
 
         .payment-btn.active {
-            background-color: #0056b3; /* Darker blue for active state */
-        }       
+            background-color: #0056b3;
+        }
 
         .inputBox {
             margin: 15px 0;
@@ -165,13 +161,12 @@
 </head>
 
 <body>
-    <!-- Header Row -->
+
     <div class="header-row">
         <h2>Booking Information</h2>
         <div id="countdown">Time remaining: <span id="timer">120</span> seconds</div>
     </div>
 
-    <!-- Booking Form -->
     <div class="booking-form">
         <form id="bookingForm">
             <label for="fullname">Full Name:</label>
@@ -188,35 +183,108 @@
 
             <button type="button" id="confirmBtn" onclick="showPaymentSection()">Confirm Booking</button>
         </form>
-    </div>
 
-    <!-- Payment Method Section (Initially Hidden) -->
-    <div class="payment-method-section" id="paymentSection" style="display: none;">
-        <h2>Select Payment Method</h2>
-        <div class="payment-buttons">
-            <button type="button" class="payment-btn" id="bkashBtn" onclick="selectPayment('bkash')">bKash</button>
-            <button type="button" class="payment-btn" id="nagadBtn" onclick="selectPayment('nagad')">Nagad</button>
+        <div class="payment-method-section" id="paymentSection" style="display: none;">
+            <h2>Payment Confirmation</h2>
+
+            <div class="inputBox">
+                <span>Transaction ID:</span>
+                <input type="text" placeholder="Enter Transaction ID" id="transactionInput" required>
+            </div>
+            <button type="button" onclick="proceedToCheckout()" class="submit-btn">Proceed to Checkout</button>
         </div>
-        <div class="inputBox">
-            <span>Transaction ID :</span>
-            <input type="text" placeholder="Enter Transaction ID" id="transactionInput">
-        </div>
-        <button type="submit" value="Proceed to Checkout" class="submit-btn">Proceed to Checkout</button>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-    <script src="handlebars-v4.7.7.js"></script>
-    <script src="app.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
-        function showPaymentSection() {
-            // Get the payment method section element
-            var paymentSection = document.getElementById("paymentSection");
 
-            // Set the display property to "block" to make it visible
-            paymentSection.style.display = "block";
+        function startCountdown(duration, display) {
+
+            var timer = duration, minutes, seconds;
+            setInterval(function () {
+                minutes = parseInt(timer / 60, 10);
+                seconds = parseInt(timer % 60, 10);
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                display.textContent = minutes + ":" + seconds;
+
+                if (--timer < 0) {
+                    window.location.reload(true);
+                }
+            }, 1000);
+
         }
+
+        async function fetchDataAndStartCountdown() {
+            try {
+                const response = await axios.get('/auth/api/auth');
+                const userData = response.data[0];
+
+                if (userData) {
+                    var duration = 120;
+                    var display = document.querySelector('#timer');
+                    startCountdown(duration, display);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        async function proceedToCheckout() {
+            const transactionID = document.getElementById('transactionInput').value;
+            const studentID = document.getElementById('studentId').value;
+
+            try {
+
+                const response = await axios.post('/auth/proceedToCheckout', { transactionID, studentID });
+
+            } catch (error) {
+
+                console.error('Error during checkout:', error);
+
+            }
+        }
+
+        async function fetchData() {
+
+            try {
+                const response = await axios.get('/auth/api/auth');
+                const userData = response.data[0];
+
+                const nameInput = document.getElementById('fullname');
+                const studentIdInput = document.getElementById('studentId');
+                const phoneInput = document.getElementById('phone');
+                const licensePlateInput = document.getElementById('licensePlate');
+
+                nameInput.value = userData.StudentName;
+                studentIdInput.value = userData.StudentID;
+                phoneInput.value = userData.Phone;
+
+                const licensePlateResponse = await axios.get(`/auth/api/getLicensePlate?studentId=${userData.StudentID}`);
+                const { licensePlate } = licensePlateResponse.data;
+
+                licensePlateInput.value = licensePlate;
+
+                fetchDataAndStartCountdown();
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        function showPaymentSection() {
+
+            var paymentSection = document.getElementById("paymentSection");
+            paymentSection.style.display = "block";
+
+        }
+
+        window.onload = fetchData; 
+
     </script>
+    
 </body>
 
 </html>

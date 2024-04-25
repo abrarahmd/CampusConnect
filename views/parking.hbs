@@ -33,121 +33,114 @@
         <div class="row">
             <div class="col-lg-6 col-sm-12 mb-3">
                 <div class="d-flex justify-content-center">
-                <form action="/auth/parking" method="POST">
-                    <div class="mb-3">
-                        <label for="name" class="form-label"><i class="bi bi-person"></i>&ensp;Fullname</label>
-                        <input type="text" class="form-control" id="name" name="name">
-                        <div><p id="nameError"></p></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="phone" class="form-label"><i class="bi bi-phone"></i>&ensp;Phone Number</label>
-                        <input type="number" min="0" class="form-control" id="phone" name="phoneNo">
-                        <div><p id="phoneError"></p></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="plate" class="form-label"><i class="fa fa-list-alt" aria-hidden="true"></i>&ensp;License Plate</label>
-                        <input type="text" class="form-control" id="plate" name="lic_plate">
-                        <div><p id="plateError"></p></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="studentId" class="form-label"><i class="bi bi-card-id"></i>&ensp;Student ID</label>
-                        <input type="text" class="form-control" id="studentId" name="student_id">
-                        <div><p id="studentIdError"></p></div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="model" class="form-label"><i class="lni lni-car-alt"></i>&ensp;Vehicle Type</label>
-                        <select class="form-select" id="vehicleType" name="type">
-                            <option value="car">Car</option>
-                            <option value="bike">Bike</option>
-                        </select>
-                        <div><p id="vehicleTypeError"></p></div>
-                    </div>
-                    <button type="submit" id="btn1" class="btn btn-warning">Book!</button>
-                </form>
+                    <form action="/auth/parking" method="POST">
+                        <div class="mb-3">
+                            <label for="name" class="form-label"><i class="bi bi-person"></i>&ensp;Fullname</label>
+                            <input type="text" class="form-control" id="name" name="name">
+                            <div><p id="nameError"></p></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label"><i class="bi bi-phone"></i>&ensp;Phone Number</label>
+                            <input type="number" min="0" class="form-control" id="phone" name="phoneNo">
+                            <div><p id="phoneError"></p></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="plate" class="form-label"><i class="fa fa-list-alt" aria-hidden="true"></i>&ensp;License Plate</label>
+                            <input type="text" class="form-control" id="plate" name="lic_plate">
+                            <div><p id="plateError"></p></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="studentId" class="form-label"><i class="bi bi-card-id"></i>&ensp;Student ID</label>
+                            <input type="text" class="form-control" id="studentId" name="student_id">
+                            <div><p id="studentIdError"></p></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="model" class="form-label"><i class="lni lni-car-alt"></i>&ensp;Vehicle Type</label>
+                            <select class="form-select" id="vehicleType" name="type">
+                                <option value="car">Car</option>
+                                <option value="bike">Bike</option>
+                            </select>
+                            <div><p id="vehicleTypeError"></p></div>
+                        </div>
+                        <button type="submit" id="btn1" class="btn btn-warning">Book!</button>
+                    </form>
 
                 </div>
             </div>
             <div class="col-lg-6 col-sm-12">
-                <!-- box for parked cars and available space -->
-                <div class="box-container d-flex justify-content-between">
-                  <div class="box">
+            <div class="box-container d-flex justify-content-between">
+                <div class="box">
                     <h4 style="color: yellow;">Parked Cars</h4>
-                    <p id="parkedCars" style="color: yellow;">0</p>
+                    <p id="parkedCarsCount" style="color: yellow;">0</p>
                 </div>
                 <div class="box">
                     <h4 style="color: yellow;">Available Space</h4>
-                    <p id="availableSpace" style="color: yellow;">10</p>
-                </div>
-                </div>
-
-                <!-- table for storing parking info when the car is parked -->
-                <table class="table table-borderless mt-5">
-                    <thead>
-                        <p id="parkingHead"><i class="fa fa-product-hunt" aria-hidden="true"></i>&ensp;Parked Cars</p>
-                        <tr>
-                            <th scope="col" id="id">ID No</th>
-                            <th scope="col" id="namE">Name</th>
-                            <th scope="col" id="platE">Plate</th>
-                            <th scope="col" id="modeL">Type</th>
-                            <th scope="col" id="arrivaltimE">Status</th>
-                            
-                        </tr>
-                    </thead>
-                    <tbody id="parkingtable">
-
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <!-- Modal for printing receipt on exit from the parking lot -->
-        <div class="container-fluid">
-            <div class="modal fade" id="receiptModal" tabindex="-1" aria-labelledby="loanModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header" id="modalHeader">
-                            <h1 class="modal-title fs-5 text-center" id="receiptModalLabel"></h1>
-                        </div>
-                        <div class="modal-body" id="modalBody">
-
-                        </div>
-                        <div class="modal-footer" id="modalFooter">
-                            <button type="button" class="btn" id="closeBtn" data-bs-dismiss="modal">CLOSE</button>
-                        </div>
-                    </div>
+                    <p id="availableSpaceCount" style="color: yellow;">10</p>
                 </div>
             </div>
-            <br><br><br>
-            <hr style="color: #E4A11B;">
-            
-        </div>
-        
 
-        <script src="parking.js"></script>
+        <table class="table table-borderless mt-5">
+            <thead>
+                <p id="parkingHead"><i class="fa fa-product-hunt" aria-hidden="true"></i>&ensp;Parked Cars</p>
+                <tr>
+                    <th scope="col" id="id">Student Id</th>
+                    <th scope="col" id="namE">Name</th>
+                    <th scope="col" id="platE">Plate</th>
+                    <th scope="col" id="modeL">Type</th>
+                    <th scope="col" id="arrivaltimE">Status</th>
+                </tr>
+            </thead>
+            <tbody id="parkingtable">
+
+            </tbody>
+        </table>
 
 
-        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-        <script>
-            async function fetchData() {
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        async function fetchData() {
             try {
-                const response = await axios.get('/auth/api/auth');
-                
-                const userData = response.data[0];
-                      
+                const userDataResponse = await axios.get('/auth/api/auth');
+                const userData = userDataResponse.data[0];
                 const nameInput = document.getElementById('name');
                 const studentIdInput = document.getElementById('studentId');
                 const phoneInput = document.getElementById('phone');
 
-                // Assuming your API response has appropriate fields
                 nameInput.value = userData.StudentName;
                 studentIdInput.value = userData.StudentID;
                 phoneInput.value = userData.Phone;
+
+                const parkingInfoResponse = await axios.get('/auth/parkingInfo');
+                const parkingInfo = parkingInfoResponse.data;
+                const parkingTableBody = document.getElementById('parkingtable');
+
+                parkingTableBody.innerHTML = '';
+                parkingInfo.forEach(info => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = 
+                        `<td>${info.student_id}</td>
+                        <td>${info.name}</td>
+                        <td>${info.lic_plate}</td>
+                        <td>${info.type}</td>
+                        <td>${info.status}</td>`;
+                    parkingTableBody.appendChild(row);
+                });
+
+            const response = await axios.get('/auth/parkingStatus');
+            const { parkedCars, availableSpace } = response.data;
+
+            document.getElementById('parkedCarsCount').innerText = parkedCars;
+            document.getElementById('availableSpaceCount').innerText = availableSpace;
+
             } catch (error) {
-                console.error('Error fetching user data:', error);
+                console.error('Error fetching data:', error);
             }
         }
+
         fetchData();
+
     </script>
-    </body>
+
+</body>
 
 </html>

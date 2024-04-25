@@ -127,7 +127,7 @@ router.get('/successfulPurchase', (req, res) => {
 
 });
 
-// Routine 
+// Routine Routes
 
 router.get('/routine', (req, res) => {
 
@@ -135,7 +135,7 @@ router.get('/routine', (req, res) => {
 
 });
 
-//Forum
+// Forum Routes
 
 router.get('/StudentForum', (req, res) => {
 

@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2024 at 07:30 AM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 25, 2024 at 07:02 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `integrated_student_service_platform`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `comment_table`
+--
+
+CREATE TABLE `comment_table` (
+  `Post` varchar(500) NOT NULL,
+  `comment` varchar(500) NOT NULL,
+  `Name` varchar(500) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comment_table`
+--
+
+INSERT INTO `comment_table` (`Post`, `comment`, `Name`) VALUES
+('1', 'How can I join this team?', 'Abrar Ahmed');
 
 -- --------------------------------------------------------
 
@@ -112,6 +131,28 @@ INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bil
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `food_place_order`
+--
+
+CREATE TABLE `food_place_order` (
+  `StudentID` varchar(11) NOT NULL,
+  `grandTotal` text NOT NULL,
+  `orderItems` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `food_place_order`
+--
+
+INSERT INTO `food_place_order` (`StudentID`, `grandTotal`, `orderItems`) VALUES
+('21301309', '150', 'Hot Dog: 1, Sandwich: 1, '),
+('21301309', '150', 'Hot Dog: 1, Sandwich: 1, '),
+('21301309', '150', 'Hot Dog: 1, Sandwich: 1, '),
+('21301309', '150', 'Hot Dog: 1, Sandwich: 1, ');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `forum`
 --
 
@@ -120,7 +161,6 @@ CREATE TABLE `forum` (
   `Title` varchar(260) DEFAULT NULL,
   `Text` text DEFAULT NULL,
   `Picture` text DEFAULT NULL,
-  `Comment` text DEFAULT NULL,
   `Username` varchar(260) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -128,21 +168,9 @@ CREATE TABLE `forum` (
 -- Dumping data for table `forum`
 --
 
-INSERT INTO `forum` (`PostID`, `Title`, `Text`, `Picture`, `Comment`, `Username`) VALUES
-(1, 'BRACU Duburi', 'The BRACU Duburi team is committed to establishing a vibrant and inclusive community of AUV and ROV hobbyists and enthusiasts who will collaborate to develop cutting-edge, industrial-grade underwater vehicle. The team envisions fostering an environment where individuals can share their ideas, knowledge, and expertise to create innovative technologies that can revolutionize the underwater industry. Additionally, the team aspires to establish a state-of-the-art test facility that will enable the next generation of ROV enthusiasts to hone their skills and advance their knowledge in the field. Through these initiatives, the BRACU Duburi team aims to create a sustainable and innovative ecosystem that will drive the growth and development of the underwater industry in Bangladesh and beyond.', 'uploads\\f0c32d17ff0fed3c1fad00364c6810a5', NULL, 'PhantomN3rd'),
-(2, 'BRACU Mongol Tori', 'BRAC University Mongol Tori, a next-generation Mars rover, has ranked 3rd in University Rover Challenge (URC). The rover, which tends to walk alongside human explorers on the red planet someday, has the ability to retrieve objects, complete autonomous traversal missions, collect visual data, perform planetary analysis, detect the presence of life by conducting biosignature tests and help astronauts with equipment servicing.', 'uploads\\157af074f3fc7aca4f8c80ad9be14b77', NULL, 'Penguin');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `parkingmanagement`
---
-
-CREATE TABLE `parkingmanagement` (
-  `SpaceID` int(100) NOT NULL,
-  `SpaceAvailibility` int(200) NOT NULL,
-  `SeatPaid` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+INSERT INTO `forum` (`PostID`, `Title`, `Text`, `Picture`, `Username`) VALUES
+(1, 'BRACU Duburi', 'The BRACU Duburi team is committed to establishing a vibrant and inclusive community of AUV and ROV hobbyists and enthusiasts who will collaborate to develop cutting-edge, industrial-grade underwater vehicle. The team envisions fostering an environment where individuals can share their ideas, knowledge, and expertise to create innovative technologies that can revolutionize the underwater industry. Additionally, the team aspires to establish a state-of-the-art test facility that will enable the next generation of ROV enthusiasts to hone their skills and advance their knowledge in the field. Through these initiatives, the BRACU Duburi team aims to create a sustainable and innovative ecosystem that will drive the growth and development of the underwater industry in Bangladesh and beyond.', 'uploads\\f0c32d17ff0fed3c1fad00364c6810a5', 'PhantomN3rd'),
+(2, 'BRACU Mongol Tori', 'BRAC University Mongol Tori, a next-generation Mars rover, has ranked 3rd in University Rover Challenge (URC). The rover, which tends to walk alongside human explorers on the red planet someday, has the ability to retrieve objects, complete autonomous traversal missions, collect visual data, perform planetary analysis, detect the presence of life by conducting biosignature tests and help astronauts with equipment servicing.', 'uploads\\157af074f3fc7aca4f8c80ad9be14b77', 'Penguin');
 
 -- --------------------------------------------------------
 
@@ -164,7 +192,8 @@ CREATE TABLE `parking_ver1` (
 --
 
 INSERT INTO `parking_ver1` (`name`, `phoneNo`, `lic_plate`, `student_id`, `type`, `status`) VALUES
-('Abrar Ahmed', 1749750959, '1234', 21301309, 'car', 'unpaid');
+('Zarin Tasnim Raisa', 1749750952, '1234', 21301022, 'car', 'Paid'),
+('Abrar Ahmed', 1749750959, 'sadia', 21301309, 'car', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -197,63 +226,49 @@ INSERT INTO `routes` (`Name`, `Place`, `Time`) VALUES
 --
 
 CREATE TABLE `transactions_table` (
-  `transactions` varchar(20) DEFAULT NULL
+  `student_id` int(20) DEFAULT NULL,
+  `transactions` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `transactions_table`
 --
 
-INSERT INTO `transactions_table` (`transactions`) VALUES
-('69742885958'),
-('84444835832'),
-('22995524055'),
-('31643115544'),
-('79229008321'),
-('21215697742'),
-('38391466511'),
-('28310242098'),
-('16376813721'),
-('76953345077'),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL),
-(NULL);
+INSERT INTO `transactions_table` (`student_id`, `transactions`) VALUES
+(NULL, '39084172657'),
+(NULL, '41205227692'),
+(NULL, '42872774640'),
+(NULL, '43834415118'),
+(NULL, '44357104733'),
+(NULL, '44625455554'),
+(NULL, '47746644958'),
+(NULL, '48669740602'),
+(NULL, '49200422362'),
+(NULL, '54148278435'),
+(NULL, '55539353336'),
+(NULL, '56509220838'),
+(NULL, '60173150207'),
+(NULL, '61211146470'),
+(NULL, '65642068781'),
+(NULL, '70539625705'),
+(NULL, '71753277323'),
+(NULL, '73821043570'),
+(NULL, '75282383127'),
+(NULL, '76513688709'),
+(NULL, '79726114476'),
+(NULL, '80025335661'),
+(NULL, '81157398205'),
+(NULL, '82888342516'),
+(NULL, '84888273648'),
+(NULL, '86093165525'),
+(NULL, '88748724467'),
+(NULL, '94016867962'),
+(NULL, '96420201002'),
+(NULL, '97337087333'),
+(NULL, '98669280854'),
+(NULL, '99795506893'),
+(21301022, '32347792137'),
+(21301309, '33623914265');
 
 -- --------------------------------------------------------
 
@@ -275,8 +290,7 @@ CREATE TABLE `transportation` (
 --
 
 INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `SeatPaid`, `SeatBooked`) VALUES
-('Going', '6:30', 1, 0, 0, 'PhantomN3rd'),
-('Going', '6:30', 2, 1, 0, NULL),
+('Going', '6:30', 2, 0, 0, 'PhantomN3rd'),
 ('Going', '6:30', 3, 1, 0, NULL),
 ('Going', '6:30', 4, 1, 0, NULL),
 ('Going', '6:30', 5, 1, 0, NULL),
@@ -338,8 +352,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
-(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'ds9ae1y9o9'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', '2jw43mtsnh3');
+(21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'n0thj53qta'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'pnt3e5ojczn');
 
 -- --------------------------------------------------------
 
@@ -360,11 +374,17 @@ CREATE TABLE `usercoursetable` (
 INSERT INTO `usercoursetable` (`Username`, `CourseName`, `CourseSection`) VALUES
 ('PhantomN3rd', 'CSE110', 1),
 ('PhantomN3rd', 'CSE111', 1),
-('PhantomN3rd', 'CSE220', 3);
+('PhantomN3rd', 'CSE221', 3);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `comment_table`
+--
+ALTER TABLE `comment_table`
+  ADD UNIQUE KEY `Post` (`Post`,`Name`) USING HASH;
 
 --
 -- Indexes for table `courses`
@@ -392,12 +412,6 @@ ALTER TABLE `forum`
   ADD PRIMARY KEY (`PostID`);
 
 --
--- Indexes for table `parkingmanagement`
---
-ALTER TABLE `parkingmanagement`
-  ADD PRIMARY KEY (`SpaceID`);
-
---
 -- Indexes for table `parking_ver1`
 --
 ALTER TABLE `parking_ver1`
@@ -411,6 +425,14 @@ ALTER TABLE `routes`
   ADD PRIMARY KEY (`Name`),
   ADD UNIQUE KEY `Place` (`Place`) USING HASH,
   ADD UNIQUE KEY `Time` (`Time`) USING HASH;
+
+--
+-- Indexes for table `transactions_table`
+--
+ALTER TABLE `transactions_table`
+  ADD UNIQUE KEY `transactions` (`transactions`),
+  ADD UNIQUE KEY `transactions_2` (`transactions`),
+  ADD UNIQUE KEY `student_id` (`student_id`);
 
 --
 -- Indexes for table `transportation`

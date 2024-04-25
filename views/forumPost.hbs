@@ -8,104 +8,102 @@
 </head>
 <body>
 
-    <main>
-        <article class="post" id = 'postContainer'>
-            <h2 class="post-title" id = 'Title'></h2>
-            <div class="post-content">
-                <img src="" alt="" id = 'Image' class="post-image">
-                <p class="post-text" id = 'Text'></p>
+<main>
+    <article class="post" id='postContainer'>
+        <h2 class="post-title" id='Title'></h2>
+        <div class="post-content">
+            <img src="" alt="" id='Image' class="post-image">
+            <p class="post-text" id='Text'></p>
+        </div>
+        <hr>
+        <div class="comments">
+            <h3>Comments</h3>
+        </div>
+        <form id="commentForm" class="comment-form">
+            <textarea name="comment" id="comment" rows="3" placeholder="Write a comment..."></textarea>
+            <button type="submit" id = "postCommentBtn">Post Comment</button>
+        </form>
+        <div id="commentsContainer">
+            <div class="comments-table">
+                <div class="comment-header">
+                    <div class="comment-header-item">Name</div>
+                    <div class="comment-header-item">Comment</div>
+                </div>
+                <div id="commentsTableBody" class="comments-table-body">
+                </div>
             </div>
-            <hr>
-            <div class="comments">
-                <h3>Comments</h3>
+        </div>
+    </article>
+</main>
 
-            </div>
-            <form action="#" method="POST" class="comment-form">
-                <textarea name="comment" id="comment" rows="3" placeholder="Write a comment..."></textarea>
-                <button type="submit">Post Comment</button>
-            </form>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script>
+    async function fetchPostBasedonID() {
+        try {
+            const postID = location.search.split('=')[1];
+            const response = await axios.get(`/auth/api/PostFetchBasedOnID?id=${postID}`);
+            const post = response.data[0];
+            const titleElement = document.getElementById('Title');
+            const imageElement = document.getElementById('Image');
+            const textElement = document.getElementById('Text');
 
-            <div id="deleteButtonContainer"></div>
+            titleElement.textContent = post.Title;
+            imageElement.src = post.Picture;
+            textElement.textContent = post.Text;
 
-        </article>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script>
-        async function fetchPostBasedonID() {
-            try {
-                const postID = location.search.split('=')[1]
-                const response = await axios.get(`/auth/api/PostFetchBasedOnID?id=${postID}`);
-                const post = response.data[0];
-                
-                
-                const titleElement = document.getElementById('Title');
-                const imageElement = document.getElementById('Image');
-                const textElement = document.getElementById('Text');
-
-                titleElement.textContent = post.Title;
-                imageElement.src = post.Picture;
-                textElement.textContent = post.Text;
-
-                
-
-                const deleteButton = await deletepost(post.Username , postID);
-                if (deleteButton) {
-                    document.getElementById('deleteButtonContainer').appendChild(deleteButton);
-                }
-                  
-            } catch (error) {
-                console.error('Error fetching posts:', error);
-            }
-         }
-         fetchPostBasedonID();
-
-         async function deletepost(Username,postID)  {
-            try {
-                const response = await axios.get('/auth/api/deletepost');
-                const userinfo = response.data[0];
-                
-                const checkusername = userinfo.Username
-            
-                 if (Username === checkusername) {
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete Post';
-                    // Use onclick to attach a function to the button click event
-                    deleteButton.onclick = async function() {
-                        try {
-                            // Send request to delete post from the database
-                            await deletepostfromdatabase(postID);
-                            console.log('Post deleted successfully');
-                            // Optionally, you can update the UI or perform additional actions after successful deletion
-                        } catch (error) {
-                            console.error('Error deleting post:', error);
-                        }
-                    };
-                    return deleteButton;
-                } else {
-                    return null;
-                }
-
-                }  catch (error) {
-                console.error('Error deleting posts:', error);
-            }
-         }
-
-        async function deletepostfromdatabase(postID) {
-    try {
-        // Send post ID to backend for deletion
-        const response = await axios.post('/auth/api/deletepostforum', { postId: postID });
-        console.log('Post deleted successfully');
-        // Optionally, you can handle the response or update the UI after successful deletion
-    } catch(error) {
-        console.error('Error deleting post:', error);
+            await showComment(postID);
+        } catch (error) {
+            console.error('Error fetching posts:', error);
+        }
     }
-}
+    fetchPostBasedonID();
 
+    async function commentOnPost(event) {
+        event.preventDefault(); 
+        
+        try {
+            const postID = location.search.split('=')[1];
+            const comment = document.getElementById('comment').value.trim(); 
+            const response = await axios.get('/auth/api/auth');
+            const commentName = response.data[0].StudentName;
 
-         
-      </script>
+            if (comment) {
+                document.getElementById('comment').value = '';
+                await axios.post('/auth/auth/postComment', { postID, comment, commentName });
+                await fetchPostBasedonID();
+            } else {
+                console.error('Comment cannot be empty!');
+            }
+        } catch (error) {
+            console.error('Error posting comment:', error);
+        }
+    }
+
+    document.getElementById('commentForm').addEventListener('submit', commentOnPost);
+
+    async function showComment(postID) {
+
+        try {
+            const response = await axios.post('/auth/showComment', { postID });
+            const comments = response.data.comments;
+
+            const commentsTableBody = document.getElementById('commentsTableBody');
+            commentsTableBody.innerHTML = ''; 
+
+            comments.forEach(comment => {
+                const commentItem = document.createElement('div');
+                commentItem.classList.add('comment-item');
+                commentItem.innerHTML = 
+                    `<div class="comment-data">${comment.Name}</div>
+                    <div class="comment-data">${comment.Comment}</div>`;
+                commentsTableBody.appendChild(commentItem);
+            });
+            
+        } catch (error) {
+            console.error('Error fetching comment:', error);
+        }
+    }
+</script>
 
 </body>
 </html>
