@@ -1,33 +1,33 @@
 body {
-    background-image: url("https://images.unsplash.com/uploads/1413259835094dcdeb9d3/6e609595?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-    background-size:cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-attachment: fixed;
+  background-image: linear-gradient(rgba(176, 174, 174, 0.5), rgba(168, 167, 167, 0.5)), url("https://c0.wallpaperflare.com/preview/1010/633/162/buildings-buses-busy-street-city.jpg");
+  background-size:cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
 }
 
 .available-seats {
-    background-color: rgba(161, 161, 161, 0.5); 
+    background-color: rgba(0, 0, 0, 0.513);
     padding: 20px;
     border-bottom: 1px solid #ccc;
     text-align: center;
 }
   
 .available-seats h3 {
-    color: #000000;
+    color: #ccc;
     margin-bottom: 10px;
 }
   
 .available-seats p {
     margin: 5px 0;
-    color: rgb(54, 0, 0);
+    color: #ccc;
 }
 
 .booking-form-box {
     max-width: 400px;
-    border: 1px solid #ced4da;
+    border: 1px solid #ccc;
     margin: 10% auto 0;
-    background-color: transparent;
+    background-color: rgba(0, 0, 0, 0.513);
     backdrop-filter: blur(50px);
     margin-top: 125px;
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2024 at 08:38 PM
+-- Generation Time: Apr 27, 2024 at 05:44 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -32,6 +32,13 @@ CREATE TABLE `comment_table` (
   `comment` varchar(500) NOT NULL,
   `Name` varchar(500) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `comment_table`
+--
+
+INSERT INTO `comment_table` (`Post`, `comment`, `Name`) VALUES
+('3', 'This is a nice project.', 'Abrar Ahmed');
 
 -- --------------------------------------------------------
 
@@ -122,6 +129,12 @@ INSERT INTO `foodcart` (`FoodPicture`, `StudentID`, `FoodName`, `Quantity`, `Bil
 ('/chocolate.jpg', 21301022, 'Chocolate', 1, 20),
 ('/Hot_dog.jpg', 21301022, 'Hot Dog', 1, 80),
 ('/ice_cream.jpg', 21301022, 'Ice Cream', 1, 100),
+('/biryani.webp', 21301308, 'Biryani', 1, 160),
+('/buger.jpg', 21301308, 'Burger', 2, 240),
+('/chocolate.jpg', 21301308, 'Chocolate', 1, 20),
+('/gallary_3.jpg', 21301308, 'Chocolate Cup Cake', 1, 50),
+('/chocolate_Drink.jpg', 21301308, 'Chocolate Milkshake', 1, 80),
+('/ice_cream.jpg', 21301308, 'Ice Cream', 2, 200),
 ('/biryani.webp', 21301309, 'Biryani', 1, 160),
 ('/buger.jpg', 21301309, 'Burger', 1, 120),
 ('/chocolate.jpg', 21301309, 'Chocolate', 1, 20),
@@ -141,6 +154,13 @@ CREATE TABLE `food_place_order` (
   `orderItems` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `food_place_order`
+--
+
+INSERT INTO `food_place_order` (`StudentID`, `grandTotal`, `orderItems`) VALUES
+('21301308', '1190', 'Biryani: 1, Burger: 2, Chocolate: 1, Chocolate Cup Cake: 1, Chocolate Milkshake: 1, Ice Cream: 2 ');
+
 -- --------------------------------------------------------
 
 --
@@ -154,6 +174,13 @@ CREATE TABLE `forum` (
   `Picture` text DEFAULT NULL,
   `Username` varchar(260) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `forum`
+--
+
+INSERT INTO `forum` (`PostID`, `Title`, `Text`, `Picture`, `Username`) VALUES
+(3, 'BRACU Duburi', 'The BRACU Duburi team is committed to establishing a vibrant and inclusive community of AUV and ROV hobbyists and enthusiasts who will collaborate to develop cutting-edge, industrial-grade underwater vehicle. The team envisions fostering an environment where individuals can share their ideas, knowledge, and expertise to create innovative technologies that can revolutionize the underwater industry. Additionally, the team aspires to establish a state-of-the-art test facility that will enable the next generation of ROV enthusiasts to hone their skills and advance their knowledge in the field. Through these initiatives, the BRACU Duburi team aims to create a sustainable and innovative ecosystem that will drive the growth and development of the underwater industry in Bangladesh and beyond.', 'uploads\\6a3a2013142d403ba06c88b60cd90956', 'AmiMezbha');
 
 -- --------------------------------------------------------
 
@@ -169,6 +196,13 @@ CREATE TABLE `parking_ver1` (
   `type` text NOT NULL,
   `status` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `parking_ver1`
+--
+
+INSERT INTO `parking_ver1` (`name`, `phoneNo`, `lic_plate`, `student_id`, `type`, `status`) VALUES
+('Mezbha Ul Haq', 1749750955, 'Abcd-1234', 21301308, 'bike', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -210,7 +244,6 @@ CREATE TABLE `transactions_table` (
 --
 
 INSERT INTO `transactions_table` (`student_id`, `transactions`) VALUES
-(NULL, '32347792137'),
 (NULL, '33623914265'),
 (NULL, '39084172657'),
 (NULL, '41205227692'),
@@ -243,7 +276,8 @@ INSERT INTO `transactions_table` (`student_id`, `transactions`) VALUES
 (NULL, '96420201002'),
 (NULL, '97337087333'),
 (NULL, '98669280854'),
-(NULL, '99795506893');
+(NULL, '99795506893'),
+(21301308, '32347792137');
 
 -- --------------------------------------------------------
 
@@ -265,7 +299,7 @@ CREATE TABLE `transportation` (
 --
 
 INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `SeatPaid`, `SeatBooked`) VALUES
-('Going', '6:30', 2, 1, 0, NULL),
+('Going', '6:30', 2, 0, 1, 'AmiMezbha'),
 ('Going', '6:30', 3, 1, 0, NULL),
 ('Going', '6:30', 4, 1, 0, NULL),
 ('Going', '6:30', 5, 1, 0, NULL),
@@ -284,7 +318,7 @@ INSERT INTO `transportation` (`BusType`, `Time`, `SeatID`, `SeatAvailibility`, `
 ('Going', '6:30', 18, 1, 0, NULL),
 ('Going', '6:30', 19, 1, 0, NULL),
 ('Going', '6:30', 20, 1, 0, NULL),
-('Returning', '5:00', 1, 1, 0, NULL),
+('Returning', '5:00', 1, 0, 1, 'AmiMezbha'),
 ('Returning', '5:00', 2, 1, 0, NULL),
 ('Returning', '5:00', 3, 1, 0, NULL),
 ('Returning', '5:00', 4, 1, 0, NULL),
@@ -328,7 +362,8 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`StudentID`, `Username`, `StudentName`, `Email`, `Grade`, `Phone`, `Password`, `Token`) VALUES
 (21301022, 'Penguin', 'Zarin Tasnim Raisa', 'zarin.tasnim.raisa@g.bracu.ac.bd', 0, 1749750952, '$2b$08$KU4D7XQHde5Zk6Tu0lUd9eotXy5.9gbVW90PU8kT9hJF6FHSpoB.S', 'ppaf2ew7eg'),
-(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'c523yahksll'),
+(21301308, 'AmiMezbha', 'Mezbha Ul Haq', 'mezbha.ul.haque@gmail.com', 0, 1749750965, '$2b$08$B6JCj4JkIlthd1ZfagRmD.oGkUZfC6AK95JVqD1R/g5GFlGAGw.ae', 'ugf08pgcsv'),
+(21301309, 'PhantomN3rd', 'Abrar Ahmed', 'abrar.ahmed1@g.bracu.ac.bd', 0, 1749750959, '$2b$08$YmQTOfg52Xn.3cRbVVpK6OK82P8wU6uGDCO31bubSIEoaC6bsxjpK', 'wxm43jskw9'),
 (213013093, 'test', 'test', 'test@test.com', 0, 2147483647, '$2b$08$lNe6DYR.RxqeTsmVdAKbGenQuMdu4CS5coSIzkoeVEFcaOD1a5/vm', '10iio9jkttmn');
 
 -- --------------------------------------------------------
@@ -342,6 +377,15 @@ CREATE TABLE `usercoursetable` (
   `CourseName` varchar(64) NOT NULL,
   `CourseSection` int(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `usercoursetable`
+--
+
+INSERT INTO `usercoursetable` (`Username`, `CourseName`, `CourseSection`) VALUES
+('AmiMezbha', 'CSE110', 1),
+('AmiMezbha', 'CSE111', 1),
+('AmiMezbha', 'CSE470', 1);
 
 --
 -- Indexes for dumped tables
@@ -431,7 +475,7 @@ ALTER TABLE `usercoursetable`
 -- AUTO_INCREMENT for table `forum`
 --
 ALTER TABLE `forum`
-  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `PostID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
