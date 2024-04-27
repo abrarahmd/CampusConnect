@@ -8,7 +8,7 @@ body {
 
 ::-webkit-scrollbar {
     width: 7px;
-    background-color: yellow;
+    background-color: #007BFF;
 }
 
 .navbar {
@@ -19,12 +19,12 @@ body {
     font-size: 25px;
     font-weight: 550;
     background-color: rgb(0, 0, 0);
-    color: yellow;
+    color: #007BFF;
 }
 
 .lni-car{
     font-size: 35px;
-    color: yellow;
+    color: #007BFF;
 }
 
 form{
@@ -32,16 +32,16 @@ form{
 }
 
 .form-label{
-    color: yellow;
+    color: #007BFF;
 }
 
 .form-control:focus, .form-control {
     padding:5px; 
-    border:2px solid yellow; 
+    border:2px solid #007BFF; 
     -webkit-border-radius: 1px;
     border-radius: 5px;
-    background-color: black;
-    color: yellow;
+    background-color: #000000;
+    color: #62d7ec;
 }
 
 input:-webkit-autofill,
@@ -52,15 +52,15 @@ input:-webkit-autofill:active  {
 }
 
 input:-webkit-autofill {
-    -webkit-text-fill-color: yellow !important;
+    -webkit-text-fill-color: #62d7ec !important;
     }
     input[type=number]::-webkit-inner-spin-button {
         -webkit-appearance: none;
       } 
 
 #parkingtable{
-    color: yellow;
-    border-color: yellow;
+    color: #007BFF;
+    border-color: #007BFF;
     font-size: 13px;
     width: 14rem;
 }
@@ -72,23 +72,23 @@ th{
 }
 
 #receipttable{
-    color: yellow;
+    color: #007BFF;
     width: 30rem;
     font-size: 13px; 
 }
 
 .table{
-    color: yellow;
-    border-color: yellow;
+    color: #007BFF;
+    border-color: #007BFF;
     width: 30rem;
 }
 
 #parkingHead{
-    color: yellow;
+    color: #007BFF;
     font-size: 25px;
     text-align: center;
     border-style:solid ;
-    border-color: yellow;
+    border-color: #007BFF;
     border-radius: 10px;
     padding: 20px;
     width: 30rem;
@@ -100,15 +100,15 @@ th{
     text-align: center;
     margin-top: 5rem;
     border-style:solid ;
-    border-color: yellow;
+    border-color: #007BFF;
     border-radius: 10px;
     padding: 20px;
-    background-color: yellow;
+    background-color: #62d7ec;
     width: 30rem;
 }
 
 #receiptDescription{
-    color: yellow;
+    color: #007BFF;
     font-size: 11px;
 }
 
@@ -125,7 +125,7 @@ th{
 }
 
 #footer{
-    color: yellow;
+    color: #007BFF;
     text-align: center;
     font-size: 15px;
 }

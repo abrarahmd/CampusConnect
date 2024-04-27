@@ -19,7 +19,8 @@
 
 body {
 
-  background-image: url("https://i.redd.it/glrntr8shsu11.jpg");
+
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://www.sussexcampervans.com/application/files/7316/7059/0183/city-of-london-4481399_1920.jpg");
   background-size:cover;
   background-repeat: no-repeat;
   background-position: center;
