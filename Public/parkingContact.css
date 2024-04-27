@@ -135,8 +135,6 @@ section.left .socialMedia{
 	color: black;
 }
 
-/* Code for the right section (column) */
-
 .row section.right .messageForm{
 	display: flex;
 	justify-content: space-between;

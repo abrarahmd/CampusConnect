@@ -53,7 +53,7 @@ section nav ul li a::after{
     content: '';
     width: 0;
     height: 2px;
-    background: #006c0d;
+    background: #007BFF;
     display: block;
     transition: 0.2s linear;
 }
@@ -63,7 +63,7 @@ section nav ul li a:hover::after{
 }
 
 section nav ul li a:hover{
-    color: #006c0d;
+    color: #007BFF;
 }
 
 section nav .icon i{
@@ -75,7 +75,7 @@ section nav .icon i{
 }
 
 section nav .icon i:hover{
-    color: #006c0d;
+    color: #007BFF;
 }
 
 section .main{
@@ -95,7 +95,7 @@ section .main .men_text h1{
 
 section .main .men_text h1 span{
     margin-left: 15px;
-    color: #006c0d;
+    color: #007BFF;
     font-family: mv boli;
     line-height: 22px;
     font-size: 70px;
@@ -117,7 +117,7 @@ section p{
 }
 
 section .main_btn{
-    background: #006c0d;
+    background: #007BFF;
     position: relative;
     left: 123px;
     bottom: 30px;
@@ -160,7 +160,7 @@ section .main_btn:hover i{
 }
 
 .about .about_main .about_text h1 span{
-    color: #006c0d;
+    color: #007BFF;
     margin-right: 15px;
     font-family: mv boli;
 }
@@ -184,7 +184,7 @@ section .main_btn:hover i{
 }
 
 .about .about_btn{
-    background: #006c0d;
+    background: #007BFF;
     padding: 12px 25px;
     text-decoration: none;
     color: #fff;
@@ -207,7 +207,7 @@ section .main_btn:hover i{
 }
 
 .menu h1 span{
-    color: #006c0d;
+    color: #007BFF;
     margin-left: 15px;
     font-family: mv boli;
 }
@@ -216,7 +216,7 @@ section .main_btn:hover i{
     content: '';
     width: 100%;
     height: 2px;
-    background: #006c0d;
+    background: #007BFF;
     display: block;
     position: relative;
     bottom: 15px;
@@ -347,7 +347,7 @@ section .main_btn:hover i{
 }
 
 .order h1 span{
-    color: #006c0d;
+    color: #007BFF;
     margin-right: 15px;
     font-family: mv boli;
 }
@@ -356,7 +356,7 @@ section .main_btn:hover i{
     content: '';
     width: 100%;
     height: 2px;
-    background: #006c0d;
+    background: #007BFF;
     display: block;
     position: relative;
     bottom: 15px;
@@ -397,12 +397,12 @@ section .main_btn:hover i{
 }
 
 .order .order_main form .input input:focus{
-    border: 2px solid #006c0d;
+    border: 2px solid #007BFF;
 }
 
 .order .order_main form .order_btn{
     padding: 10px 0;
-    background: #006c0d;
+    background: #007BFF;
     color: white;
     width: 40%;
     text-align: center;
@@ -416,7 +416,7 @@ body, h1, h2, p {
 }
 
 footer {
-  background-color: #006c0d;
+  background-color: #007BFF;
   color: #fff;
   padding: 20px;
 }

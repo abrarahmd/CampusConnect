@@ -42,7 +42,7 @@
             Welcome to the heart of Brac University – our vibrant cafeteria! A bustling hub for students and faculty alike, it's where delicious aromas meet lively conversations, creating the perfect backdrop for both relaxation and intellectual exchange.
         </p>
         <div class="main_btn">
-            <a href="#Order">Order Now</a>
+            <a href="#Menu">Order Now</a>
             <i class="fa-solid fa-angle-right"></i> 
         </div>
     </section>
@@ -66,7 +66,7 @@
                 </p>
             </div>
         </div>
-        <a href="#Order" class="about_btn">Order Now</a>
+        <a href="#Menu" class="about_btn">Order Now</a>
     </div>
 
     <div class="menu" id="Menu">
@@ -130,7 +130,7 @@
                             <div class="menu_icon">
                                 ${generateStarIcons(food.FoodRating)}
                             </div>
-                            <a href="" class="menu_btn" onclick="addToCart('${food.FoodPicture}', '${food.FoodName}', ${food.FoodCost})">Add To Cart</a>
+                            <a href="#Menu" class="menu_btn" onclick="addToCart('${food.FoodPicture}', '${food.FoodName}', ${food.FoodCost})">Add To Cart</a>
                         </div>`;
 
                     menuBox.appendChild(menuCard);

@@ -90,3 +90,45 @@ hr {
     margin: 20px 0;
     width: 100%;
 }
+
+#commentsContainer {
+    margin-top: 20px;
+}
+
+.comments-table {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.comment-header {
+    display: flex;
+    background-color: #f0f0f0;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-header-item {
+    flex: 1;
+    padding: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.comment-item {
+    display: flex;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.comment-data {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+}
+
+.comment-data:first-child {
+    border-right: 1px solid #ddd;
+}

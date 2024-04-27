@@ -1,10 +1,9 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600&display=swap">
-);
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;200;300;400;500;600&display=swap");
 
 :root{
-   --blue:#5bbafa;
-   --deepnavy:rgb(9, 74, 145);
-   --navy:rgb(9, 31, 200);
+   --blue:rgba(5, 13, 105, 0.933);;
+   --deepnavy:rgba(5, 13, 105, 0.933);;
+   --navy:rgba(5, 13, 105, 0.933);;
    --black:#120f72;
    --white:#fff;
    --bg-color:#eee;
@@ -30,7 +29,6 @@ html{
 .container{
    max-width: 1200px;
    margin:0 auto;
-   /* padding-bottom: 5rem; */
 }
 
 section{
@@ -495,25 +493,6 @@ section{
    padding:0 .5rem;
    text-transform: none;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/* media queries  */
 
 @media (max-width:1200px){
 
